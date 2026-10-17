@@ -1,0 +1,25 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONTENTS_DIR="$(dirname "$DIR")"
+APP_DIR="$(dirname "$CONTENTS_DIR")"
+REPO_DIR="$(dirname "$APP_DIR")"
+
+# Prioridade: 1) Recursos internos do App; 2) Pasta raiz
+if [ -f "$CONTENTS_DIR/Resources/index.html" ]; then
+    INDEX_PATH="$CONTENTS_DIR/Resources/index.html"
+elif [ -f "$REPO_DIR/index.html" ]; then
+    INDEX_PATH="$REPO_DIR/index.html"
+else
+    INDEX_PATH="$APP_DIR/index.html"
+fi
+
+# Abre em modo aplicativo desktop nativo (janela limpa sem abas de navegador)
+if [ -d "/Applications/Google Chrome.app" ]; then
+    open -na "Google Chrome" --args --app="file://$INDEX_PATH" --window-size=1200,850
+elif [ -d "/Applications/Brave Browser.app" ]; then
+    open -na "Brave Browser" --args --app="file://$INDEX_PATH" --window-size=1200,850
+elif [ -d "/Applications/Microsoft Edge.app" ]; then
+    open -na "Microsoft Edge" --args --app="file://$INDEX_PATH" --window-size=1200,850
+else
+    open "$INDEX_PATH"
+fi

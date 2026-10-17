@@ -20,26 +20,39 @@
 
 ---
 
-## ⬇️ Onde Baixar e Como Instalar
+## ⬇️ Como Baixar e Usar Apenas o Aplicativo (Mac & Windows)
 
-### 1. Download Direto (Código Fonte e Releases)
-* **[⬇️ Baixar Pacote Completo (.ZIP)](https://github.com/cadubezerrapro/fluxvpn/archive/refs/heads/main.zip)**
-* **Clone via Git no Terminal:**
-  ```bash
-  git clone https://github.com/cadubezerrapro/fluxvpn.git
-  cd fluxvpn
-  ```
+Se você deseja apenas **usar o aplicativo do FLUX VPN no seu computador**, sem precisar mexer em códigos, você tem executáveis diretos prontos para rodar:
 
-### 2. Acesso Instantâneo no Navegador (Sem Instalação)
-* **Landing Page Institucional:** Abra `landing.html` diretamente em qualquer navegador.
-* **Simulador Operacional (iPhone 15 Pro + macOS Desktop):** Abra `index.html`.
+### 🍏 Para macOS (Mac)
+1. Baixe o projeto ou acesse a pasta descompactada.
+2. Dê **duplo clique** no arquivo executável:
+   - **`▶️ Iniciar FLUX VPN (macOS).command`** ou **`FLUX-VPN.app`**
+3. O aplicativo abrirá imediatamente como uma **janela de app nativa** (sem barra de URL e sem abas de navegador), pronta para conectar!
 
-### 3. Instalar a Extensão no Google Chrome (Manifest V3)
-1. Abra o navegador Google Chrome e digite na barra de endereços: `chrome://extensions/`
-2. Ative a chave **"Modo do desenvolvedor"** no canto superior direito.
-3. Clique em **"Carregar sem compactação"** no canto superior esquerdo.
-4. Selecione a pasta: `fluxvpn/clients/extensions`.
-5. A extensão estará ativa com proteção imediata contra vazamentos de WebRTC.
+### 🪟 Para Windows (PC)
+1. Baixe o projeto ou acesse a pasta descompactada.
+2. Dê **duplo clique** no arquivo executável:
+   - **`▶️ Iniciar FLUX VPN (Windows).bat`**
+3. O aplicativo iniciará instantaneamente em uma janela dedicada de desktop via Microsoft Edge/Chrome, funcionando como um app de desktop nativo.
+
+### 🌐 Para Navegadores (Google Chrome / Brave / Edge / Opera)
+1. Acesse: `chrome://extensions/` no seu navegador.
+2. Ative o **"Modo do desenvolvedor"** (canto superior direito).
+3. Clique em **"Carregar sem compactação"** e selecione a pasta: `clients/extensions`.
+4. A extensão será instalada e ativada no seu navegador com bloqueio de WebRTC.
+
+---
+
+### 📦 Releases Oficiais no GitHub (Download Isolado por Sistema)
+Para baixar exclusivamente o pacote isolado do seu sistema operacional sem a documentação:
+👉 **[Acessar GitHub Releases (v1.0.0)](https://github.com/cadubezerrapro/fluxvpn/releases)**
+
+| Pacote | Plataforma | Formato |
+| :--- | :--- | :--- |
+| **FLUX VPN para macOS** | Mac (Apple Silicon & Intel) | `FLUX-VPN-macOS.command` / `.app` |
+| **FLUX VPN para Windows** | Windows 10 e Windows 11 | `FLUX-VPN-Windows.bat` |
+| **Extensão Web** | Chrome, Edge, Brave, Opera | `FLUX-VPN-Chrome.zip` |
 
 ---
 

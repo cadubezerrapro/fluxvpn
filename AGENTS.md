@@ -62,24 +62,30 @@ git clone https://github.com/cadubezerrapro/fluxvpn.git && cd fluxvpn && open la
 
 ```
 FLUXVPN/
-├── AGENTS.md                  # Este guia universal de automação para IAs
-├── README.md                  # Apresentação do projeto e badges do GitHub
-├── PLANO_MESTRE_FLUX_VPN.md   # Especificação técnica completa de arquitetura e infraestrutura
-├── DESIGN_SYSTEM.md           # Tokens de design, paleta visual e tipografia
-├── LICENSE                    # Licença Open-Source GNU General Public License v3.0 (GPLv3)
-├── landing.html               # Landing page institucional com simulador embutido
-├── landing.css                # Estilização moderna da landing page (Dark mode, glassmorphism)
-├── landing.js                 # Lógica de animações, modais, FAQ e download
-├── index.html                 # Simulador isolado da suíte FLUX VPN (iPhone + macOS)
-├── style.css                  # Estilização do simulador interativo
-├── app.js                     # Motor reativo do simulador (WireGuard state, ping, kill switch)
+├── Iniciar FLUX VPN (macOS).command   # Executável de 1 clique para Mac (modo standalone)
+├── Iniciar FLUX VPN (Windows).bat     # Executável de 1 clique para Windows (modo standalone)
+├── FLUX-VPN.app/                      # Pacote de aplicativo nativo macOS
+├── dist/                              # Pacotes isolados para download direto
+│   ├── macOS/                         # Binário isolado para Mac
+│   └── windows/                       # Executável isolado para Windows
+├── AGENTS.md                          # Este guia universal de automação para IAs
+├── README.md                          # Apresentação do projeto e badges do GitHub
+├── PLANO_MESTRE_FLUX_VPN.md           # Especificação técnica completa de arquitetura e infraestrutura
+├── DESIGN_SYSTEM.md                   # Tokens de design, paleta visual e tipografia
+├── LICENSE                            # Licença Open-Source GNU General Public License v3.0 (GPLv3)
+├── landing.html                       # Landing page institucional com simulador embutido
+├── landing.css                        # Estilização moderna da landing page (Dark mode, glassmorphism)
+├── landing.js                         # Lógica de animações, modais, FAQ e download
+├── index.html                         # Interface oficial do FLUX VPN (iPhone + macOS)
+├── style.css                          # Estilização do aplicativo FLUX VPN
+├── app.js                             # Motor reativo do aplicativo (WireGuard state, ping, kill switch)
 └── clients/
-    └── extensions/            # Extensão WebExtensions Manifest V3
-        ├── manifest.json      # Configuração da extensão (permissões mínimas)
-        ├── background.js      # Service worker e bloqueador de WebRTC Leaks
-        ├── popup.html         # Interface compacta da extensão
-        ├── popup.css          # Estilos do popup
-        └── popup.js           # Lógica de conexão rápida da extensão
+    └── extensions/                    # Extensão WebExtensions Manifest V3
+        ├── manifest.json              # Configuração da extensão (permissões mínimas)
+        ├── background.js              # Service worker e bloqueador de WebRTC Leaks
+        ├── popup.html                 # Interface compacta da extensão
+        ├── popup.css                  # Estilos do popup
+        └── popup.js                   # Lógica de conexão rápida da extensão
 ```
 
 ---

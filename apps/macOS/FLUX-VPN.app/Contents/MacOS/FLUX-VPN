@@ -1,0 +1,15 @@
+#!/bin/bash
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+CONTENTS_DIR="$(dirname "$DIR")"
+INDEX_PATH="$CONTENTS_DIR/Resources/index.html"
+
+# Abre o FLUX VPN como janela de aplicativo nativo (sem abas ou barras de URL)
+if [ -d "/Applications/Google Chrome.app" ]; then
+    open -na "Google Chrome" --args --app="file://$INDEX_PATH" --window-size=1200,850
+elif [ -d "/Applications/Brave Browser.app" ]; then
+    open -na "Brave Browser" --args --app="file://$INDEX_PATH" --window-size=1200,850
+elif [ -d "/Applications/Microsoft Edge.app" ]; then
+    open -na "Microsoft Edge" --args --app="file://$INDEX_PATH" --window-size=1200,850
+else
+    open "$INDEX_PATH"
+fi
