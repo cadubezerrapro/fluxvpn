@@ -1,0 +1,30 @@
+# Sistema Operacional / Arquivos do macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Ambientes de Desenvolvimento e IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Caches e Builds
+node_modules/
+dist/
+build/
+*.zip
+*.tar.gz
+
+# Logs e Depuração
+*.log
+npm-debug.log*
+yarn-debug.log*
+
+# Variáveis Locais
+.env
+.env.local

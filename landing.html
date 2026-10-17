@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLUX VPN — A VPN Open-Source, Segura e Sem Vazamentos</title>
+  <meta name="description" content="A primeira VPN verdadeiramente 100% open-source, sem logs, com servidores em RAM pura e proteção absoluta contra vazamentos de DNS, IPv6 e WebRTC.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="landing.css">
+</head>
+<body>
+
+  <!-- ========================================================= -->
+  <!-- HEADER / NAVEGAÇÃO INSTITUCIONAL -->
+  <!-- ========================================================= -->
+  <header class="site-header" id="siteHeader">
+    <div class="header-inner">
+      <a href="landing.html" class="header-logo">
+        <div class="logo-mark">
+          <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="headerGrad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#0284C7"/>
+                <stop offset="60%" stop-color="#0EA5E9"/>
+                <stop offset="100%" stop-color="#06B6D4"/>
+              </linearGradient>
+            </defs>
+            <path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="url(#headerGrad)"/>
+            <path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/>
+            <circle cx="18.5" cy="19.5" r="1.5" fill="#FFFFFF"/>
+          </svg>
+        </div>
+        <div class="logo-text">
+          <span class="logo-name">FLUX VPN</span>
+          <span class="logo-tag">OPEN SOURCE</span>
+        </div>
+      </a>
+
+      <!-- Menu de Links -->
+      <nav class="header-nav">
+        <a href="#diferenciais" class="nav-link">Por que a FLUX?</a>
+        <a href="#chrome-ext" class="nav-link">Extensão Chrome</a>
+        <a href="#seguranca" class="nav-link">Zero Leaks</a>
+        <a href="#plataformas" class="nav-link">Plataformas</a>
+        <a href="#comparativo" class="nav-link">Comparativo</a>
+        <a href="#faq" class="nav-link">FAQ</a>
+      </nav>
+
+      <!-- Ações do Header -->
+      <div class="header-actions">
+        <a href="index.html" class="btn-ghost">
+          <span>Simulador do App</span>
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="https://github.com/cadubezerrapro/fluxvpn" target="_blank" class="btn-primary github-cta">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <span>★ Star no GitHub</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ========================================================= -->
+  <!-- HERO SECTION -->
+  <!-- ========================================================= -->
+  <section class="hero-section">
+    <div class="hero-bg-blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container hero-content">
+      <div class="hero-badge reveal">
+        <span class="badge-dot"></span>
+        <span>Projeto 100% Código Aberto • Sem Logs • RAM-Only</span>
+      </div>
+
+      <h1 class="hero-title reveal delay-1">
+        A VPN Verdadeira.<br>
+        <span class="gradient-text">Sem Vazamentos.</span> Sem Pegadinhas.
+      </h1>
+
+      <p class="hero-subtitle reveal delay-2">
+        VPNs "gratuitas" comuns transformam seu computador em nó de saída ou vendem seu tráfego. 
+        A <strong>FLUX VPN</strong> é construída sobre o protocolo WireGuard®, roda puramente em servidores RAM sem disco, isola você em Wi-Fi públicas e tem código 100% auditável.
+      </p>
+
+      <div class="hero-cta-group reveal delay-3">
+        <a href="#chrome-ext" class="btn-hero-chrome">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#FFFFFF"/>
+            <path d="M12 5.5C14.7 5.5 17 7.2 17.9 9.6H12V14.4H20.3C20.4 13.6 20.5 12.8 20.5 12C20.5 7.3 16.7 3.5 12 3.5V5.5Z" fill="#EA4335"/>
+            <path d="M12 18.5C9.3 18.5 7 16.8 6.1 14.4L9.5 8.5C7.3 9.4 5.8 11.5 5.8 14C5.8 17.4 8.6 20.2 12 20.2V18.5Z" fill="#34A853"/>
+            <path d="M12 18.5C14.7 18.5 17 16.8 17.9 14.4H11.5L14.5 9.2C13.8 9 12.9 8.8 12 8.8C8.6 8.8 5.8 11.6 5.8 15C5.8 15.7 5.9 16.4 6.1 17L12 18.5Z" fill="#FBBC05"/>
+            <circle cx="12" cy="12" r="4" fill="#4285F4"/>
+            <circle cx="12" cy="12" r="2.2" fill="#FFFFFF"/>
+          </svg>
+          <div class="btn-chrome-text">
+            <span class="btn-chrome-title">Usar no Google Chrome</span>
+            <span class="btn-chrome-sub">Extensão Manifest V3 • Grátis</span>
+          </div>
+        </a>
+
+        <a href="#plataformas" class="btn-hero-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          <span>Baixar App (Desktop & Mobile)</span>
+        </a>
+      </div>
+
+      <!-- Trust Badges -->
+      <div class="hero-trust-row reveal delay-4">
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Sem Registro / Sem E-mail</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Banda Ilimitada</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Zero Logs Persistentes</span>
+        </div>
+        <div class="trust-item">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+          <span>Hard Kill Switch de Kernel</span>
+        </div>
+      </div>
+
+      <!-- Barra de Controle de Visualização do Showcase -->
+      <div class="hero-switcher-wrap reveal delay-4">
+        <div class="view-switcher" role="tablist">
+          <button class="switcher-btn active" id="btnViewBoth" data-view="both">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>Apresentação Lado a Lado</span>
+          </button>
+          <button class="switcher-btn" id="btnViewDesktop" data-view="desktop">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>App Desktop (macOS / Windows)</span>
+          </button>
+          <button class="switcher-btn" id="btnViewMobile" data-view="mobile">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+            <span>App Mobile (iPhone / Android)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- VITRINE COMPLETA NATIVA (IPHONE + MACOS DESKTOP) -->
+    <div class="hero-showcase-wrapper reveal delay-3">
+      <div class="showcase-container" id="showcaseContainer">
+
+        <!-- 1. MOCKUP DO IPHONE 15 PRO -->
+        <div class="mockup-column mobile-column" id="mobileColumn">
+          <div class="device-frame iphone-frame">
+            <div class="iphone-speaker"></div>
+            <div class="dynamic-island"><div class="island-camera"></div></div>
+
+            <div class="mobile-screen">
+              <div class="mobile-status-bar">
+                <span class="status-time" id="mobileTime">18:30</span>
+                <div class="status-icons">
+                  <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M0 2C0 0.895431 0.895431 0 2 0H14C15.1046 0 16 0.895431 16 2V10C16 11.1046 15.1046 12 14 12H2C0.895431 12 0 11.1046 0 10V2Z" fill-opacity="0.3"/><rect x="2" y="2" width="10" height="8" rx="1"/><path d="M16 4V8C16.5523 8 17 7.55228 17 7V5C17 4.44772 16.5523 4 16 4Z"/></svg>
+                </div>
+              </div>
+
+              <div class="mobile-app-header">
+                <button class="mobile-icon-btn" id="mobileMenuBtn" aria-label="Menu">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+                </button>
+                <div class="mobile-title-wrap">
+                  <span class="mobile-app-title">FLUX VPN</span>
+                </div>
+                <button class="mobile-icon-btn" id="mobileSettingsBtn" aria-label="Configurações">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </button>
+              </div>
+
+              <div class="mobile-body">
+                <div class="mobile-shield-wrapper">
+                  <button class="shield-button mobile-shield connected" id="mobileShieldBtn" aria-label="Conectar ou Desconectar VPN">
+                    <div class="shield-glow"></div>
+                    <div class="shield-inner">
+                      <svg class="shield-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="shieldGradMobile" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0284C7"/>
+                            <stop offset="50%" stop-color="#0EA5E9"/>
+                            <stop offset="100%" stop-color="#06B6D4"/>
+                          </linearGradient>
+                          <linearGradient id="fluxWaveGradMobile" x1="30" y1="35" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0284C7"/>
+                            <stop offset="100%" stop-color="#06B6D4"/>
+                          </linearGradient>
+                        </defs>
+                        <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" stroke="url(#shieldGradMobile)" stroke-width="5" stroke-linejoin="round"/>
+                        <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" stroke="url(#shieldGradMobile)" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
+                        <g class="shield-flux-core">
+                          <path d="M40 40C40 37.7909 41.7909 36 44 36H64C66.2091 36 68 37.7909 68 40C68 42.2091 66.2091 44 64 44H47V51H60C62.2091 51 64 52.7909 64 55C64 57.2091 62.2091 59 60 59H47V74C47 76.2091 45.2091 78 43 78C40.7909 78 40 76.2091 40 74V40Z" fill="url(#fluxWaveGradMobile)"/>
+                          <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
+                          <circle cx="58" cy="69" r="7.5" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+                        </g>
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="mobile-status-section">
+                  <div class="status-indicator">
+                    <span class="status-dot green" id="mobileStatusDot"></span>
+                    <span class="status-text" id="mobileStatusText">Protegido</span>
+                  </div>
+                  <div class="timer-display" id="mobileTimer">00:15:42</div>
+                </div>
+
+                <div class="mobile-server-pill" id="mobileServerPill">
+                  <div class="pill-left">
+                    <span class="pill-flag" id="mobilePillFlag">🇧🇷</span>
+                    <div class="pill-info">
+                      <span class="pill-country" id="mobilePillCountry">Brasil</span>
+                      <span class="pill-city" id="mobilePillCity">São Paulo #1</span>
+                    </div>
+                  </div>
+                  <div class="pill-right">
+                    <span class="ping-badge" id="mobilePingBadge">18 ms</span>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                  </div>
+                </div>
+
+                <button class="action-btn-primary disconnect" id="mobileActionBtn">
+                  Desconectar
+                </button>
+
+                <div class="mobile-card-metrics">
+                  <div class="metric-row">
+                    <span class="metric-label">IP Atribuído</span>
+                    <span class="metric-value font-mono" id="mobileVirtualIp">185.220.101.42</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Protocolo</span>
+                    <span class="metric-value">WireGuard • ChaCha20</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Kill Switch</span>
+                    <span class="metric-badge green">Ativo</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Rede Local</span>
+                    <span class="metric-badge green">Invisível</span>
+                  </div>
+                  <div class="metric-row">
+                    <span class="metric-label">Vazamentos</span>
+                    <span class="metric-badge green">0 Detectados</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="home-indicator"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. MOCKUP DA JANELA DO MACOS DESKTOP -->
+        <div class="mockup-column desktop-column" id="desktopColumn">
+          <div class="desktop-window">
+            <div class="window-titlebar">
+              <div class="traffic-lights">
+                <span class="tl-btn close"></span>
+                <span class="tl-btn minimize"></span>
+                <span class="tl-btn zoom"></span>
+              </div>
+              <div class="window-title">
+                <span class="title-app-name">FLUX VPN</span>
+                <span class="title-separator">—</span>
+                <span class="title-sub" id="desktopTitleStatus">Conexão Segura Ativa</span>
+              </div>
+              <div class="window-actions">
+                <button class="win-btn" title="Configurações Rápidas">
+                  <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                </button>
+              </div>
+            </div>
+
+            <div class="window-content">
+              <div class="panel-left">
+                <div class="desktop-shield-container">
+                  <button class="shield-button desktop-shield connected" id="desktopShieldBtn" aria-label="Alternar Conexão">
+                    <div class="shield-glow"></div>
+                    <div class="shield-inner">
+                      <svg class="shield-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <defs>
+                          <linearGradient id="shieldGradDesktop" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0284C7"/>
+                            <stop offset="50%" stop-color="#0EA5E9"/>
+                            <stop offset="100%" stop-color="#06B6D4"/>
+                          </linearGradient>
+                          <linearGradient id="fluxWaveGradDesktop" x1="30" y1="35" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+                            <stop offset="0%" stop-color="#0284C7"/>
+                            <stop offset="100%" stop-color="#06B6D4"/>
+                          </linearGradient>
+                        </defs>
+                        <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" stroke="url(#shieldGradDesktop)" stroke-width="5" stroke-linejoin="round"/>
+                        <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" stroke="url(#shieldGradDesktop)" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
+                        <g class="shield-flux-core">
+                          <path d="M40 40C40 37.7909 41.7909 36 44 36H64C66.2091 36 68 37.7909 68 40C68 42.2091 66.2091 44 64 44H47V51H60C62.2091 51 64 52.7909 64 55C64 57.2091 62.2091 59 60 59H47V74C47 76.2091 45.2091 78 43 78C40.7909 78 40 76.2091 40 74V40Z" fill="url(#fluxWaveGradDesktop)"/>
+                          <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
+                          <circle cx="58" cy="69" r="7.5" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+                        </g>
+                      </svg>
+                    </div>
+                  </button>
+                </div>
+
+                <div class="desktop-status-info">
+                  <div class="status-indicator">
+                    <span class="status-dot green" id="desktopStatusDot"></span>
+                    <span class="status-text" id="desktopStatusText">Conectado</span>
+                  </div>
+                  <div class="timer-display" id="desktopTimer">00:15:42</div>
+                  <div class="desktop-ip-row">
+                    <span class="ip-label">IP Seguro:</span>
+                    <span class="ip-value font-mono" id="desktopVirtualIp">185.220.101.42</span>
+                  </div>
+                </div>
+
+                <button class="action-btn-primary disconnect" id="desktopActionBtn">
+                  Desconectar
+                </button>
+
+                <div class="desktop-divider"></div>
+
+                <div class="security-toggles">
+                  <div class="toggle-item">
+                    <div class="toggle-text">
+                      <span class="toggle-title">Kill Switch</span>
+                      <span class="toggle-desc">Bloquear tráfego sem VPN</span>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="checkKillSwitch" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-item">
+                    <div class="toggle-text">
+                      <span class="toggle-title">Proteção Wi-Fi</span>
+                      <span class="toggle-desc">Auto-conectar em redes públicas</span>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="checkWifiShield" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-item">
+                    <div class="toggle-text">
+                      <span class="toggle-title">Invisibilidade LAN</span>
+                      <span class="toggle-desc">Ocultar de outros aparelhos locais</span>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="checkLanShield" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+
+                  <div class="toggle-item">
+                    <div class="toggle-text">
+                      <span class="toggle-title">Prevenção de Vazamentos</span>
+                      <span class="toggle-desc">DNS Próprio e Blackhole IPv6</span>
+                    </div>
+                    <label class="switch">
+                      <input type="checkbox" id="checkLeakShield" checked>
+                      <span class="slider"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel-right">
+                <div class="search-box">
+                  <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                  <input type="text" id="serverSearchInput" placeholder="Buscar país, cidade ou nó..." autocomplete="off">
+                  <button class="search-clear-btn" id="searchClearBtn" style="display:none;">✕</button>
+                </div>
+
+                <div class="quick-favorites-section">
+                  <span class="section-label">Acesso Rápido</span>
+                  <div class="favorites-chips">
+                    <button class="fav-chip active" data-server="br-sp"><span class="flag">🇧🇷</span><span class="name">Brasil</span></button>
+                    <button class="fav-chip" data-server="us-ny"><span class="flag">🇺🇸</span><span class="name">EUA</span></button>
+                    <button class="fav-chip" data-server="de-fra"><span class="flag">🇩🇪</span><span class="name">Alemanha</span></button>
+                    <button class="fav-chip" data-server="ch-zur"><span class="flag">🇨🇭</span><span class="name">Suíça</span></button>
+                  </div>
+                </div>
+
+                <div class="server-tabs">
+                  <button class="tab-btn active" data-tab="all">Todos os Locais (<span id="countAll">9</span>)</button>
+                  <button class="tab-btn" data-tab="speed">Mais Rápidos</button>
+                  <button class="tab-btn" data-tab="privacy">Alta Privacidade</button>
+                </div>
+
+                <div class="server-list" id="serverListContainer">
+                  <!-- Renderizado via app.js -->
+                </div>
+              </div>
+            </div>
+
+            <div class="window-footer">
+              <div class="footer-left">
+                <span class="footer-dot green"></span>
+                <span class="footer-protocol">WireGuard® Kernel • ChaCha20-Poly1305</span>
+              </div>
+              <div class="footer-right">
+                <span>Rede 100% em RAM (Diskless)</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO: O PERIGO DAS OUTRAS VPNS VS FLUX -->
+  <!-- ========================================================= -->
+  <section class="section-contrast" id="diferenciais">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">Análise Forense & Transparência</span>
+        <h2 class="section-title">Por que o FLUX VPN não é como os outros?</h2>
+        <p class="section-sub">Entenda o que acontece nos bastidores de serviços como Urban VPN e Planet VPN versus nossa arquitetura aberta.</p>
+      </div>
+
+      <div class="contrast-grid">
+        <!-- Card 1: Urban VPN -->
+        <div class="contrast-card danger reveal delay-1">
+          <div class="card-badge danger">❌ O Modelo Urban VPN</div>
+          <h3 class="card-heading">Seu IP é Vendido como Proxy Residencial</h3>
+          <p class="card-body">
+            O Urban VPN opera sob uma rede <strong>P2P residencial</strong> (igual ao Hola VPN). Ao usar o serviço de graça, seu computador ou celular vira um <strong>Exit Node</strong>: estranhos anônimos e clientes corporativos de raspagem de dados navegam na internet usando a <strong>sua conexão e o seu IP residencial</strong>.
+          </p>
+          <ul class="danger-list">
+            <li>Seu IP responde por crimes de terceiros</li>
+            <li>Vazamentos crônicos de WebRTC e DNS</li>
+            <li>Código 100% fechado e telemetria de mercado</li>
+          </ul>
+        </div>
+
+        <!-- Card 2: Planet VPN -->
+        <div class="contrast-card warning reveal delay-2">
+          <div class="card-badge warning">⚠️ O Modelo Planet VPN</div>
+          <h3 class="card-heading">Código Fechado e Funil de Monetização</h3>
+          <p class="card-body">
+            O Planet VPN atua com servidores centralizados, mas funciona como um funil agressivo com limitação a poucos locais, estrangulamento de banda e <strong>código 100% proprietário</strong>. Seus apps incluem SDKs de rastreamento e exibição de anúncios.
+          </p>
+          <ul class="warning-list">
+            <li>Impossível auditar se há logs no servidor</li>
+            <li>Propaganda e SDKs de terceiros no celular</li>
+            <li>Extensões são simples proxies de navegador</li>
+          </ul>
+        </div>
+
+        <!-- Card 3: FLUX VPN -->
+        <div class="contrast-card success reveal delay-3">
+          <div class="card-badge success">🛡️ O Padrão FLUX VPN</div>
+          <h3 class="card-heading">100% Open-Source & Servidores em RAM</h3>
+          <p class="card-body">
+            O FLUX VPN é um projeto comunitário auditável. Não transformamos você em nó de saída, não temos fins lucrativos ocultos e nossa infraestrutura roda exclusivamente em <strong>memória RAM volátil (Diskless PXE)</strong> sem gravação física em disco.
+          </p>
+          <ul class="success-list">
+            <li>Você é 100% cliente protegido, nunca exit node</li>
+            <li>Servidores em RAM apagam tudo ao reiniciar</li>
+            <li>Proteção matemática contra vazamentos DNS e IPv6</li>
+            <li>Compilações determinísticas verificáveis (SHA256)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO EXCLUSIVA: EXTENSÃO GOOGLE CHROME (MANIFEST V3) -->
+  <!-- ========================================================= -->
+  <section class="section-chrome-ext" id="chrome-ext">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <div class="chrome-section-badge">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#FFFFFF"/>
+            <path d="M12 5.5C14.7 5.5 17 7.2 17.9 9.6H12V14.4H20.3C20.4 13.6 20.5 12.8 20.5 12C20.5 7.3 16.7 3.5 12 3.5V5.5Z" fill="#EA4335"/>
+            <path d="M12 18.5C9.3 18.5 7 16.8 6.1 14.4L9.5 8.5C7.3 9.4 5.8 11.5 5.8 14C5.8 17.4 8.6 20.2 12 20.2V18.5Z" fill="#34A853"/>
+            <path d="M12 18.5C14.7 18.5 17 16.8 17.9 14.4H11.5L14.5 9.2C13.8 9 12.9 8.8 12 8.8C8.6 8.8 5.8 11.6 5.8 15C5.8 15.7 5.9 16.4 6.1 17L12 18.5Z" fill="#FBBC05"/>
+            <circle cx="12" cy="12" r="4" fill="#4285F4"/>
+            <circle cx="12" cy="12" r="2.2" fill="#FFFFFF"/>
+          </svg>
+          <span>Extensão Oficial Google Chrome • Manifest V3 • Zero WebRTC Leaks</span>
+        </div>
+        <h2 class="section-title">Privacidade Extrema a 1 Clique no seu Google Chrome</h2>
+        <p class="section-sub">Sem instalar softwares pesados ou conceder privilégios de administrador. Proteção nativa direto no navegador com neutralização automática de vazamentos de IP por WebRTC.</p>
+      </div>
+
+      <!-- Vitrine Interativa: Navegador Chrome + Popup Ativo da Extensão -->
+      <div class="chrome-showcase-grid reveal delay-1">
+        
+        <!-- Mockup da Janela do Navegador Chrome -->
+        <div class="chrome-browser-mockup">
+          <div class="chrome-browser-header">
+            <div class="chrome-tab-row">
+              <div class="traffic-dots">
+                <span></span><span></span><span></span>
+              </div>
+              <div class="chrome-tab active">
+                <div class="tab-favicon">
+                  <svg viewBox="0 0 32 32" fill="none"><path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="#0284C7"/><path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/></svg>
+                </div>
+                <span class="tab-title">Auditoria de Segurança — FLUX Safe Tunnel</span>
+                <span class="tab-close">✕</span>
+              </div>
+              <div class="tab-new">+</div>
+            </div>
+            <div class="chrome-toolbar">
+              <div class="toolbar-nav">
+                <button class="tool-btn" title="Voltar">‹</button>
+                <button class="tool-btn" title="Avançar">›</button>
+                <button class="tool-btn" title="Recarregar">↻</button>
+              </div>
+              <div class="chrome-omnibox">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span class="url-secure">https://</span><span class="url-domain">browserleaks.com/webrtc</span>
+                <span class="url-badge-verified">Túnel Seguro Ativo</span>
+              </div>
+              <div class="chrome-extensions-bar">
+                <div class="ext-icon puzzle" title="Extensões">🧩</div>
+                <div class="ext-icon-pinned flux-active" title="FLUX VPN (Ativo)">
+                  <svg viewBox="0 0 32 32" fill="none"><path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="#0284C7"/><path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/></svg>
+                  <span class="ext-status-dot"></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Conteúdo Interno da Página Web em Auditoria -->
+          <div class="chrome-page-content">
+            <div class="leak-test-results">
+              <div class="test-header">
+                <div class="test-title-wrap">
+                  <span class="test-site-icon">🛡️</span>
+                  <div>
+                    <h5 class="test-title">Relatório de Teste de Vazamentos WebRTC & DNS</h5>
+                    <span class="test-sub">Varredura em tempo real via Chrome API</span>
+                  </div>
+                </div>
+                <span class="test-badge pass">100% BLINDADO</span>
+              </div>
+              <div class="test-grid">
+                <div class="test-row">
+                  <span class="test-label">Endereço IP Público:</span>
+                  <span class="test-value font-mono">185.220.101.42 (Nó FLUX São Paulo)</span>
+                </div>
+                <div class="test-row">
+                  <span class="test-label">IP Real do Provedor de Internet:</span>
+                  <span class="test-value safe">OCULTO / NÃO DETECTÁVEL</span>
+                </div>
+                <div class="test-row">
+                  <span class="test-label">Política WebRTC Chromium:</span>
+                  <span class="test-value safe font-mono">disable_non_proxied_udp (BLOQUEADO)</span>
+                </div>
+                <div class="test-row">
+                  <span class="test-label">Vazamentos DNS IPv4 / IPv6:</span>
+                  <span class="test-value safe">0 Vazamentos (Resolvido em RAM)</span>
+                </div>
+              </div>
+              <div class="test-footer-notice">
+                <span>✓ Protegido contra ataques de desmascaramento por scripts STUN/TURN de terceiros.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card Popup Interativo da Extensão FLUX VPN -->
+        <div class="chrome-popup-card">
+          <div class="ext-popup-header">
+            <div class="ext-popup-brand">
+              <svg viewBox="0 0 32 32" fill="none"><path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="#0284C7"/><path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/></svg>
+              <span class="popup-title">FLUX VPN</span>
+            </div>
+            <span class="badge-v3">MANIFEST V3</span>
+          </div>
+
+          <div class="ext-popup-shield-wrap">
+            <button class="shield-button mobile-shield connected" id="extShieldBtn" aria-label="Alternar Conexão Extensão">
+              <div class="shield-glow"></div>
+              <div class="shield-inner">
+                <svg class="shield-svg" viewBox="0 0 100 120" fill="none">
+                  <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" stroke="#0284C7" stroke-width="5" stroke-linejoin="round"/>
+                  <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" stroke="#0284C7" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
+                  <g class="shield-flux-core">
+                    <path d="M40 40C40 37.8 41.8 36 44 36H64C66.2 36 68 37.8 68 40C68 42.2 66.2 44 64 44H47V51H60C62.2 51 64 52.8 64 55C64 57.2 62.2 59 60 59H47V74C47 76.2 45.2 78 43 78C40.8 78 40 76.2 40 74V40Z" fill="#0284C7"/>
+                    <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
+                  </g>
+                </svg>
+              </div>
+            </button>
+          </div>
+
+          <div class="ext-status-info">
+            <div class="status-indicator">
+              <span class="status-dot green" id="extStatusDot"></span>
+              <span class="status-text" id="extStatusText">Navegador Protegido</span>
+            </div>
+            <div class="timer-display" id="extTimerDisplay">00:18:42</div>
+          </div>
+
+          <div class="mobile-server-pill" id="extServerPill" title="Clique para alternar nó da extensão">
+            <div class="pill-left">
+              <span class="pill-flag" id="extPillFlag">🇧🇷</span>
+              <div class="pill-info">
+                <span class="pill-country" id="extPillCountry">Brasil</span>
+                <span class="pill-city" id="extPillCity">São Paulo #1</span>
+              </div>
+            </div>
+            <div class="pill-right">
+              <span class="ping-badge" id="extPingBadge">18 ms</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+            </div>
+          </div>
+
+          <button class="action-btn-primary disconnect" id="extActionBtn">
+            Desconectar Extensão
+          </button>
+
+          <div class="ext-mini-audit">
+            <div class="audit-item">
+              <span>WebRTC Shield</span>
+              <span class="audit-tag green">Travado</span>
+            </div>
+            <div class="audit-item">
+              <span>DNS Resolver</span>
+              <span class="audit-tag green">Unbound RAM</span>
+            </div>
+            <div class="audit-item">
+              <span>Bypass Localhost</span>
+              <span class="audit-tag green">Ativo</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Recursos Exclusivos da Extensão -->
+      <div class="chrome-features-grid reveal delay-2">
+        <div class="cfeature-card">
+          <div class="cfeature-icon">🛡️</div>
+          <h4>Bloqueio Rígido de WebRTC</h4>
+          <p>Aplica a política <code>disable_non_proxied_udp</code> no Chromium, impedindo que sites e scripts externos descubram seu IP público real por chamadas STUN.</p>
+        </div>
+        <div class="cfeature-card">
+          <div class="cfeature-icon">⚡</div>
+          <h4>Ultraleve • Menos de 8MB</h4>
+          <p>Construída sob a especificação oficial Manifest V3 do Google com Service Worker sob demanda. Zero lentidão e economia de bateria.</p>
+        </div>
+        <div class="cfeature-card">
+          <div class="cfeature-icon">🔓</div>
+          <h4>Zero Cadastro & Sem Logs</h4>
+          <p>Instale e conecte com 1 clique. Não exige e-mail, login, senha nem cartão de crédito. Sem rastreadores ou telemetria de anunciantes.</p>
+        </div>
+        <div class="cfeature-card">
+          <div class="cfeature-icon">💻</div>
+          <h4>Bypass Automático para Devs</h4>
+          <p>Navegue seguro enquanto continua acessando <code>localhost</code>, <code>127.0.0.1</code> e dispositivos da sua LAN sem quebrar ferramentas de desenvolvimento.</p>
+        </div>
+      </div>
+
+      <!-- Guia Rápido de Instalação no Google Chrome -->
+      <div class="chrome-install-banner reveal delay-3">
+        <div class="install-info">
+          <h3>Como carregar a extensão no Google Chrome agora:</h3>
+          <ol class="install-steps">
+            <li>Abra <code>chrome://extensions</code> no seu navegador Google Chrome</li>
+            <li>Ative a opção <strong>"Modo do desenvolvedor"</strong> no canto superior direito</li>
+            <li>Clique em <strong>"Carregar sem compactação"</strong> e selecione a pasta <code>FLUXVPN/clients/extensions</code></li>
+          </ol>
+        </div>
+        <div class="install-actions">
+          <a href="clients/extensions/popup.html" target="_blank" class="btn-chrome-install">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2Z" fill="#FFFFFF"/><path d="M12 5.5C14.7 5.5 17 7.2 17.9 9.6H12V14.4H20.3C20.4 13.6 20.5 12.8 20.5 12C20.5 7.3 16.7 3.5 12 3.5V5.5Z" fill="#EA4335"/><path d="M12 18.5C9.3 18.5 7 16.8 6.1 14.4L9.5 8.5C7.3 9.4 5.8 11.5 5.8 14C5.8 17.4 8.6 20.2 12 20.2V18.5Z" fill="#34A853"/><path d="M12 18.5C14.7 18.5 17 16.8 17.9 14.4H11.5L14.5 9.2C13.8 9 12.9 8.8 12 8.8C8.6 8.8 5.8 11.6 5.8 15C5.8 15.7 5.9 16.4 6.1 17L12 18.5Z" fill="#FBBC05"/><circle cx="12" cy="12" r="4" fill="#4285F4"/><circle cx="12" cy="12" r="2.2" fill="#FFFFFF"/></svg>
+            <span>Abrir Simulador da Extensão</span>
+          </a>
+          <a href="https://github.com/cadubezerrapro/fluxvpn/tree/main/clients/extensions" target="_blank" class="btn-chrome-code">
+            Ver Código Fonte no GitHub ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO: ENGENHARIA ZERO LEAKS & ANTI-HACKING -->
+  <!-- ========================================================= -->
+  <section class="section-security" id="seguranca">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">Engenharia de Defesa</span>
+        <h2 class="section-title">Zero Leaks por Design. Blindagem Real.</h2>
+        <p class="section-sub">Não confiamos em promessas de marketing. Construímos barreiras de segurança acopladas ao kernel do seu sistema operacional.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-item reveal delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h4>Hard Kill Switch de Kernel</h4>
+          <p>Diferente de VPNs fracas que falham se o app travar, nossas regras no <strong>WFP (Windows), PF (macOS) e nftables (Linux)</strong> travam a placa de rede no nível do kernel se o túnel oscilar.</p>
+        </div>
+
+        <div class="feature-item reveal delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></svg>
+          </div>
+          <h4>Unbound DNS Privado</h4>
+          <p>Suas consultas DNS nunca tocam provedores de internet locais nem Google. Cada nó FLUX roda um resolvedor recursivo próprio diretamente na memória RAM com validação DNSSEC.</p>
+        </div>
+
+        <div class="feature-item reveal delay-3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          </div>
+          <h4>Escudo Wi-Fi Público & Anti-ARP</h4>
+          <p>Em cafeterias ou aeroportos, o FLUX neutraliza ataques de <em>Man-in-the-Middle</em> e <em>ARP Spoofing</em>, tornando seu dispositivo 100% invisível a varreduras Nmap de terceiros na rede local.</p>
+        </div>
+
+        <div class="feature-item reveal delay-4">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <h4>IPv6 Blackhole Determinístico</h4>
+          <p>A maioria das VPNs vaza seu IP ao acessar sites IPv6. O FLUX aplica descarte atômico de pacotes IPv6 desprotegidos na placa física antes mesmo de tocarem o roteador.</p>
+        </div>
+
+        <div class="feature-item reveal delay-1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <h4>Velocidade Máxima com WireGuard®</h4>
+          <p>Até 5.4 Gbps de throughput real através do driver oficial <strong>WinTun</strong> e módulos nativos do kernel. Conexão instantânea em menos de 100 milissegundos e economia de bateria.</p>
+        </div>
+
+        <div class="feature-item reveal delay-2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
+          </div>
+          <h4>Camada Anti-Censura (DPI)</h4>
+          <p>Em redes restritivas (faculdades, empresas ou países com censura profunda), ative a camada ofuscada <strong>AmneziaWG / VLESS Reality</strong> que mascara o túnel como tráfego HTTPS normal.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO: TODAS AS 13 PLATAFORMAS -->
+  <!-- ========================================================= -->
+  <section class="section-platforms" id="plataformas">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">Compatibilidade Universal</span>
+        <h2 class="section-title">Disponível para Todos os seus Dispositivos</h2>
+        <p class="section-sub">Uma experiência nativa, leve e otimizada para todas as plataformas sem exceção.</p>
+      </div>
+
+      <div class="platforms-grid">
+        <div class="platform-card reveal delay-1">
+          <div class="platform-icon">🪟</div>
+          <h3>Windows</h3>
+          <p>Driver WinTun de alta velocidade e proteção de firewall WFP nativa.</p>
+          <a href="index.html" class="platform-link">Download .exe / MSI</a>
+        </div>
+
+        <div class="platform-card reveal delay-2">
+          <div class="platform-icon">🍎</div>
+          <h3>macOS</h3>
+          <p>App nativo em SwiftUI com suporte M1/M2/M3/M4 e Apple Silicon.</p>
+          <a href="index.html" class="platform-link">Download .dmg</a>
+        </div>
+
+        <div class="platform-card reveal delay-3">
+          <div class="platform-icon">🐧</div>
+          <h3>Linux</h3>
+          <p>Daemon Rust de alta performance, CLI rápida e pacotes .deb, .rpm e AUR.</p>
+          <a href="index.html" class="platform-link">Instalar via Terminal</a>
+        </div>
+
+        <div class="platform-card reveal delay-4">
+          <div class="platform-icon">🤖</div>
+          <h3>Android</h3>
+          <p>Always-on VPN nativo, bloqueio de vazamentos e consumo mínimo de bateria.</p>
+          <a href="index.html" class="platform-link">Download APK / Play</a>
+        </div>
+
+        <div class="platform-card reveal delay-1">
+          <div class="platform-icon">📱</div>
+          <h3>iOS</h3>
+          <p>Chaves protegidas no Apple Secure Enclave e conexão On-Demand em Wi-Fi.</p>
+          <a href="index.html" class="platform-link">App Store</a>
+        </div>
+
+        <div class="platform-card reveal delay-2">
+          <div class="platform-icon">📺</div>
+          <h3>Android TV</h3>
+          <p>Interface Leanback para Smart TVs navegável 100% pelo controle remoto.</p>
+          <a href="index.html" class="platform-link">Download Android TV</a>
+        </div>
+
+        <div class="platform-card reveal delay-3">
+          <div class="platform-icon">🌐</div>
+          <h3>Extensões Web</h3>
+          <p>Chrome, Firefox, Edge e Opera com bloqueio rígido de vazamentos WebRTC.</p>
+          <a href="index.html" class="platform-link">Instalar no Navegador</a>
+        </div>
+
+        <div class="platform-card reveal delay-4">
+          <div class="platform-icon">📡</div>
+          <h3>Roteadores</h3>
+          <p>Perfis manuais WireGuard (.conf) e OpenVPN (.ovpn) para OpenWrt e pfSense.</p>
+          <a href="index.html" class="platform-link">Gerar Configurações</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO: COMPARATIVO TÉCNICO -->
+  <!-- ========================================================= -->
+  <section class="section-table" id="comparativo">
+    <div class="container">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">Matriz Comparativa</span>
+        <h2 class="section-title">Transparência Lado a Lado</h2>
+        <p class="section-sub">Veja por que o FLUX VPN é a escolha definitiva para quem valoriza segurança de verdade.</p>
+      </div>
+
+      <div class="table-responsive reveal">
+        <table class="flux-table">
+          <thead>
+            <tr>
+              <th>Critério Técnico</th>
+              <th>❌ Urban VPN</th>
+              <th>⚠️ Planet VPN</th>
+              <th class="col-flux">🛡️ FLUX VPN</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Arquitetura da Rede</strong></td>
+              <td>P2P Residencial (Perigoso)</td>
+              <td>Centralizada Comercial</td>
+              <td class="col-flux"><strong>Nós Dedicados em RAM Volátil</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Uso da Banda do Usuário</strong></td>
+              <td><span class="badge-red">SIM (Você é nó de saída)</span></td>
+              <td>Não</td>
+              <td class="col-flux"><span class="badge-green">NUNCA (100% Cliente Protegido)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Código Aberto (Open Source)</strong></td>
+              <td>Não (Proprietário Fechado)</td>
+              <td>Não (Proprietário Fechado)</td>
+              <td class="col-flux"><span class="badge-green">100% Aberto (GPLv3 / GitHub)</span></td>
+            </tr>
+            <tr>
+              <td><strong>Kill Switch</strong></td>
+              <td>Soft / Em nível de app</td>
+              <td>Básico</td>
+              <td class="col-flux"><strong>Hard Kill Switch no Kernel (WFP/PF)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Proteção contra DNS Leak</strong></td>
+              <td>Vazamentos frequentes</td>
+              <td>DNS fechado</td>
+              <td class="col-flux"><strong>Unbound Local + Firewall Travado</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Persistência em Disco</strong></td>
+              <td>Logs e telemetria comercial</td>
+              <td>Afirma RAM-only (sem auditoria)</td>
+              <td class="col-flux"><strong>Diskless PXE Boot (Zero HD/SSD)</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Publicidade e Anúncios</strong></td>
+              <td>Coleta de dados de mercado</td>
+              <td>Exibe anúncios na versão grátis</td>
+              <td class="col-flux"><strong>Zero Anúncios • Zero Trackers</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- SEÇÃO: PERGUNTAS FREQUENTES (FAQ) -->
+  <!-- ========================================================= -->
+  <section class="section-faq" id="faq">
+    <div class="container max-w-750">
+      <div class="section-header text-center reveal">
+        <span class="section-tag">Dúvidas Comuns</span>
+        <h2 class="section-title">Perguntas Frequentes</h2>
+      </div>
+
+      <div class="faq-accordion">
+        <div class="faq-item reveal delay-1">
+          <button class="faq-question">
+            <span>O FLUX VPN é realmente gratuito e sem limites de tráfego?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Sim. O protocolo WireGuard® nativo não possui contadores artificiais de dados. O projeto é mantido através de nós comunitários, fundos de liberdade digital e doações abertas via GitHub Sponsors e criptomoedas (Monero e Bitcoin), sem limites artificiais de velocidade ou tempo de uso.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-2">
+          <button class="faq-question">
+            <span>Qual a diferença real entre o FLUX VPN e o Urban VPN?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>A diferença é fundamental para a sua segurança legal: o Urban VPN utiliza um modelo de proxy residencial P2P onde o <strong>seu IP residencial é compartilhado com terceiros</strong> para servir de nó de saída. No FLUX VPN, você é puramente um cliente protegido; todo o tráfego de saída utiliza servidores dedicados em data centers seguros fora dos 14 Eyes.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-3">
+          <button class="faq-question">
+            <span>Como os servidores garantem que não há logs?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Nossos nós operam com inicialização de rede via iPXE, carregando uma imagem minimalista do Alpine Linux inteiramente em memória volátil (tmpfs). Os discos rígidos ou SSDs são inexistentes ou mantidos desmontados. Ao reiniciar o servidor ou desplugá-lo da tomada, qualquer registro em RAM evapora instantaneamente.</p>
+          </div>
+        </div>
+
+        <div class="faq-item reveal delay-4">
+          <button class="faq-question">
+            <span>O aplicativo pesa no computador ou descarrega a bateria?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Não. Não utilizamos frameworks pesados como Electron (que consome 400MB+ de RAM). Nossos clientes são construídos em <strong>Rust + Tauri</strong> no Desktop (menos de 20MB de RAM) e em código nativo puro (SwiftUI no macOS/iOS e Kotlin no Android), utilizando as extensões de rede do próprio sistema operacional.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- CTA FINAL DE CÓDIGO ABERTO -->
+  <!-- ========================================================= -->
+  <section class="section-cta-final">
+    <div class="container text-center reveal">
+      <div class="cta-box">
+        <h2 class="cta-title">Privacidade Digital de Verdade, Construída em Aberto.</h2>
+        <p class="cta-desc">Junte-se a milhares de desenvolvedores, ativistas e usuários que não aceitam ter seus dados comercializados.</p>
+        <div class="cta-buttons">
+          <a href="https://github.com/cadubezerrapro/fluxvpn" target="_blank" class="btn-cta-github">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            <span>Ver no GitHub (cadubezerrapro/fluxvpn)</span>
+          </a>
+          <a href="index.html" class="btn-cta-app">
+            <span>Abrir Simulador do App</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================= -->
+  <!-- FOOTER INSTITUCIONAL -->
+  <!-- ========================================================= -->
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col brand-col">
+        <div class="footer-logo">
+          <span class="logo-name">FLUX VPN</span>
+          <span class="badge-license">GPLv3</span>
+        </div>
+        <p class="footer-tagline">A suíte de VPN open-source mais segura, leve e auditável do mundo.</p>
+        <div class="footer-socials">
+          <a href="https://github.com/cadubezerrapro/fluxvpn" target="_blank" title="GitHub">GitHub</a>
+          <a href="PLANO_MESTRE_FLUX_VPN.md" target="_blank" title="Arquitetura">Plano Técnico</a>
+          <a href="DESIGN_SYSTEM.md" target="_blank" title="Design System">Design System</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Segurança & Auditoria</h5>
+        <ul>
+          <li><a href="#seguranca">Zero Leaks DNS</a></li>
+          <li><a href="#seguranca">Kill Switch no Kernel</a></li>
+          <li><a href="#seguranca">Proteção Wi-Fi Pública</a></li>
+          <li><a href="#diferenciais">Servidores RAM-Only</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Plataformas</h5>
+        <ul>
+          <li><a href="#plataformas">Windows & macOS</a></li>
+          <li><a href="#plataformas">Linux & Android</a></li>
+          <li><a href="#plataformas">iOS & Android TV</a></li>
+          <li><a href="#plataformas">Extensões de Navegador</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h5>Comunidade</h5>
+        <ul>
+          <li><a href="https://github.com/cadubezerrapro/fluxvpn" target="_blank">Repositório Oficial</a></li>
+          <li><a href="https://github.com/cadubezerrapro/fluxvpn/issues" target="_blank">Reportar Falha</a></li>
+          <li><a href="PLANO_MESTRE_FLUX_VPN.md">Documentação</a></li>
+          <li><a href="LICENSE">Licença GPLv3</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container bottom-flex">
+        <span>© 2026 FLUX VPN Project. Software Livre sob licença GPLv3.</span>
+        <div class="canary-badge">
+          <span class="canary-dot"></span>
+          <span>Warrant Canary: 0 Mandados Judiciais Recebidos</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script src="landing.js"></script>
+</body>
+</html>
