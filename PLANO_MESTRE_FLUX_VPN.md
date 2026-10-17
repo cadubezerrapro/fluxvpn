@@ -7,10 +7,10 @@
 ## 📑 ÍNDICE GERAL
 
 1. [Sumário Executivo e Manifesto FLUX VPN](#1-sumário-executivo-e-manifesto-flux-vpn)
-2. [Auditoria Forense dos Concorrentes: Urban VPN vs. Planet VPN](#2-auditoria-forense-dos-concorrentes-urban-vpn-vs-planet-vpn)
-   - 2.1 A Armadilha P2P do Urban VPN (Perigo Jurídico e Vazamentos)
-   - 2.2 O Modelo Planet VPN (Freemium, Código Fechado e Ads)
-   - 2.3 Matriz Comparativa Definitiva: Urban vs Planet vs FLUX
+2. [Auditoria Forense da Indústria: Riscos de Redes P2P Residenciais e Softwares Fechados](#2-auditoria-forense-da-indústria-riscos-de-redes-p2p-residenciais-e-softwares-fechados)
+   - 2.1 A Armadilha de Redes P2P Residenciais (Exit Node Hijacking)
+   - 2.2 O Modelo Freemium Fechado (Código Proprietário e Telemetria)
+   - 2.3 Matriz Comparativa Definitiva: Redes P2P vs Softwares Fechados vs FLUX VPN
 3. [Engenharia de "Zero Leaks" e Segurança de Nível Militar](#3-engenharia-de-zero-leaks-e-segurança-de-nível-militar)
    - 3.1 Anatomia e Blindagem contra DNS Leaks
    - 3.2 Erradicação de Vazamentos IPv6 (Dual-Stack vs Blackholing)
@@ -43,7 +43,7 @@
 
 ## 1. SUMÁRIO EXECUTIVO E MANIFESTO FLUX VPN
 
-O mercado de "VPNs gratuitas" é amplamente dominado por ilusões de segurança, modelos de monetização predatórios e vazamentos massivos de dados. Serviços populares como o **Urban VPN** e o **Planet VPN** atraem dezenas de milhões de downloads com promessas de "100% grátis e ilimitado", porém escondem contrapartidas graves que comprometem a segurança e a integridade jurídica do usuário final.
+O mercado de "VPNs gratuitas" é amplamente dominado por ilusões de segurança, modelos de monetização predatórios e vazamentos massivos de dados. Serviços comerciais gratuitos populares atraem dezenas de milhões de downloads com promessas de "100% grátis e ilimitado", porém escondem contrapartidas graves que comprometem a segurança e a integridade jurídica do usuário final.
 
 O **FLUX VPN** nasce com uma missão clara:
 > **Criar a primeira suíte de VPN verdadeiramente Open-Source, com infraestrutura verificável, proteção matemática contra vazamentos (DNS, IPv6, WebRTC) e ausência absoluta de rastreamento.**
@@ -57,36 +57,36 @@ O **FLUX VPN** nasce com uma missão clara:
 
 ---
 
-## 2. AUDITORIA FORENSE DOS CONCORRENTES: URBAN VPN vs. PLANET VPN
+## 2. AUDITORIA FORENSE DA INDÚSTRIA: RISCOS DE MODELOS P2P RESIDENCIAIS E CÓDIGO FECHADO
 
-Para conceber uma solução superior, realizamos uma engenharia reversa conceitual e análise detalhada dos serviços mencionados.
+Para conceber uma solução superior, realizamos uma engenharia reversa conceitual e análise detalhada dos modelos dominantes no mercado de VPNs.
 
-### 2.1 A Armadilha P2P do Urban VPN (Perigo Jurídico e Técnico)
-Ao examinar os termos de uso, a política de privacidade e a arquitetura técnica da **Urban VPN** (operada pela *Urban Cyber Security Inc.* / vinculada à empresa de inteligência *BIScience*), constata-se a realidade por trás do serviço "100% Gratuito e Ilimitado":
+### 2.1 A Armadilha de Redes P2P Residenciais (Exit Node Hijacking)
+Ao examinar termos de uso, políticas de privacidade e tráfego de pacotes em redes VPN gratuitas baseadas em P2P, constata-se a realidade por trás do serviço "100% Gratuito e Ilimitado":
 
-* **Rede P2P Residencial (Exit Node Hijacking):** O Urban VPN opera sob a mesma arquitetura controversa do infame *Hola VPN*. Ao aceitar o plano gratuito, o computador ou celular do usuário se transforma em um **nó de saída (Exit Node)** para outros usuários da rede e clientes corporativos de proxy da BIScience.
+* **Rede P2P Residencial (Exit Node Hijacking):** Ao aceitar o plano gratuito, o computador ou celular do usuário se transforma silenciosamente em um **nó de saída (Exit Node)** para outros usuários da rede e clientes corporativos de proxies residenciais.
 * **O Risco Penal e Civil:** Se outro membro da rede ou cliente corporativo utilizar o nó de saída para cometer cibercrimes (ataques DDoS, scraping agressivo, disseminação de conteúdo ilícito, estelionato digital), **o endereço IP residencial do usuário comum aparecerá nos registros das autoridades e provedores de internet (ISPs)**.
-* **Vazamento Sistêmico de WebRTC e DNS:** As extensões de navegador do Urban VPN atuam meramente como proxies HTTP/SOCKS com injeção de scripts, sem isolamento de socket UDP. Isso resulta em vazamentos frequentes do endereço IP real através de requisições STUN/TURN da API WebRTC dos navegadores.
-* **Coleta de Telemetria Comercial:** Os dados de navegação e performance de rede são minerados e anonimizados para alimentação de inteligência de mercado e pesquisa de concorrência.
+* **Vazamento Sistêmico de WebRTC e DNS:** As extensões de navegador dessas redes atuam meramente como proxies HTTP/SOCKS com injeção de scripts, sem isolamento de socket UDP. Isso resulta em vazamentos frequentes do endereço IP real através de requisições STUN/TURN da API WebRTC dos navegadores.
+* **Coleta de Telemetria Comercial:** Os dados de navegação e performance de rede são minerados e anonimizados para alimentação de inteligência de mercado e pesquisa corporativa.
 
-### 2.2 O Modelo Planet VPN (Freemium, Código Fechado e Ads)
-A **Planet VPN** (operada pela *FREE VPN PLANET S.R.L*, sediada em Bucareste, Romênia) apresenta uma abordagem tradicional de túneis VPN centralizados:
+### 2.2 O Modelo Freemium Fechado (Código Proprietário e Telemetria)
+Em provedores comerciais de código fechado convencionais:
 
-* **Arquitetura Base:** Utiliza servidores centrais com suporte a OpenVPN, IKEv2 e protocolos customizados ("StarGuard", "PlanetX").
-* **O Funil Gratuito vs. Pago:** O plano gratuito restringe o usuário a 5 ou 6 localidades com velocidades estranguladas, servindo como isca para aquisição de planos pagos ($3.99/mês a $9.99/mês).
-* **Propriedade Fechada (Closed Source):** Apesar de alegar política rigorosa de "No-Logs" e servidores em RAM, **não há como auditar externamente o código do cliente ou dos servidores**. O usuário é forçado a confiar cegamente nas declarações de marketing da empresa.
-* **SDKs de Terceiros e Monetização por Publicidade:** As versões mobile (Android) gratuitas integram bibliotecas de analytics e redes de anúncio (como Google AdMob/Firebase), que coletam identificadores de hardware (GAID/IDFA) e dados de telemetria de inicialização de app.
-* **Extensões de Navegador como Simples Proxies:** As extensões para Chrome/Firefox/Edge da Planet VPN são proxies HTTP/SOCKS que não criptografam o tráfego de outros softwares do sistema e sofrem de problemas de WebRTC caso o usuário não ative manualmente travas adicionais.
+* **Arquitetura Base:** Utilizam servidores centrais com protocolos proprietários ou fechados, sem auditabilidade pública.
+* **O Funil Gratuito vs. Pago:** O plano gratuito restringe o usuário a poucas localidades com velocidades deliberadamente estranguladas, servindo como funil para forçar assinaturas mensais.
+* **Propriedade Fechada (Closed Source):** Apesar de alegarem política rigorosa de "No-Logs" e servidores em RAM, **não há como auditar externamente o código do cliente ou dos servidores**. O usuário é forçado a confiar cegamente nas declarações de marketing da empresa.
+* **SDKs de Terceiros e Monetização por Publicidade:** As versões mobile gratuitas frequentemente integram bibliotecas de analytics e redes de anúncio, que coletam identificadores de hardware (GAID/IDFA) e dados de telemetria.
+* **Extensões de Navegador como Simples Proxies:** Extensões que funcionam apenas como proxies HTTP simples sem criptografia no sistema operacional e sem blindagem contra vazamento de WebRTC.
 
-### 2.3 Matriz Comparativa Definitiva: Urban vs Planet vs FLUX
+### 2.3 Matriz Comparativa Definitiva: Redes P2P vs Softwares Fechados vs FLUX VPN
 
-| Critério Técnico | ❌ Urban VPN | ⚠️ Planet VPN | 🛡️ FLUX VPN (Nossa Solução) |
+| Critério Técnico | ❌ Redes P2P Gratuitas | ⚠️ Softwares Fechados Comuns | 🛡️ FLUX VPN (Nossa Solução) |
 | :--- | :--- | :--- | :--- |
 | **Arquitetura de Rede** | P2P / Rede Residencial (Perigoso) | Servidores Dedicados Centralizados | Nós Dedicados de Alta Velocidade + RAM-Only |
 | **Uso da Conexão do Usuário** | **SIM** (Você vira Exit Node para estranhos) | Não | **NUNCA** (Usuário é puramente cliente) |
 | **Código-Fonte** | 100% Fechado / Obscuro | 100% Fechado | **100% Open-Source (GPLv3 / Apache 2.0)** |
 | **Auditoria & Reproducible Builds** | Inexistente | Inexistente | Totalmente Auditável + CI/CD Determinístico |
-| **Protocolo de Rede** | Proxy proprietário / P2P Mesh | OpenVPN, IKEv2, StarGuard (fechado) | **WireGuard Kernel + AmneziaWG + OpenVPN 2.6** |
+| **Protocolo de Rede** | Proxy proprietário / P2P Mesh | Protocolos proprietários fechados | **WireGuard Kernel + AmneziaWG + OpenVPN 2.6** |
 | **Proteção contra DNS Leak** | Fraca / Frequentes vazamentos | Média (DNS proprietário fechado) | **Absoluta (Unbound local + DNS forçado via Firewall)** |
 | **Proteção contra IPv6 Leak** | Incompleta (Frequentemente vaza) | Desativa IPv6 ou vaza | **Dual-Stack nativo com isolamento ou Blackhole total** |
 | **Proteção contra WebRTC** | Nula nas extensões | Média nas extensões | **Bloqueio rígido de IP Handling Policy via MV3** |
@@ -182,7 +182,7 @@ Redes Wi-Fi abertas em aeroportos, hotéis, cafés e shoppings são os principai
 
 ## 4. PILHA DE PROTOCOLOS E CRIPTOGRAFIA DO FLUX VPN
 
-O FLUX VPN não reinventa a roda com algoritmos proprietários duvidosos. Utilizamos as tecnologias criptográficas mais avançadas, comprovadas e auditadas do planeta:
+O FLUX VPN não reinventa a roda com algoritmos proprietários duvidosos. Utilizamos as tecnologias criptográficas mais avançadas, comprovadas e auditadas do mundo:
 
 ### 4.1 WireGuard: O Coração do FLUX VPN
 * **Criptografia:**
@@ -208,7 +208,7 @@ Para usuários em redes corporativas, universidades, escolas ou países com Deep
 
 ## 5. ESTRATÉGIA MULTIPLATAFORMA (13 ECOSSISTEMAS ALVO)
 
-O FLUX VPN será disponibilizado exatamente em todas as plataformas onde o Planet VPN e o Urban VPN operam, mas com arquitetura unificada e moderna.
+O FLUX VPN é disponibilizado de forma universal e unificada em todas as plataformas e ecossistemas modernos.
 
 ```
                                 +---------------------------+
@@ -286,7 +286,7 @@ O FLUX VPN será disponibilizado exatamente em todas as plataformas onde o Plane
 
 ## 6. INFRAESTRUTURA DE SERVIDORES 100% EM RAM (RAM-ONLY DISKLESS)
 
-Enquanto serviços fechados como o Planet VPN alegam política de "No-Logs" sem possibilidade de verificação, o FLUX VPN adota uma infraestrutura arquiteturalmente incapaz de armazenar dados persistentes:
+Enquanto soluções proprietárias de código fechado alegam política de "No-Logs" sem possibilidade de verificação, o FLUX VPN adota uma infraestrutura arquiteturalmente incapaz de armazenar dados persistentes:
 
 ```
 +-----------------------------------------------------------------------------------+
@@ -332,7 +332,7 @@ Enquanto serviços fechados como o Planet VPN alegam política de "No-Logs" sem 
 Os nós centrais de coordenação e primeiros servidores de saída serão alocados em jurisdições com legislação rigorosa de proteção à privacidade e fora de tratados de espionagem em massa (Five Eyes / Nine Eyes / Fourteen Eyes):
 * **Suíça:** Legislação estrita de privacidade (DPA / FADP), sem obrigação de retenção de logs para serviços VPN.
 * **Islândia:** Pioneira em proteção de direitos digitais e liberdade de expressão.
-* **Romênia:** Mesma jurisdição legal que permitiu ao CyberGhost e ao Planet VPN operarem com imunidade contra retenção arbitrária da UE.
+* **Romênia:** Jurisdição com histórico consolidado contra leis de retenção arbitrária e vigilância da UE.
 * **Panamá:** Fora de qualquer pacto internacional de vigilância de dados.
 
 ---
@@ -390,7 +390,7 @@ FLUXVPN/
 
 ## 8. MODELO DE SUSTENTABILIDADE ÉTICO E GOVERNANÇA
 
-O maior erro de VPNs ditas "gratuitas" é recorrer à venda de dados ou ao sequestro de IPs dos usuários (como faz o Urban VPN). Para que o FLUX VPN seja viável a longo prazo mantendo a ética absoluta:
+O maior erro de VPNs ditas "gratuitas" comerciais é recorrer à venda de telemetria ou ao sequestro de banda e IPs residenciais de usuários. Para que o FLUX VPN seja viável a longo prazo mantendo a ética absoluta:
 
 1. **Camada Gratuita Comunitária (Community Free Tier):**
    * Nós básicos de alta qualidade mantidos por patrocinadores e doadores (fundos de liberdade na internet, doações comunitárias via Open Collective e GitHub Sponsors).
@@ -445,8 +445,8 @@ FASE 6: Auditoria de Segurança, Lançamento Público e Governança Open-Source
 
 ## 🏁 CONCLUSÃO & PRÓXIMOS PASSOS IMEDIATOS
 
-Com este plano mestre em mãos, possuímos a fórmula técnica exata para superar o **Urban VPN** e o **Planet VPN** em todas as frentes:
-* Enquanto o **Urban VPN** compromete o usuário transformando-o em um nó de saída de terceiros, o **FLUX VPN** protege a máquina do usuário com um cofre criptográfico impenetrável.
-* Enquanto o **Planet VPN** opera sob código fechado e táticas comerciais agressivas, o **FLUX VPN** entrega total auditabilidade, builds reproduzíveis e transparência em nível de hardware.
+Com este plano mestre em mãos, possuímos a fórmula técnica exata para estabelecer o novo padrão ouro de segurança e privacidade em todas as frentes:
+* Enquanto serviços P2P residenciais comprometem o usuário transformando sua máquina em nó de tráfego de terceiros, o **FLUX VPN** protege a máquina do usuário com um cofre criptográfico impenetrável.
+* Enquanto VPNs comerciais operam sob código fechado e táticas comerciais agressivas, o **FLUX VPN** entrega total auditabilidade, builds reproduzíveis e transparência em nível de hardware.
 
 **O projeto está pronto para iniciar a fase de implementação imediata.**

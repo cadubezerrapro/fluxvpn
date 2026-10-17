@@ -5,7 +5,7 @@
 
 ## 🎯 1. Filosofia de Design: "Clean, Utilitário e Seguro"
 
-Seguindo a referência dos melhores líderes da categoria (como Planet VPN, Urban VPN, Mullvad e Apple Human Interface Guidelines), o **FLUX VPN** adota uma identidade visual pautada por:
+Inspirado nos mais altos padrões da indústria moderna de software e nas Apple Human Interface Guidelines, o **FLUX VPN** adota uma identidade visual pautada por:
 
 * **Superfícies Claras e Arejadas:** Fundo suave off-white (`#F8FAFC` e `#FFFFFF`), evitando poluição visual, temas espalhafatosos ou elementos sci-fi futuristas exagerados que transmitem amadorismo.
 * **Tipografia Moderna e Legível:** Família tipográfica *Plus Jakarta Sans* para títulos e controles (usada por grandes fintechs e produtos SaaS) e *JetBrains Mono* para exibição de endereços IP e portas criptográficas.
