@@ -9,7 +9,10 @@
 
 | Método | Link / Comando | Descrição |
 | :--- | :--- | :--- |
-| **Download Direto (.ZIP)** | **[Baixar ZIP da Branch Main](https://github.com/cadubezerrapro/fluxvpn/archive/refs/heads/main.zip)** | Pacote completo pronto para descompactar e usar imediatamente sem Git |
+| **Código Completo (.ZIP)** | **[Baixar ZIP da Branch Main](https://github.com/cadubezerrapro/fluxvpn/archive/refs/heads/main.zip)** | Pacote completo com código, documentação e simulador |
+| **🍏 App Mac (.ZIP)** | **[Baixar FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip)** | Pacote standalone macOS pronto para duplo-clique |
+| **🪟 App Windows (.ZIP)** | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** | Pacote standalone Windows pronto para duplo-clique |
+| **🌐 Extensão Web (.ZIP)** | **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)** | Extensão Manifest V3 pronta para Chrome/Brave/Edge |
 | **Repositório Oficial** | `https://github.com/cadubezerrapro/fluxvpn` | Página principal do projeto no GitHub |
 | **Git Clone (Terminal)** | `git clone https://github.com/cadubezerrapro/fluxvpn.git` | Clona o código fonte completo com histórico |
 

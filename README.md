@@ -67,13 +67,13 @@ Se você deseja executar a interface do FLUX VPN diretamente no computador como 
 
 ### 📦 Releases Oficiais no GitHub (Download Isolado por Sistema)
 Para baixar exclusivamente o pacote isolado do seu sistema operacional sem a documentação:
-👉 **[Acessar GitHub Releases (v1.0.0)](https://github.com/cadubezerrapro/fluxvpn/releases)**
+👉 **[Acessar Central de Releases no GitHub](https://github.com/cadubezerrapro/fluxvpn/releases)**
 
-| Pacote | Plataforma | Formato |
+| Pacote | Plataforma | Download Direto (.ZIP) |
 | :--- | :--- | :--- |
-| **FLUX VPN para macOS** | Mac (Apple Silicon & Intel) | `FLUX-VPN-macOS.command` / `.app` |
-| **FLUX VPN para Windows** | Windows 10 e Windows 11 | `FLUX-VPN-Windows.bat` |
-| **Extensão Web** | Chrome, Edge, Brave, Opera | `FLUX-VPN-Chrome.zip` |
+| **🍏 FLUX VPN para macOS** | Mac (Apple Silicon & Intel) | **[Baixar FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip)** |
+| **🪟 FLUX VPN para Windows** | Windows 10 e Windows 11 | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** |
+| **🌐 Extensão Chrome / Brave** | Chrome, Edge, Brave, Opera | **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)** |
 
 ---
 
