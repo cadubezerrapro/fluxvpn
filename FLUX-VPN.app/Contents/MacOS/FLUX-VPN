@@ -4,6 +4,15 @@ CONTENTS_DIR="$(dirname "$DIR")"
 APP_DIR="$(dirname "$CONTENTS_DIR")"
 REPO_DIR="$(dirname "$APP_DIR")"
 
+# Inicia o motor nativo em segundo plano se disponível
+if ! pgrep -f "flux_engine.py" > /dev/null; then
+    if [ -f "$CONTENTS_DIR/Resources/core/flux_engine.py" ]; then
+        python3 "$CONTENTS_DIR/Resources/core/flux_engine.py" >/dev/null 2>&1 &
+    elif [ -f "$REPO_DIR/core/flux_engine.py" ]; then
+        python3 "$REPO_DIR/core/flux_engine.py" >/dev/null 2>&1 &
+    fi
+fi
+
 # Prioridade: 1) Recursos internos do App; 2) Pasta raiz
 if [ -f "$CONTENTS_DIR/Resources/index.html" ]; then
     INDEX_PATH="$CONTENTS_DIR/Resources/index.html"

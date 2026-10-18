@@ -1,6 +1,13 @@
 #!/bin/bash
 cd "$(dirname "$0")"
 
+# Inicia o motor nativo de rede FLUX em segundo plano (se não estiver rodando)
+if ! pgrep -f "flux_engine.py" > /dev/null; then
+    if [ -f "core/flux_engine.py" ]; then
+        python3 core/flux_engine.py >/dev/null 2>&1 &
+    fi
+fi
+
 # Localiza o arquivo principal do aplicativo
 APP_FILE="$(pwd)/index.html"
 

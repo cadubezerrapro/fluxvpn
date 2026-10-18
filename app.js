@@ -354,14 +354,33 @@ function updateUI() {
 }
 
 // ==========================================================================
-// 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO
+// 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO (Com Bridge Nativa)
 // ==========================================================================
-function connectVPN() {
+async function connectVPN() {
   if (state.isConnecting || state.isConnected) return;
 
   state.isConnecting = true;
-  state.handshakeStepText = "Conectando...";
+  state.handshakeStepText = "Conectando ao nó...";
   updateUI();
+
+  // Comunicação assíncrona com o motor nativo local (se ativo no sistema)
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 1200);
+    const res = await fetch("http://127.0.0.1:51821/api/connect", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ node: state.selectedServer.id }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const data = await res.json();
+    if (data && data.state && data.state.current_ip) {
+      state.selectedServer.ip = data.state.current_ip;
+    }
+  } catch (e) {
+    // Modo standalone / webview
+  }
 
   setTimeout(() => {
     if (!state.isConnecting) return;
@@ -374,9 +393,8 @@ function connectVPN() {
   }, 600);
 }
 
-function disconnectVPN() {
+async function disconnectVPN() {
   if (state.isConnecting) {
-    // Cancela tentativa em andamento
     state.isConnecting = false;
     state.handshakeStepText = "";
     updateUI();
@@ -385,7 +403,10 @@ function disconnectVPN() {
 
   if (!state.isConnected) return;
 
-  playCyberSound("disconnect");
+  try {
+    fetch("http://127.0.0.1:51821/api/disconnect", { method: "POST" }).catch(() => {});
+  } catch (e) {}
+
   state.isConnected = false;
   state.isConnecting = false;
   state.handshakeStepText = "";
