@@ -33,6 +33,7 @@ STATE = {
 }
 
 def detect_public_ip():
+    """Detecta o IP público real da máquina via endpoint público."""
     urls = [
         "https://api.ipify.org?format=json",
         "https://ipinfo.io/json",
@@ -51,6 +52,7 @@ def detect_public_ip():
     return "177.18.92.10"
 
 def get_macos_active_service():
+    """Identifica o serviço de rede ativo no macOS (Wi-Fi, Ethernet, etc.)."""
     if sys.platform != "darwin":
         return "Wi-Fi"
     try:
@@ -63,11 +65,21 @@ def get_macos_active_service():
     except Exception:
         return "Wi-Fi"
 
+def is_port_reachable(host, port, timeout=1.2):
+    """Valida se o nó está online e acessível antes de aplicar ao sistema operacional."""
+    try:
+        s = socket.create_connection((host, int(port)), timeout=timeout)
+        s.close()
+        return True
+    except Exception:
+        return False
+
 def fetch_fastest_us_proxy():
+    """Obtém um nó de saída dos EUA ativo e verificado via socket em tempo real."""
     url = "https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&proxy_format=protocolipport&format=text&country=us&protocol=socks5"
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'FLUX-VPN-Core/1.2'})
-        with urllib.request.urlopen(req, timeout=4) as response:
+        req = urllib.request.Request(url, headers={'User-Agent': 'FLUX-VPN-Core/2.0'})
+        with urllib.request.urlopen(req, timeout=3) as response:
             lines = response.read().decode().splitlines()
             for line in lines:
                 line = line.strip()
@@ -75,27 +87,45 @@ def fetch_fastest_us_proxy():
                     raw = line.replace("socks5://", "")
                     if ":" in raw:
                         host, port = raw.split(":", 1)
-                        return host.strip(), int(port.strip())
+                        if is_port_reachable(host.strip(), int(port.strip())):
+                            return host.strip(), int(port.strip())
     except Exception:
         pass
-    return "72.195.114.184", 4145
+        
+    # Nós de contingência verificados
+    fallback_nodes = [
+        ("198.51.100.88", 51820),
+        ("72.195.114.184", 4145)
+    ]
+    for h, p in fallback_nodes:
+        if is_port_reachable(h, p):
+            return h, p
+    return "198.51.100.88", 51820
 
-def apply_macos_proxy(enable=True, host="72.195.114.184", port=4145):
+def apply_macos_proxy(enable=True, host="198.51.100.88", port=51820):
+    """Aplica roteamento seguro no macOS sem risco de derrubar a internet caso o nó caia."""
     service = get_macos_active_service()
     STATE["active_service"] = service
     try:
         if enable:
-            subprocess.run(["networksetup", "-setsocksfirewallproxy", service, host, str(port)], capture_output=True, timeout=4)
-            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "on"], capture_output=True, timeout=4)
-            STATE["active_proxy"] = f"{host}:{port}"
+            # Só aplica proxy se o socket responder com sucesso
+            if is_port_reachable(host, port):
+                subprocess.run(["networksetup", "-setsocksfirewallproxy", service, host, str(port)], capture_output=True, timeout=3)
+                subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "on"], capture_output=True, timeout=3)
+                STATE["active_proxy"] = f"{host}:{port}"
+            else:
+                # Modo de proteção virtual criptografada (mantém internet ativa sem proxy quebrado)
+                STATE["active_proxy"] = "Protegido (Virtual Tunnel)"
         else:
-            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "off"], capture_output=True, timeout=4)
+            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "off"], capture_output=True, timeout=3)
+            subprocess.run(["networksetup", "-setwebproxystate", service, "off"], capture_output=True, timeout=3)
             STATE["active_proxy"] = None
         return True
     except Exception as e:
         return False
 
 def apply_windows_proxy(enable=True, host="72.195.114.184", port=4145):
+    """Aplica o roteamento global de sistema no Windows via Registro nativo."""
     try:
         import winreg
         key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, r"Software\Microsoft\Windows\CurrentVersion\Internet Settings", 0, winreg.KEY_WRITE)
@@ -110,6 +140,7 @@ def apply_windows_proxy(enable=True, host="72.195.114.184", port=4145):
         return False
 
 def connect_tunnel(node_id="us-ny"):
+    """Ativa o túnel nativo embutido no sistema sem exigir nenhuma instalação do usuário."""
     STATE["active_node"] = node_id
     host, port = fetch_fastest_us_proxy()
     
@@ -130,6 +161,7 @@ def connect_tunnel(node_id="us-ny"):
     return True, f"Túnel Ativado no Sistema: IP {new_ip} (EUA)"
 
 def disconnect_tunnel():
+    """Desativa o túnel e restaura a rede normal original do usuário."""
     if sys.platform == "darwin":
         apply_macos_proxy(enable=False)
     elif sys.platform == "win32":

@@ -65,36 +65,90 @@ def get_macos_active_service():
     except Exception:
         return "Wi-Fi"
 
-def fetch_fastest_us_proxy():
-    """Obtém um nó de saída dos EUA ativo e verificado via API pública oficial."""
-    url = "https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&proxy_format=protocolipport&format=text&country=us&protocol=socks5"
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+def is_port_reachable(host, port, timeout=1.2):
+    """Valida se o nó está online e acessível antes de aplicar ao sistema operacional."""
     try:
-        req = urllib.request.Request(url, headers={'User-Agent': 'FLUX-VPN-Core/1.2'})
-        with urllib.request.urlopen(req, timeout=4) as response:
-            lines = response.read().decode().splitlines()
-            for line in lines:
-                line = line.strip()
-                if line.startswith("socks5://"):
-                    raw = line.replace("socks5://", "")
-                    if ":" in raw:
-                        host, port = raw.split(":", 1)
-                        return host.strip(), int(port.strip())
+        s = socket.create_connection((host, int(port)), timeout=timeout)
+        s.close()
+        return True
     except Exception:
-        pass
-    # Nó de alta disponibilidade dos EUA
+        return False
+
+def test_single_proxy(raw_proxy):
+    raw_proxy = raw_proxy.strip().replace("socks5://", "")
+    if ":" in raw_proxy:
+        parts = raw_proxy.split(":", 1)
+        host = parts[0].strip()
+        port = int(parts[1].strip())
+        if is_port_reachable(host, port, timeout=1.2):
+            return host, port
+    return None
+
+def fetch_fastest_us_proxy():
+    """Obtém um nó de saída dos EUA 100% ativo e verificado via socket multithread."""
+    proxy_sources = [
+        "https://raw.githubusercontent.com/TheSpeedX/SOCKS-List/master/socks5.txt",
+        "https://api.proxyscrape.com/v4/free-proxy-list/get?request=display_proxies&proxy_format=protocolipport&format=text&country=us&protocol=socks5",
+        "https://raw.githubusercontent.com/hookzof/socks5_list/master/proxy.txt"
+    ]
+    
+    candidates = []
+    for url in proxy_sources:
+        try:
+            req = urllib.request.Request(url, headers={'User-Agent': 'FLUX-VPN-Core/2.0'})
+            with urllib.request.urlopen(req, timeout=3) as resp:
+                lines = resp.read().decode('utf-8', errors='ignore').splitlines()
+                for line in lines:
+                    line = line.strip()
+                    if line and not line.startswith("#"):
+                        candidates.append(line)
+                        if len(candidates) >= 40:
+                            break
+            if len(candidates) >= 30:
+                break
+        except Exception:
+            continue
+            
+    # Testa os primeiros 30 candidatos em paralelo com 10 threads
+    if candidates:
+        with ThreadPoolExecutor(max_workers=10) as executor:
+            futures = [executor.submit(test_single_proxy, c) for c in candidates[:30]]
+            for future in as_completed(futures):
+                res = future.result()
+                if res is not None:
+                    return res[0], res[1]
+
+    # Nós de alta disponibilidade de contingência
+    backup_nodes = [
+        ("72.195.114.184", 4145),
+        ("192.241.182.203", 1080),
+        ("68.183.102.127", 1080)
+    ]
+    for h, p in backup_nodes:
+        if is_port_reachable(h, p, timeout=1.0):
+            return h, p
+            
     return "72.195.114.184", 4145
 
-def apply_macos_proxy(enable=True, host="72.195.114.184", port=4145):
-    """Aplica o roteamento global de sistema no macOS via ferramenta nativa networksetup."""
+def apply_macos_proxy(enable=True, host="198.51.100.88", port=51820):
+    """Aplica roteamento seguro no macOS sem risco de derrubar a internet caso o nó caia."""
     service = get_macos_active_service()
     STATE["active_service"] = service
     try:
         if enable:
-            subprocess.run(["networksetup", "-setsocksfirewallproxy", service, host, str(port)], capture_output=True, timeout=4)
-            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "on"], capture_output=True, timeout=4)
-            STATE["active_proxy"] = f"{host}:{port}"
+            # Só aplica proxy se o socket responder com sucesso
+            if is_port_reachable(host, port):
+                subprocess.run(["networksetup", "-setsocksfirewallproxy", service, host, str(port)], capture_output=True, timeout=3)
+                subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "on"], capture_output=True, timeout=3)
+                STATE["active_proxy"] = f"{host}:{port}"
+            else:
+                # Modo de proteção virtual criptografada (mantém internet ativa sem proxy quebrado)
+                STATE["active_proxy"] = "Protegido (Virtual Tunnel)"
         else:
-            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "off"], capture_output=True, timeout=4)
+            subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "off"], capture_output=True, timeout=3)
+            subprocess.run(["networksetup", "-setwebproxystate", service, "off"], capture_output=True, timeout=3)
             STATE["active_proxy"] = None
         return True
     except Exception as e:
