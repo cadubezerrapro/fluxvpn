@@ -39,39 +39,37 @@
 
 ---
 
-## ⬇️ Como Baixar e Usar os Aplicativos Standalone (Mac & Windows)
+## ⬇️ Como Baixar e Instalar (macOS, Windows e Navegadores)
 
-Se você deseja executar a interface do FLUX VPN diretamente no computador como aplicativo nativo:
+O **FLUX VPN** foi desenhado para ser imediatamente utilizável sem necessidade de instalar softwares de terceiros:
 
-### 🍏 Para macOS (Mac)
-1. Baixe o projeto ou acesse a pasta descompactada.
-2. Dê **duplo clique** no arquivo executável:
-   - **`▶️ Iniciar FLUX VPN (macOS).command`** ou **`FLUX-VPN.app`**
-3. O aplicativo abrirá imediatamente como uma **janela de app nativa** (sem barra de URL e sem abas de navegador), pronta para conectar!
+### 🍏 Para macOS (Mac) — Instalador Profissional .DMG
+1. Baixe o instalador oficial: **[Baixar FLUX-VPN-macOS.dmg](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.dmg)** *(ou a versão portátil [FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip))*.
+2. Dê **duplo clique no arquivo `.dmg`** baixado.
+3. Arraste o ícone do **FLUX VPN** para a pasta **Applications** (Aplicativos).
+4. Abra o FLUX VPN pelo Launchpad ou Spotlight. O aplicativo abrirá imediatamente como uma janela nativa com motor de conexão embutido!
 
 ### 🪟 Para Windows (PC)
-1. Baixe o projeto ou acesse a pasta descompactada.
-2. Dê **duplo clique** no arquivo executável:
-   - **`▶️ Iniciar FLUX VPN (Windows).bat`**
-3. O aplicativo iniciará instantaneamente em uma janela dedicada de desktop via Microsoft Edge/Chrome, funcionando como um app de desktop nativo.
+1. Baixe o pacote oficial: **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)**.
+2. Descompacte a pasta e dê duplo clique em: **`Iniciar FLUX VPN (Windows).bat`**.
+3. O aplicativo iniciará em modo de janela dedicada de desktop com zero configuração prévia.
 
 ### 🌐 Para Navegadores (Google Chrome / Brave / Edge / Opera)
-1. Acesse: `chrome://extensions/` no seu navegador.
-2. Ative o **"Modo do desenvolvedor"** (canto superior direito).
-3. Clique em **"Carregar sem compactação"** e selecione a pasta: `clients/extensions`.
-4. A extensão será instalada e ativada no seu navegador com bloqueio de WebRTC.
+1. Baixe a extensão oficial: **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)**.
+2. Descompacte a pasta `dist/chrome-extension/`.
+3. Acesse `chrome://extensions/` no navegador, ative o **Modo do Desenvolvedor** e clique em **Carregar sem compactação**.
+4. Conexão direta com 1 clique e bloqueio ativo de vazamentos WebRTC.
 
 ---
 
-### 📦 Releases Oficiais no GitHub (Download Isolado por Sistema)
-Para baixar exclusivamente o pacote isolado do seu sistema operacional sem a documentação:
-👉 **[Acessar Central de Releases no GitHub](https://github.com/cadubezerrapro/fluxvpn/releases)**
+### 📦 Central de Downloads Oficiais (GitHub Releases)
 
-| Pacote | Plataforma | Download Direto (.ZIP) |
-| :--- | :--- | :--- |
-| **🍏 FLUX VPN para macOS** | Mac (Apple Silicon & Intel) | **[Baixar FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip)** |
-| **🪟 FLUX VPN para Windows** | Windows 10 e Windows 11 | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** |
-| **🌐 Extensão Chrome / Brave** | Chrome, Edge, Brave, Opera | **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)** |
+| Plataforma | Formato Oficial | Download Direto | Método de Instalação |
+| :--- | :--- | :--- | :--- |
+| **🍏 macOS (Recomendado)** | **Instalador Apple (.DMG)** | **[Baixar FLUX-VPN-macOS.dmg](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.dmg)** | Arrastar para `/Applications` |
+| **🍏 macOS (Portátil)** | Pacote Standalone (.ZIP) | **[Baixar FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip)** | Duplo clique para abrir |
+| **🪟 Windows (10/11)** | Pacote Standalone (.ZIP) | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** | Executar `.bat` dedicado |
+| **🌐 Chrome / Brave / Edge** | Extensão Manifest V3 (.ZIP) | **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)** | Instalação em 1 clique |
 
 ---
 
