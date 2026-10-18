@@ -23,8 +23,11 @@ TMP_DMG="$REPO_DIR/dist/FLUX-VPN-tmp.dmg"
 VOL_NAME="FLUX VPN"
 MOUNT_DIR="/Volumes/$VOL_NAME"
 
-# 1. Remove duplicatas antigas do Spotlight
+# 1. Remove duplicatas antigas do Spotlight e oculta pasta dist da indexação
 rm -rf "$REPO_DIR/apps"
+mkdir -p "$REPO_DIR/dist/macOS"
+touch "$REPO_DIR/dist/.metadata_never_index"
+touch "$REPO_DIR/dist/macOS/.metadata_never_index"
 
 # 2. Compilar Lançador Mach-O Nativo Apple (Zero erro de 'não pode ser aberto')
 echo "[1/7] Compilando executável nativo Mach-O (C/Clang)..."
@@ -93,27 +96,6 @@ xattr -rc "$MOUNT_DIR/FLUX-VPN.app" 2>/dev/null || true
 # Cria o atalho nativo para /Applications
 ln -s /Applications "$MOUNT_DIR/Applications"
 
-# Adiciona o script auxiliar de 1-clique para desbloqueio instantâneo do Gatekeeper
-cat <<'EOF' > "$MOUNT_DIR/⚡️ Desbloquear e Abrir FLUX VPN.command"
-#!/bin/bash
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-echo "=========================================================="
-echo "🔓 Desbloqueando FLUX VPN no macOS (Gatekeeper Bypass)..."
-echo "=========================================================="
-if [ -d "/Applications/FLUX-VPN.app" ]; then
-    xattr -cr /Applications/FLUX-VPN.app 2>/dev/null || true
-    echo "✓ Permissões liberadas com sucesso em /Applications!"
-    open /Applications/FLUX-VPN.app
-else
-    xattr -cr "$DIR/FLUX-VPN.app" 2>/dev/null || true
-    cp -R "$DIR/FLUX-VPN.app" /Applications/
-    xattr -cr /Applications/FLUX-VPN.app 2>/dev/null || true
-    echo "✓ Instalado e liberado em Aplicativos!"
-    open /Applications/FLUX-VPN.app
-fi
-EOF
-chmod +x "$MOUNT_DIR/⚡️ Desbloquear e Abrir FLUX VPN.command"
-
 # Configura o fundo artístico Modo Claro (Retina TIFF ou PNG)
 mkdir -p "$MOUNT_DIR/.background"
 if [ -f "$REPO_DIR/dist/assets/dmg_background.tiff" ]; then
@@ -142,7 +124,7 @@ tell application \"Finder\"
         delay 1
         set position of item \"FLUX-VPN.app\" of container window to {160, 195}
         set position of item \"Applications\" of container window to {500, 195}
-        set position of item \"⚡️ Desbloquear e Abrir FLUX VPN.command\" of container window to {330, 340}
+        update without registering applications
         update without registering applications
         delay 1
         close
