@@ -1895,4 +1895,328 @@ html, body.app-body-root {
   font-size: 11px;
 }
 
+/* ==========================================================================
+   ESTILOS PREMIUM NATIVOS (SEM CARA DE IA)
+   ========================================================================== */
+.version-tag {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #E2E8F0;
+  color: #475569;
+  letter-spacing: 0.02em;
+}
+
+/* Botão Power Minimalista Circular (Estilo Apple / Mullvad) */
+.power-switch-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 0 8px;
+}
+
+.power-dial-button {
+  position: relative;
+  width: 114px;
+  height: 114px;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  outline: none;
+}
+
+.power-dial-outer-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 3.5px solid #E2E8F0;
+  transition: all 0.3s ease;
+}
+
+.power-dial-core {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  background: #F8FAFC;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #64748B;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.power-icon-svg {
+  width: 40px;
+  height: 40px;
+  transition: all 0.25s ease;
+}
+
+.power-dial-button:hover .power-dial-core {
+  transform: scale(1.04);
+  color: #0F172A;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.12);
+}
+
+/* Estado: Conectando */
+.power-dial-button.connecting .power-dial-outer-ring {
+  border-color: #BAE6FD;
+  border-top-color: #0284C7;
+  animation: dialSpin 0.9s linear infinite;
+}
+
+.power-dial-button.connecting .power-dial-core {
+  color: #0284C7;
+  animation: dialPulse 1.2s ease-in-out infinite;
+}
+
+@keyframes dialSpin {
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes dialPulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+}
+
+/* Estado: Conectado */
+.power-dial-button.connected .power-dial-outer-ring {
+  border-color: #38BDF8;
+  box-shadow: 0 0 24px rgba(2, 132, 199, 0.3);
+}
+
+.power-dial-button.connected .power-dial-core {
+  background: linear-gradient(135deg, #0284C7 0%, #0EA5E9 100%);
+  color: #FFFFFF;
+  box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35), inset 0 1px 2px rgba(255, 255, 255, 0.4);
+}
+
+/* Informações Centrais de Conexão */
+.connection-info-block {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+
+.connection-status-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.selected-location-sub {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.ip-info-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: var(--bg-subtle);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.ip-pill-label {
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+.ip-pill-value {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Barra de Telemetria */
+.telemetry-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--text-muted);
+  margin-top: 4px;
+  height: 22px;
+}
+
+.telemetry-stat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.telemetry-icon {
+  font-size: 11px;
+  color: var(--brand-cyan);
+}
+
+.telemetry-divider {
+  color: var(--border-light);
+}
+
+/* Botão Primário Desconectar */
+.action-btn-primary.disconnect {
+  background: #FFF1F2;
+  color: #E11D48;
+  border: 1px solid #FECDD3;
+  box-shadow: none;
+}
+
+.action-btn-primary.disconnect:hover {
+  background: #FFE4E6;
+  border-color: #FDA4AF;
+}
+
+/* Modais de Preferências e Sobre */
+.modal-settings-box {
+  max-width: 480px;
+}
+
+.modal-about-box {
+  max-width: 420px;
+}
+
+.settings-group {
+  margin-bottom: 20px;
+}
+
+.settings-group-title {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.settings-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+}
+
+.settings-row-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.settings-row-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.settings-row-desc {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.settings-select {
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  outline: none;
+  cursor: pointer;
+}
+
+/* Modal Sobre */
+.about-body-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+.about-logo {
+  margin-bottom: 12px;
+}
+
+.about-app-name {
+  font-size: 18px;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.about-version {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.about-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.about-badges {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.about-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 10px;
+  background: #F1F5F9;
+  border: 1px solid #E2E8F0;
+  border-radius: 20px;
+  color: #334155;
+}
+
+/* Badge de Carga de Servidor */
+.server-load-badge {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: #F1F5F9;
+  color: #64748B;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.server-load-badge.low {
+  background: #ECFDF5;
+  color: #059669;
+}
+
+.server-load-badge.med {
+  background: #EFF6FF;
+  color: #2563EB;
+}
+
+
 

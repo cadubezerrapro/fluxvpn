@@ -283,37 +283,38 @@ function updateUI() {
   const desktopActionBtn = document.getElementById("desktopActionBtn");
   const desktopVirtualIp = document.getElementById("desktopVirtualIp");
   const desktopTitleStatus = document.getElementById("desktopTitleStatus");
+  const desktopLocationSub = document.getElementById("desktopLocationSub");
 
   // Definições visuais conforme o estado
   let statusText = "Desconectado";
   let dotClass = "red";
-  let shieldClass = "disconnected";
+  let dialClass = "disconnected";
   let btnClass = "connect";
-  let btnLabel = "Proteger Minha Conexão";
-  let displayIp = `Exposto: ${realIp}`;
-  let titleSub = "Conexão Desprotegida • Clique para Conectar";
+  let btnLabel = "Conectar";
+  let displayIp = `${realIp} (Exposto)`;
+  let titleSub = "Desconectado";
 
   if (isConnecting) {
-    statusText = handshakeStepText || "Conectando...";
+    statusText = "Conectando...";
     dotClass = "yellow";
-    shieldClass = "connecting";
+    dialClass = "connecting";
     btnClass = "connecting";
-    btnLabel = "Negociando Túnel...";
-    displayIp = "Criptografando rota...";
-    titleSub = `Conectando a ${selectedServer.city}...`;
+    btnLabel = "Conectando...";
+    displayIp = "Estabelecendo rota...";
+    titleSub = "Conectando...";
   } else if (isConnected) {
     statusText = "Protegido";
     dotClass = "green";
-    shieldClass = "connected";
+    dialClass = "connected";
     btnClass = "disconnect";
     btnLabel = "Desconectar";
-    displayIp = selectedServer.ip;
-    titleSub = `Protegido • ${selectedServer.city}`;
+    displayIp = `${selectedServer.ip} (Protegido)`;
+    titleSub = "Protegido";
   }
 
   // Atualizar Mobile
   if (mobileShieldBtn) {
-    mobileShieldBtn.className = `shield-button mobile-shield ${shieldClass}`;
+    mobileShieldBtn.className = `shield-button mobile-shield ${dialClass}`;
   }
   if (mobileStatusDot) mobileStatusDot.className = `status-dot ${dotClass}`;
   if (mobileStatusText) mobileStatusText.textContent = statusText;
@@ -333,7 +334,7 @@ function updateUI() {
 
   // Atualizar Desktop
   if (desktopShieldBtn) {
-    desktopShieldBtn.className = `shield-button desktop-shield ${shieldClass}`;
+    desktopShieldBtn.className = `power-dial-button ${dialClass}`;
   }
   if (desktopStatusDot) desktopStatusDot.className = `status-dot ${dotClass}`;
   const desktopStatusDotIndicator = document.getElementById("desktopStatusDotIndicator");
@@ -345,6 +346,7 @@ function updateUI() {
   }
   if (desktopVirtualIp) desktopVirtualIp.textContent = displayIp;
   if (desktopTitleStatus) desktopTitleStatus.textContent = titleSub;
+  if (desktopLocationSub) desktopLocationSub.textContent = `${selectedServer.city}, ${selectedServer.country}`;
 
   updateTimerDisplays();
   renderServerList();
@@ -352,34 +354,15 @@ function updateUI() {
 }
 
 // ==========================================================================
-// 6. MOTOR DE CONEXÃO & HANDSHAKE REALISTA
+// 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO
 // ==========================================================================
 function connectVPN() {
   if (state.isConnecting || state.isConnected) return;
 
   state.isConnecting = true;
-  playCyberSound("handshake");
-
-  // Etapa 1: Início
-  state.handshakeStepText = "Negociando WireGuard®...";
+  state.handshakeStepText = "Conectando...";
   updateUI();
 
-  // Etapa 2: Troca de chaves Curve25519
-  setTimeout(() => {
-    if (!state.isConnecting) return;
-    state.handshakeStepText = "Trocando Chaves Curve25519...";
-    playCyberSound("handshake");
-    updateUI();
-  }, 400);
-
-  // Etapa 3: Criptografia ChaCha20
-  setTimeout(() => {
-    if (!state.isConnecting) return;
-    state.handshakeStepText = "Criptografando ChaCha20-Poly1305...";
-    updateUI();
-  }, 850);
-
-  // Etapa 4: Conexão Estabelecida com Sucesso
   setTimeout(() => {
     if (!state.isConnecting) return;
     state.isConnecting = false;
@@ -387,9 +370,8 @@ function connectVPN() {
     state.handshakeStepText = "";
     startTimer();
     startTrafficSimulation();
-    playCyberSound("connect");
     updateUI();
-  }, 1250);
+  }, 600);
 }
 
 function disconnectVPN() {
@@ -644,222 +626,54 @@ function setupEventListeners() {
     setInterval(updateTime, 30000);
   }
 
-  // Gatilhos do Modal WireGuard Real
-  const btnOpenWireGuardModal = document.getElementById("btnOpenWireGuardModal");
-  const btnDesktopWireGuard = document.getElementById("btnDesktopWireGuard");
-  const btnMobileWireGuard = document.getElementById("btnMobileWireGuard");
-  const btnCloseWgModal = document.getElementById("btnCloseWgModal");
-  const wireGuardModal = document.getElementById("wireGuardModal");
+  // Modais Nativos: Preferências e Sobre
+  const btnOpenSettings = document.getElementById("btnOpenSettings");
+  const btnCloseSettingsModal = document.getElementById("btnCloseSettingsModal");
+  const settingsModal = document.getElementById("settingsModal");
 
-  if (btnOpenWireGuardModal) btnOpenWireGuardModal.addEventListener("click", () => openWireGuardModal());
-  if (btnDesktopWireGuard) btnDesktopWireGuard.addEventListener("click", () => openWireGuardModal());
-  if (btnMobileWireGuard) btnMobileWireGuard.addEventListener("click", () => openWireGuardModal());
-  if (btnCloseWgModal) btnCloseWgModal.addEventListener("click", closeWireGuardModal);
-
-  if (wireGuardModal) {
-    wireGuardModal.addEventListener("click", (e) => {
-      if (e.target === wireGuardModal) closeWireGuardModal();
+  if (btnOpenSettings) {
+    btnOpenSettings.addEventListener("click", () => {
+      if (settingsModal) settingsModal.style.display = "flex";
+    });
+  }
+  if (btnCloseSettingsModal) {
+    btnCloseSettingsModal.addEventListener("click", () => {
+      if (settingsModal) settingsModal.style.display = "none";
+    });
+  }
+  if (settingsModal) {
+    settingsModal.addEventListener("click", (e) => {
+      if (e.target === settingsModal) settingsModal.style.display = "none";
     });
   }
 
-  const btnDownloadConf = document.getElementById("btnDownloadConf");
-  const btnCopyConf = document.getElementById("btnCopyConf");
-  const btnCopyPrivKey = document.getElementById("btnCopyPrivKey");
-  const btnRegenerateKeys = document.getElementById("btnRegenerateKeys");
+  const btnOpenAbout = document.getElementById("btnOpenAbout");
+  const btnCloseAboutModal = document.getElementById("btnCloseAboutModal");
+  const aboutModal = document.getElementById("aboutModal");
 
-  if (btnDownloadConf) btnDownloadConf.addEventListener("click", downloadWireGuardFile);
-  if (btnCopyConf) btnCopyConf.addEventListener("click", copyWireGuardConfig);
-  if (btnCopyPrivKey) btnCopyPrivKey.addEventListener("click", copyPrivateKey);
-  if (btnRegenerateKeys) btnRegenerateKeys.addEventListener("click", regenerateWireGuardKeys);
-
-  const tabViewConfig = document.getElementById("tabViewConfig");
-  const tabViewQr = document.getElementById("tabViewQr");
-
-  if (tabViewConfig) {
-    tabViewConfig.addEventListener("click", () => {
-      wgActiveTab = "config";
-      updateWireGuardModalUI();
+  if (btnOpenAbout) {
+    btnOpenAbout.addEventListener("click", () => {
+      if (aboutModal) aboutModal.style.display = "flex";
     });
   }
-
-  if (tabViewQr) {
-    tabViewQr.addEventListener("click", () => {
-      wgActiveTab = "qr";
-      updateWireGuardModalUI();
+  if (btnCloseAboutModal) {
+    btnCloseAboutModal.addEventListener("click", () => {
+      if (aboutModal) aboutModal.style.display = "none";
+    });
+  }
+  if (aboutModal) {
+    aboutModal.addEventListener("click", (e) => {
+      if (e.target === aboutModal) aboutModal.style.display = "none";
     });
   }
 }
 
 // ==========================================================================
-// 10. MÓDULO EXPORTADOR WIREGUARD® REAL (.CONF E QR CODE)
-// ==========================================================================
-function generateCurve25519Key() {
-  const array = new Uint8Array(32);
-  window.crypto.getRandomValues(array);
-  array[0] &= 248;
-  array[31] &= 127;
-  array[31] |= 64;
-  let binary = '';
-  for (let i = 0; i < array.length; i++) {
-    binary += String.fromCharCode(array[i]);
-  }
-  return window.btoa(binary);
-}
-
-let wgSelectedServer = SERVERS[0];
-let wgClientPrivateKey = generateCurve25519Key();
-let wgActiveTab = "qr";
-
-function buildWireGuardConfig(server, privateKey) {
-  return `[Interface]
-# FLUX VPN — Perfil Criptográfico Oficial
-# Local: ${server.country} (${server.city})
-# Protocolo: WireGuard® Kernel (Wintun / utun)
-PrivateKey = ${privateKey}
-Address = 10.66.66.2/32, fd42:42:42::2/128
-DNS = 1.1.1.1, 1.0.0.1
-
-[Peer]
-# Chave Pública do Servidor FLUX VPN
-PublicKey = ${server.publicKey}
-Endpoint = ${server.endpoint}
-AllowedIPs = 0.0.0.0/0, ::/0
-PersistentKeepalive = 25`;
-}
-
-function updateWireGuardModalUI() {
-  const wgServerChips = document.getElementById("wgServerChips");
-  const wgPrivateKeyDisplay = document.getElementById("wgPrivateKeyDisplay");
-  const wgConfigCode = document.getElementById("wgConfigCode");
-  const btnDownloadText = document.getElementById("btnDownloadText");
-  const wgQrContainer = document.getElementById("wgQrContainer");
-  const wgCodeBox = document.getElementById("wgCodeBox");
-  const wgQrBox = document.getElementById("wgQrBox");
-  const tabViewConfig = document.getElementById("tabViewConfig");
-  const tabViewQr = document.getElementById("tabViewQr");
-
-  if (!wgServerChips) return;
-
-  wgServerChips.innerHTML = "";
-  SERVERS.forEach(server => {
-    const isSel = server.id === wgSelectedServer.id;
-    const chip = document.createElement("button");
-    chip.className = `wg-chip ${isSel ? "active" : ""}`;
-    chip.innerHTML = `<span>${server.flag}</span> <span>${server.country}</span>`;
-    chip.addEventListener("click", () => {
-      playCyberSound("click");
-      wgSelectedServer = server;
-      updateWireGuardModalUI();
-    });
-    wgServerChips.appendChild(chip);
-  });
-
-  if (wgPrivateKeyDisplay) {
-    wgPrivateKeyDisplay.textContent = wgClientPrivateKey;
-  }
-
-  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
-  if (wgConfigCode) {
-    wgConfigCode.textContent = configText;
-  }
-
-  if (btnDownloadText) {
-    btnDownloadText.textContent = `Baixar ${wgSelectedServer.confFile || 'flux.conf'}`;
-  }
-
-  if (wgActiveTab === "config") {
-    if (wgCodeBox) wgCodeBox.style.display = "block";
-    if (wgQrBox) wgQrBox.style.display = "none";
-    if (tabViewConfig) tabViewConfig.classList.add("active");
-    if (tabViewQr) tabViewQr.classList.remove("active");
-  } else {
-    if (wgCodeBox) wgCodeBox.style.display = "none";
-    if (wgQrBox) wgQrBox.style.display = "flex";
-    if (tabViewConfig) tabViewConfig.classList.remove("active");
-    if (tabViewQr) tabViewQr.classList.add("active");
-
-    if (wgQrContainer) {
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(configText)}`;
-      wgQrContainer.innerHTML = `<img src="${qrUrl}" alt="WireGuard QR Code" width="170" height="170" />`;
-    }
-  }
-}
-
-function openWireGuardModal(server = null) {
-  playCyberSound("click");
-  if (server) {
-    wgSelectedServer = server;
-  } else {
-    wgSelectedServer = state.selectedServer || SERVERS[0];
-  }
-  const modal = document.getElementById("wireGuardModal");
-  if (modal) {
-    modal.style.display = "flex";
-    updateWireGuardModalUI();
-  }
-}
-
-function closeWireGuardModal() {
-  playCyberSound("click");
-  const modal = document.getElementById("wireGuardModal");
-  if (modal) modal.style.display = "none";
-}
-
-function downloadWireGuardFile() {
-  playCyberSound("click");
-  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
-  const blob = new Blob([configText], { type: "text/plain;charset=utf-8" });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement("a");
-  a.href = url;
-  a.download = wgSelectedServer.confFile || `flux-${wgSelectedServer.id}.conf`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
-
-  const btnText = document.getElementById("btnDownloadText");
-  if (btnText) {
-    const original = btnText.textContent;
-    btnText.textContent = "Baixado com Sucesso! ✓";
-    setTimeout(() => { btnText.textContent = original; }, 2000);
-  }
-}
-
-function copyWireGuardConfig() {
-  playCyberSound("click");
-  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
-  navigator.clipboard.writeText(configText).then(() => {
-    const btnCopyText = document.getElementById("btnCopyText");
-    if (btnCopyText) {
-      btnCopyText.textContent = "Copiado! ✓";
-      setTimeout(() => { btnCopyText.textContent = "Copiar Texto"; }, 2000);
-    }
-  });
-}
-
-function copyPrivateKey() {
-  playCyberSound("click");
-  navigator.clipboard.writeText(wgClientPrivateKey).then(() => {
-    const btn = document.getElementById("btnCopyPrivKey");
-    if (btn) {
-      btn.textContent = "Copiado! ✓";
-      setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
-    }
-  });
-}
-
-function regenerateWireGuardKeys() {
-  playCyberSound("click");
-  wgClientPrivateKey = generateCurve25519Key();
-  updateWireGuardModalUI();
-}
-
-// ==========================================================================
-// 11. INICIALIZAÇÃO CONTROLADA
+// 10. INICIALIZAÇÃO CONTROLADA
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();
   updateUI();
   detectUserRealIp();
 });
+

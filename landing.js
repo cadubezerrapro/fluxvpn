@@ -117,14 +117,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function updateExtState() {
       if (extConnected) {
-        extShieldBtn.className = "shield-button mobile-shield connected";
+        extShieldBtn.className = "power-dial-button connected";
         extActionBtn.className = "action-btn-primary disconnect";
         extActionBtn.textContent = "Desconectar Extensão";
         if (extStatusDot) extStatusDot.className = "status-dot green";
         if (extStatusText) extStatusText.textContent = "Navegador Protegido";
         startExtTimer();
       } else {
-        extShieldBtn.className = "shield-button mobile-shield disconnected";
+        extShieldBtn.className = "power-dial-button disconnected";
         extActionBtn.className = "action-btn-primary connect";
         extActionBtn.textContent = "Conectar Extensão Agora";
         if (extStatusDot) extStatusDot.className = "status-dot red";

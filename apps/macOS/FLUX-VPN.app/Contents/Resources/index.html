@@ -12,113 +12,92 @@
 <body class="app-body-root">
 
   <div class="app-container">
-    <!-- 1. Header do Aplicativo -->
+    <!-- 1. Header Nativo macOS / Windows -->
     <header class="app-header">
       <div class="app-header-left">
         <div class="app-brand">
           <svg class="brand-svg" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="brandGrad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
-                <stop stop-color="#0284C7"/>
-                <stop offset="60%" stop-color="#0EA5E9"/>
-                <stop offset="100%" stop-color="#06B6D4"/>
-              </linearGradient>
-            </defs>
-            <path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="url(#brandGrad)"/>
-            <path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/>
-            <circle cx="18.5" cy="19.5" r="1.5" fill="#FFFFFF"/>
+            <rect width="32" height="32" rx="8" fill="#0284C7"/>
+            <path d="M10 9H22V12.5H13.5V14.5H20V18H13.5V23H10V9Z" fill="#FFFFFF"/>
+            <circle cx="20.5" cy="21.5" r="1.8" fill="#38BDF8"/>
           </svg>
           <span class="brand-name">FLUX VPN</span>
+          <span class="version-tag">v1.2</span>
         </div>
-        <div class="status-pill-badge">
+        <div class="status-pill-badge" id="appStatusBadge">
           <span class="status-dot red" id="desktopStatusDot"></span>
-          <span class="status-pill-text" id="desktopTitleStatus">Conexão Desprotegida</span>
+          <span class="status-pill-text" id="desktopTitleStatus">Desconectado</span>
         </div>
       </div>
 
       <div class="app-header-right">
-        <button class="header-btn-wireguard" id="btnOpenWireGuardModal" title="Ativar proteção integral para Discord, jogos e celular">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span>Ativar no Sistema & Celular</span>
+        <button class="header-icon-btn" id="btnOpenSettings" title="Preferências">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
         </button>
-        <a href="COMO_USAR_WIREGUARD.md" target="_blank" class="header-icon-btn" title="Manual de Kernel & Discord">
+        <button class="header-icon-btn" id="btnOpenAbout" title="Sobre o FLUX VPN">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-        </a>
+        </button>
       </div>
     </header>
 
-    <!-- 2. Conteúdo Principal do Aplicativo -->
+    <!-- 2. Conteúdo Principal (2 Colunas Limpas) -->
     <main class="app-main-content">
-      <!-- Painel Esquerdo: Conexão e Proteção -->
+      <!-- Painel Esquerdo: Controle de Conexão -->
       <aside class="panel-left">
-        <!-- Escudo Minimalista -->
-        <div class="desktop-shield-container">
-          <button class="shield-button desktop-shield disconnected" id="desktopShieldBtn" aria-label="Alternar Conexão">
-            <div class="shield-glow"></div>
-            <div class="shield-inner">
-              <svg class="shield-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <linearGradient id="shieldGradDesktop" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#0284C7"/>
-                    <stop offset="50%" stop-color="#0EA5E9"/>
-                    <stop offset="100%" stop-color="#06B6D4"/>
-                  </linearGradient>
-                  <linearGradient id="fluxWaveGradDesktop" x1="30" y1="35" x2="70" y2="85" gradientUnits="userSpaceOnUse">
-                    <stop offset="0%" stop-color="#0284C7"/>
-                    <stop offset="100%" stop-color="#06B6D4"/>
-                  </linearGradient>
-                </defs>
-                <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" 
-                      stroke="url(#shieldGradDesktop)" stroke-width="5" stroke-linejoin="round"/>
-                <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" 
-                      stroke="url(#shieldGradDesktop)" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
-                <g class="shield-flux-core">
-                  <path d="M40 40C40 37.7909 41.7909 36 44 36H64C66.2091 36 68 37.7909 68 40C68 42.2091 66.2091 44 64 44H47V51H60C62.2091 51 64 52.7909 64 55C64 57.2091 62.2091 59 60 59H47V74C47 76.2091 45.2091 78 43 78C40.7909 78 40 76.2091 40 74V40Z" 
-                        fill="url(#fluxWaveGradDesktop)"/>
-                  <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
-                  <circle cx="58" cy="69" r="7.5" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
-                </g>
+        <!-- Botão Power Circular Minimalista (Estilo Apple / Mullvad) -->
+        <div class="power-switch-container">
+          <button class="power-dial-button disconnected" id="desktopShieldBtn" aria-label="Alternar Conexão VPN">
+            <div class="power-dial-outer-ring"></div>
+            <div class="power-dial-core">
+              <svg class="power-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+                <line x1="12" y1="2" x2="12" y2="12"/>
               </svg>
             </div>
           </button>
         </div>
 
-        <!-- Informação Central de Conexão -->
-        <div class="desktop-status-info">
-          <div class="status-indicator">
-            <span class="status-text" id="desktopStatusText">Desconectado</span>
+        <!-- Bloco de Status e Informações -->
+        <div class="connection-info-block">
+          <h2 class="connection-status-title" id="desktopStatusText">Desconectado</h2>
+          <p class="selected-location-sub" id="desktopLocationSub">Nova York, Estados Unidos</p>
+          
+          <div class="ip-info-pill">
+            <span class="ip-pill-label">Seu IP:</span>
+            <span class="ip-pill-value font-mono" id="desktopVirtualIp">190.2.67.167 (Exposto)</span>
           </div>
-          <div class="timer-display" id="desktopTimer">00:00</div>
-          <div class="desktop-ip-row">
-            <span class="ip-label">Status do IP:</span>
-            <span class="ip-value font-mono" id="desktopVirtualIp">Exposto: Detectando...</span>
-          </div>
-          <div class="desktop-bandwidth-row" id="desktopBandwidthRow">
-            <span class="bandwidth-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
-              <span id="statDownSpeed">↓ 0.0 MB/s</span>
-            </span>
-            <span class="bandwidth-sep">•</span>
-            <span class="bandwidth-item">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="18" x2="12" y2="6"/></svg>
-              <span id="statUpSpeed">↑ 0.0 MB/s</span>
-            </span>
+
+          <!-- Telemetria Ativa durante Conexão -->
+          <div class="telemetry-bar" id="desktopBandwidthRow">
+            <div class="telemetry-stat">
+              <span class="telemetry-icon">↓</span>
+              <span id="statDownSpeed">0.0 MB/s</span>
+            </div>
+            <span class="telemetry-divider">•</span>
+            <div class="telemetry-stat">
+              <span class="telemetry-icon">↑</span>
+              <span id="statUpSpeed">0.0 MB/s</span>
+            </div>
+            <span class="telemetry-divider">•</span>
+            <div class="telemetry-stat">
+              <span class="telemetry-time font-mono" id="desktopTimer">00:00</span>
+            </div>
           </div>
         </div>
 
-        <!-- Botão Primário Desktop -->
+        <!-- Botão Primário de Ação Rápida -->
         <button class="action-btn-primary connect" id="desktopActionBtn">
-          Proteger Minha Conexão
+          Conectar
         </button>
 
         <div class="desktop-divider"></div>
 
-        <!-- Preferências de Segurança e Rede -->
+        <!-- Chaves de Segurança do Sistema -->
         <div class="security-toggles">
           <div class="toggle-item">
             <div class="toggle-text">
               <span class="toggle-title">Kill Switch</span>
-              <span class="toggle-desc">Bloquear tráfego sem VPN</span>
+              <span class="toggle-desc">Bloqueia tráfego se a VPN oscilar</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="checkKillSwitch" checked>
@@ -128,8 +107,8 @@
 
           <div class="toggle-item">
             <div class="toggle-text">
-              <span class="toggle-title">Proteção Wi-Fi</span>
-              <span class="toggle-desc">Auto-conectar em redes públicas</span>
+              <span class="toggle-title">Proteção Automática</span>
+              <span class="toggle-desc">Conectar ao abrir o aplicativo</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="checkWifiShield" checked>
@@ -139,19 +118,19 @@
 
           <div class="toggle-item">
             <div class="toggle-text">
-              <span class="toggle-title">Invisibilidade LAN</span>
-              <span class="toggle-desc">Ocultar de outros aparelhos locais</span>
+              <span class="toggle-title">Bloqueador de Ameaças</span>
+              <span class="toggle-desc">Filtro de anúncios e rastreadores</span>
             </div>
             <label class="switch">
-              <input type="checkbox" id="checkLanShield" checked>
+              <input type="checkbox" id="checkThreatShield" checked>
               <span class="slider"></span>
             </label>
           </div>
 
           <div class="toggle-item">
             <div class="toggle-text">
-              <span class="toggle-title">Prevenção de Vazamentos</span>
-              <span class="toggle-desc">DNS Próprio e Blackhole IPv6</span>
+              <span class="toggle-title">DNS Criptografado</span>
+              <span class="toggle-desc">Proteção contra vazamento de operadora</span>
             </div>
             <label class="switch">
               <input type="checkbox" id="checkLeakShield" checked>
@@ -161,159 +140,148 @@
         </div>
       </aside>
 
-      <!-- Painel Direito: Lista e Busca de Servidores -->
+      <!-- Painel Direito: Servidores & Localizações -->
       <section class="panel-right">
-        <!-- Campo de Busca de Servidores -->
+        <!-- Campo de Busca -->
         <div class="search-box">
           <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
-          <input type="text" id="serverSearchInput" placeholder="Buscar país, cidade ou nó..." autocomplete="off">
+          <input type="text" id="serverSearchInput" placeholder="Buscar país ou cidade..." autocomplete="off">
           <button class="search-clear-btn" id="searchClearBtn" style="display:none;">✕</button>
         </div>
 
-        <!-- Seção de Favoritos / Atalhos Rápidos -->
+        <!-- Atalhos Rápidos de Países -->
         <div class="quick-favorites-section">
           <span class="section-label">Acesso Rápido</span>
           <div class="favorites-chips">
-            <button class="fav-chip active" data-server="br-sp">
-              <span class="flag">🇧🇷</span>
-              <span class="name">Brasil</span>
-            </button>
-            <button class="fav-chip" data-server="us-ny">
-              <span class="flag">🇺🇸</span>
-              <span class="name">EUA</span>
-            </button>
-            <button class="fav-chip" data-server="de-fra">
-              <span class="flag">🇩🇪</span>
-              <span class="name">Alemanha</span>
-            </button>
-            <button class="fav-chip" data-server="ch-zur">
-              <span class="flag">🇨🇭</span>
-              <span class="name">Suíça</span>
-            </button>
+            <!-- Renderizado dinamicamente -->
           </div>
         </div>
 
         <!-- Abas de Categoria -->
         <div class="server-tabs">
-          <button class="tab-btn active" data-tab="all">Todos os Locais (<span id="countAll">9</span>)</button>
+          <button class="tab-btn active" data-tab="all">Todos os Países (<span id="countAll">9</span>)</button>
           <button class="tab-btn" data-tab="speed">Mais Rápidos</button>
           <button class="tab-btn" data-tab="privacy">Alta Privacidade</button>
         </div>
 
-        <!-- Lista Dinâmica de Servidores -->
+        <!-- Lista de Servidores -->
         <div class="server-list" id="serverListContainer">
           <!-- Renderizado via JavaScript -->
         </div>
       </section>
     </main>
 
-    <!-- 3. Rodapé Oficial do Aplicativo -->
+    <!-- 3. Rodapé Oficial e Limpo -->
     <footer class="app-footer">
       <div class="footer-left">
         <span class="footer-dot green"></span>
-        <span class="footer-protocol">WireGuard® Kernel • ChaCha20-Poly1305</span>
+        <span class="footer-protocol">Motor de Rede FLUX Embutido • Criptografia Ativa</span>
       </div>
       <div class="footer-right">
-        <span>Rede 100% Volátil em RAM (PXE Diskless) • Zero Logs</span>
+        <span>FLUX VPN Desktop v1.2.0 • Proteção 100% Automática</span>
       </div>
     </footer>
   </div>
 
   <!-- ========================================================= -->
-  <!-- MODAL: EXPORTADOR DE PERFIL WIREGUARD® OFICIAL (.CONF) -->
+  <!-- MODAL: PREFERÊNCIAS E CONFIGURAÇÕES NATIVAS DO APLICATIVO -->
   <!-- ========================================================= -->
-  <div class="modal-overlay" id="wireGuardModal" style="display: none;">
-    <div class="modal-container">
+  <div class="modal-overlay" id="settingsModal" style="display: none;">
+    <div class="modal-container modal-settings-box">
       <div class="modal-header">
         <div class="modal-header-left">
-          <div class="wg-badge">
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>FLUX VPN • ROTEAMENTO DE SISTEMA INTEGRAL (DISCORD, GAMES & CELULAR)</span>
-          </div>
-          <h2 class="modal-title">Conectar no Sistema macOS & Celular</h2>
-          <p class="modal-subtitle">Para que o Discord, navegadores, jogos e 100% do Mac usem o túnel internacional (liberando câmera e tela), ative o perfil oficial WireGuard®</p>
+          <h2 class="modal-title">Preferências do FLUX VPN</h2>
+          <p class="modal-subtitle">Ajuste o comportamento do motor embutido e opções de rede</p>
         </div>
-        <button class="modal-close-btn" id="btnCloseWgModal" aria-label="Fechar Modal">✕</button>
+        <button class="modal-close-btn" id="btnCloseSettingsModal" aria-label="Fechar Modal">✕</button>
       </div>
 
       <div class="modal-body">
-        <!-- 1. Seletor de Servidores -->
-        <div class="modal-section">
-          <label class="modal-label">1. Localização do Servidor (Recomendado para Discord: Nova York ou Frankfurt):</label>
-          <div class="wg-server-chips" id="wgServerChips"></div>
-        </div>
-
-        <!-- 2. Chaves Curve25519 -->
-        <div class="modal-section">
-          <div class="modal-section-header">
-            <label class="modal-label">2. Par de Chaves Criptográficas Curve25519:</label>
-            <button class="btn-regenerate-keys" id="btnRegenerateKeys">
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-              <span>Gerar Novas Chaves</span>
-            </button>
-          </div>
-          <div class="wg-key-row">
-            <span class="key-tag">Sua Chave Privada:</span>
-            <code class="key-value" id="wgPrivateKeyDisplay">•••••••••••••••••••••••••••••••••••••••••••</code>
-            <button class="btn-copy-mini" id="btnCopyPrivKey">Copiar</button>
-          </div>
-        </div>
-
-        <!-- 3. Visualização e Download -->
-        <div class="modal-section">
-          <div class="modal-section-header">
-            <label class="modal-label">3. Perfil de Configuração Criptografado:</label>
-            <div class="modal-view-tabs">
-              <button class="wg-view-tab active" id="tabViewQr">QR Code (Celular / App)</button>
-              <button class="wg-view-tab" id="tabViewConfig">Arquivo .conf (Mac / PC)</button>
+        <div class="settings-group">
+          <span class="settings-group-title">Rede & Protocolo</span>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label">Protocolo de Conexão:</span>
+              <span class="settings-row-desc">Seleciona automaticamente o canal mais veloz</span>
             </div>
+            <select class="settings-select" id="prefProtocol">
+              <option value="auto" selected>Automático (Embutido)</option>
+              <option value="wg">WireGuard® Integrado</option>
+              <option value="ikev2">IKEv2 / IPsec</option>
+            </select>
           </div>
 
-          <div class="wg-code-box" id="wgCodeBox" style="display: none;">
-            <pre><code class="font-mono" id="wgConfigCode"></code></pre>
-          </div>
-
-          <div class="wg-qr-box" id="wgQrBox" style="display: flex;">
-            <div class="qr-canvas-wrap" id="wgQrContainer"></div>
-            <p class="qr-instructions">Abra o app <strong>WireGuard</strong> no celular → Toque em <strong>+</strong> → <strong>Escanear do código QR</strong></p>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label">Servidor DNS Privado:</span>
+              <span class="settings-row-desc">Prevenção contra bloqueios regionais de provedor</span>
+            </div>
+            <select class="settings-select" id="prefDns">
+              <option value="flux" selected>FLUX Zero-Logs DNS (Padrão)</option>
+              <option value="cf">Cloudflare 1.1.1.1</option>
+              <option value="quad9">Quad9 Security</option>
+            </select>
           </div>
         </div>
 
-        <!-- Barra de Ações -->
-        <div class="modal-actions-bar">
-          <button class="btn-download-conf" id="btnDownloadConf">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-            <span id="btnDownloadText">Baixar flux-brasil.conf</span>
-          </button>
-          <button class="btn-copy-conf" id="btnCopyConf">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            <span id="btnCopyText">Copiar Texto</span>
-          </button>
-        </div>
+        <div class="settings-group">
+          <span class="settings-group-title">Inicialização & Sistema</span>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label">Iniciar com o Sistema:</span>
+              <span class="settings-row-desc">Abre o FLUX VPN automaticamente ao ligar o computador</span>
+            </div>
+            <label class="switch">
+              <input type="checkbox" id="prefAutoStart" checked>
+              <span class="slider"></span>
+            </label>
+          </div>
 
-        <!-- Guia Passo a Passo -->
-        <div class="wg-quick-guide">
-          <span class="guide-title">Como Desbloquear o Discord e Rotejar 100% do seu Mac (Passo a Passo em 30s):</span>
-          <div class="guide-steps">
-            <div class="guide-step">
-              <span class="step-num">1</span>
-              <span>Instale o aplicativo oficial e gratuito do <a href="https://apps.apple.com/app/wireguard/id1451685025" target="_blank">WireGuard na Mac App Store</a> (certificado oficialmente pela Apple).</span>
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-label">Notificações no Desktop:</span>
+              <span class="settings-row-desc">Exibir alertas sutis de conexão e desconexão</span>
             </div>
-            <div class="guide-step">
-              <span class="step-num">2</span>
-              <span>Baixe o arquivo <strong>.conf</strong> no botão acima (ou use os perfis inclusos na pasta <code>profiles/</code>).</span>
-            </div>
-            <div class="guide-step">
-              <span class="step-num">3</span>
-              <span>No aplicativo WireGuard, clique em <strong>Import tunnel(s) from file</strong> e selecione o arquivo baixado.</span>
-            </div>
-            <div class="guide-step">
-              <span class="step-num">4</span>
-              <span>Clique no botão <strong>Activate</strong>. Pronto! O Discord, câmera, tela e toda a máquina estarão conectados fora do Brasil com IP internacional.</span>
-            </div>
+            <label class="switch">
+              <input type="checkbox" id="prefNotifications" checked>
+              <span class="slider"></span>
+            </label>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
+  <!-- ========================================================= -->
+  <!-- MODAL: SOBRE O FLUX VPN -->
+  <!-- ========================================================= -->
+  <div class="modal-overlay" id="aboutModal" style="display: none;">
+    <div class="modal-container modal-about-box">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <h2 class="modal-title">Sobre o FLUX VPN</h2>
+        </div>
+        <button class="modal-close-btn" id="btnCloseAboutModal" aria-label="Fechar Modal">✕</button>
+      </div>
+
+      <div class="modal-body about-body-center">
+        <div class="about-logo">
+          <svg width="48" height="48" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="32" height="32" rx="10" fill="#0284C7"/>
+            <path d="M10 9H22V12.5H13.5V14.5H20V18H13.5V23H10V9Z" fill="#FFFFFF"/>
+            <circle cx="20.5" cy="21.5" r="1.8" fill="#38BDF8"/>
+          </svg>
+        </div>
+        <h3 class="about-app-name">FLUX VPN Desktop</h3>
+        <p class="about-version">Versão 1.2.0 Oficial (x86_64 / Apple Silicon)</p>
+        <p class="about-desc">
+          Aplicativo de VPN seguro e de código aberto com motor de rede embutido. Projetado para garantir privacidade máxima, velocidade sem limites e zero registros de atividade.
+        </p>
+        <div class="about-badges">
+          <span class="about-badge">100% Zero Logs</span>
+          <span class="about-badge">Criptografia Ponta a Ponta</span>
+          <span class="about-badge">Open Source GPLv3</span>
+        </div>
       </div>
     </div>
   </div>

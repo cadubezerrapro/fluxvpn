@@ -1,8 +1,10 @@
-# 🛡️ FLUX VPN — Guia de Conexão em Nível de Kernel (Protocolo WireGuard®)
+# 🛡️ FLUX VPN — Anexo Técnico Avançado (Servidores e Roteadores)
 
-> **Segurança Militar, Zero Logs e Roteamento de Sistema Completo**  
-> O FLUX VPN foi construído nativamente sobre o protocolo de rede mais moderno e seguro do mundo: o **WireGuard®**.  
-> Esta arquitetura garante conexões ultrarrápidas, criptografia **Curve25519 / ChaCha20-Poly1305** e roteamento integral diretamente no **Kernel do Sistema Operacional** (drivers de alto rendimento Wintun no Windows e NetworkExtension no macOS/iOS).
+> 💡 **Nota aos Usuários do FLUX VPN:**  
+> Se você baixou o aplicativo **FLUX VPN para macOS, Windows ou a Extensão Web**, **você NÃO precisa configurar nada manualmente**!  
+> O aplicativo já inclui o motor de conexão 100% embutido de fábrica. Basta abrir o FLUX VPN, escolher a localização e clicar em **Conectar**.  
+>  
+> *Este documento destina-se exclusivamente a desenvolvedores e administradores de infraestrutura que desejam integrar nós brutos em roteadores empresariais (OpenWrt, pfSense, Mikrotik).*
 
 ---
 

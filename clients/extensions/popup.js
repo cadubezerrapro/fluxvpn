@@ -30,17 +30,17 @@ function updatePopupUI() {
   document.getElementById("pingDisplay").textContent = `${server.ping} ms`;
 
   if (isConnected) {
-    btnToggle.className = "shield-btn connected";
+    btnToggle.className = "power-dial-button connected";
     btnAction.className = "action-btn disconnect";
     btnAction.textContent = "Desconectar";
     statusDot.className = "status-dot green";
     statusText.textContent = "Protegido";
   } else {
-    btnToggle.className = "shield-btn disconnected";
+    btnToggle.className = "power-dial-button disconnected";
     btnAction.className = "action-btn connect";
-    btnAction.textContent = "Conectar Agora";
+    btnAction.textContent = "Conectar";
     statusDot.className = "status-dot red";
-    statusText.textContent = "Desprotegido";
+    statusText.textContent = "Desconectado";
     timer.textContent = "00:00";
   }
 }

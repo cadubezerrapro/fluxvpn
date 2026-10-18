@@ -24,20 +24,18 @@
 
 ---
 
-## ⚡ Conexão em Nível de Kernel (Engine WireGuard® Oficial)
+## ⚡ Conexão em 1 Clique (Motor de Rede Embutido)
 
-> **Roteamento Total em Nível de Kernel (OS-Level Routing):**  
-> Para conectar 100% do tráfego de todo o computador (jogos, navegadores, torrents, Discord, etc.) mudando o IP público real com zero atrito de quarentena do macOS (`xattr -cr`) ou avisos do Windows SmartScreen:
+> **Zero Configuração Manual — Plug & Play Nativo:**  
+> O **FLUX VPN** foi construído com arquitetura integrada e motor de rede embutido.  
+> Você **não precisa** baixar utilitários externos, nem importar arquivos `.conf` ou ler códigos:
 > 
-> 📖 **[Consulte o Guia Passo a Passo Oficial: COMO_USAR_WIREGUARD.md](COMO_USAR_WIREGUARD.md)**
+> 1. Baixe o pacote do seu sistema operacional (**macOS**, **Windows** ou **Extensão Chrome**).
+> 2. Abra o aplicativo com 1 clique.
+> 3. Escolha o país desejado e aperte o botão de **Conectar**.
+> 4. **Pronto!** Sua conexão estará protegida com criptografia de ponta a ponta e zero registros.
 >
-> 📂 **Perfis Prontos para Uso na pasta [`profiles/`](profiles/):**
-> - 🇧🇷 [`FLUX-Brasil-SaoPaulo.conf`](profiles/FLUX-Brasil-SaoPaulo.conf) — Baixa latência e streaming nacional
-> - 🇩🇪 [`FLUX-Alemanha-Frankfurt.conf`](profiles/FLUX-Alemanha-Frankfurt.conf) — Rota de altíssima velocidade na Europa
-> - 🇺🇸 [`FLUX-EUA-NovaYork.conf`](profiles/FLUX-EUA-NovaYork.conf) — Desbloqueio de catálogos e servidores dos EUA
-> - 🇨🇭 [`FLUX-Suica-Zurique.conf`](profiles/FLUX-Suica-Zurique.conf) — Máxima proteção jurídica e sigilo de dados
-> - 🇮🇸 [`FLUX-Islandia-Reykjavik.conf`](profiles/FLUX-Islandia-Reykjavik.conf) — Imune a jurisdições de vigilância internacional
-> - 🇯🇵 [`FLUX-Japao-Toquio.conf`](profiles/FLUX-Japao-Toquio.conf) — Baixo jitter e alta velocidade na Ásia
+> *(Nota: Para administradores de redes que desejam configurar roteadores empresariais ou servidores headless, os perfis brutos continuam disponíveis como anexo na pasta [`profiles/`](profiles/) e no guia [`COMO_USAR_WIREGUARD.md`](COMO_USAR_WIREGUARD.md)).*
 
 ---
 
