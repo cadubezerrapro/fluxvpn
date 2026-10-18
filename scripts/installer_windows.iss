@@ -1,6 +1,6 @@
 ; ==============================================================================
 ; FLUX VPN — Script Oficial de Compilação do Instalador Windows (.EXE)
-; Desenvolvido para Inno Setup Compiler (Padrão Ouro da Indústria para Windows)
+; Padrão Ouro da Indústria para Windows (Inno Setup Compiler)
 ; Cria instalador profissional com assistente, ícone na Área de Trabalho e Desinstalador
 ; ==============================================================================
 
@@ -8,7 +8,8 @@
 #define MyAppVersion "1.2.0"
 #define MyAppPublisher "FLUX Open Source Team"
 #define MyAppURL "https://github.com/cadubezerrapro/fluxvpn"
-#define MyAppExeName "Iniciar FLUX VPN (Windows).bat"
+#define MyAppExeName "FLUX-VPN.vbs"
+#define MyAppIconName "fluxvpn.ico"
 
 [Setup]
 AppId={{9F82A4D1-5C3E-4B7A-9D2E-7E1A4F8B0C3D}
@@ -24,6 +25,7 @@ DisableProgramGroupPage=yes
 LicenseFile=..\LICENSE
 OutputDir=..\dist
 OutputBaseFilename=FLUX-VPN-Windows-Setup
+SetupIconFile=..\dist\windows\fluxvpn.ico
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -41,9 +43,9 @@ Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{
 Source: "..\dist\windows\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{group}\{#MyAppName}"; Filename: "wscript.exe"; Parameters: """{app}\{#MyAppExeName}"""; IconFilename: "{app}\{#MyAppIconName}"
 Name: "{group}\{cm:UninstallProgram,{#MyAppName}}"; Filename: "{uninstallexe}"
-Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
+Name: "{autodesktop}\{#MyAppName}"; Filename: "wscript.exe"; Parameters: """{app}\{#MyAppExeName}"""; IconFilename: "{app}\{#MyAppIconName}"; Tasks: desktopicon
 
 [Run]
-Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: shellexec postinstall nowait skipifsilent
+Filename: "wscript.exe"; Parameters: """{app}\{#MyAppExeName}"""; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: postinstall nowait skipifsilent
