@@ -15,10 +15,12 @@
 
 # Caches e Builds
 node_modules/
-dist/
 build/
-*.zip
-*.tar.gz
+# Permite arquivos da pasta dist para download direto no GitHub
+!dist/
+!dist/**
+!*.dmg
+!*.exe
 
 # Logs e Depuração
 *.log
