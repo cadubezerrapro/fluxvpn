@@ -67,8 +67,9 @@ O **FLUX VPN** foi desenhado para ser imediatamente utilizável sem necessidade 
 | Plataforma | Formato Oficial | Download Direto | Método de Instalação |
 | :--- | :--- | :--- | :--- |
 | **🍏 macOS (Recomendado)** | **Instalador Apple (.DMG)** | **[Baixar FLUX-VPN-macOS.dmg](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.dmg)** | Arrastar para `/Applications` |
+| **🍏 macOS (Assistente .PKG)** | **Instalador Apple (.PKG)** | **[Baixar FLUX-VPN-macOS.pkg](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.pkg)** | Duplo clique (Instalação Assistida) |
 | **🍏 macOS (Portátil)** | Pacote Standalone (.ZIP) | **[Baixar FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip)** | Duplo clique para abrir |
-| **🪟 Windows (10/11)** | Pacote Standalone (.ZIP) | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** | Executar `.bat` dedicado |
+| **🪟 Windows (10/11)** | Pacote Standalone (.ZIP) | **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)** | Executar com ícone dedicado |
 | **🌐 Chrome / Brave / Edge** | Extensão Manifest V3 (.ZIP) | **[Baixar FLUX-VPN-Chrome-Extension.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Chrome-Extension.zip)** | Instalação em 1 clique |
 
 ---

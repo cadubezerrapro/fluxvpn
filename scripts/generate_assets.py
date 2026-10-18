@@ -259,15 +259,15 @@ def render_app_icon_pure(size=1024):
                 
     return data
 
-def render_dmg_background(width=1320, height=840):
+def render_dmg_background(width=660, height=420):
     """
-    Renderiza o fundo profissional do instalador DMG Retina (1320x840 -> exibido em 660x420).
+    Renderiza o fundo profissional do instalador DMG em 660x420 (escala 1:1 nativa do Finder).
     Contém:
       - Fundo Dark Titanium com grid suave
       - Header "FLUX VPN — Instalação Oficial macOS"
-      - Posição da App à esquerda (x=320, y=420)
-      - Posição de Applications à direita (x=1000, y=420)
-      - Seta futurista de arraste no centro com brilho neon
+      - Pedestal iluminado para FLUX-VPN.app em (160, 195)
+      - Pedestal iluminado para Applications em (500, 195)
+      - Seta futurista neon central (de 245 a 415, y=195)
     """
     try:
         from PIL import Image, ImageDraw, ImageFont
@@ -275,73 +275,103 @@ def render_dmg_background(width=1320, height=840):
     except ImportError:
         return render_dmg_background_pure(width, height)
 
-def render_dmg_background_pil(width=1320, height=840):
-    from PIL import Image, ImageDraw
+def render_dmg_background_pil(width=660, height=420):
+    from PIL import Image, ImageDraw, ImageFont
     
     img = Image.new('RGB', (width, height), (9, 13, 22))
     draw = ImageDraw.Draw(img)
     
-    # 1. Gradiente de Fundo
+    # 1. Gradiente de Fundo Dark Obsidian
     for y in range(height):
         factor = y / float(height)
-        r = int(9 * (1 - factor) + 5 * factor)
-        g = int(14 * (1 - factor) + 8 * factor)
-        b = int(24 * (1 - factor) + 14 * factor)
+        r = int(10 * (1 - factor) + 5 * factor)
+        g = int(15 * (1 - factor) + 8 * factor)
+        b = int(26 * (1 - factor) + 14 * factor)
         draw.line([(0, y), (width, y)], fill=(r, g, b))
         
     # 2. Tech Grid Sutil
-    grid_color = (255, 255, 255, 10)
     grid_img = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     g_draw = ImageDraw.Draw(grid_img)
-    for x in range(0, width, 60):
-        g_draw.line([(x, 0), (x, height)], fill=(14, 165, 233, 12))
-    for y in range(0, height, 60):
-        g_draw.line([(0, y), (width, y)], fill=(14, 165, 233, 12))
+    for x in range(0, width, 30):
+        g_draw.line([(x, 0), (x, height)], fill=(14, 165, 233, 10))
+    for y in range(0, height, 30):
+        g_draw.line([(0, y), (width, y)], fill=(14, 165, 233, 10))
     img.paste(grid_img, (0, 0), grid_img)
     
-    # 3. Pedestais / Alvos com Brilho Circular
-    left_cx, left_cy = 320, 420
-    right_cx, right_cy = 1000, 420
-    radius = 140
+    # 3. Pedestais / Alvos com Brilho Circular Exatos
+    left_cx, left_cy = 160, 195
+    right_cx, right_cy = 500, 195
+    radius = 65
     
     # Brilho esquerdo (App)
-    for r in range(radius + 40, radius, -2):
-        alpha = int(40 * (1 - (r - radius) / 40.0))
-        g_draw.ellipse([left_cx - r, left_cy - r, left_cx + r, left_cy + r], outline=(14, 165, 233, alpha), width=2)
+    for r in range(radius + 25, radius, -1):
+        alpha = int(45 * (1 - (r - radius) / 25.0))
+        g_draw.ellipse([left_cx - r, left_cy - r, left_cx + r, left_cy + r], outline=(14, 165, 233, alpha), width=1)
+        
     # Brilho direito (Applications)
-    for r in range(radius + 40, radius, -2):
-        alpha = int(40 * (1 - (r - radius) / 40.0))
-        g_draw.ellipse([right_cx - r, right_cy - r, right_cx + r, right_cy + r], outline=(6, 182, 212, alpha), width=2)
+    for r in range(radius + 25, radius, -1):
+        alpha = int(45 * (1 - (r - radius) / 25.0))
+        g_draw.ellipse([right_cx - r, right_cy - r, right_cx + r, right_cy + r], outline=(6, 182, 212, alpha), width=1)
     
-    # Círculo base pontilhado
-    g_draw.ellipse([left_cx - radius, left_cy - radius, left_cx + radius, left_cy + radius], outline=(14, 165, 233, 100), width=3)
-    g_draw.ellipse([right_cx - radius, right_cy - radius, right_cx + radius, right_cy + radius], outline=(6, 182, 212, 100), width=3)
+    # Círculo base iluminado
+    g_draw.ellipse([left_cx - radius, left_cy - radius, left_cx + radius, left_cy + radius], outline=(14, 165, 233, 140), width=2)
+    g_draw.ellipse([right_cx - radius, right_cy - radius, right_cx + radius, right_cy + radius], outline=(6, 182, 212, 140), width=2)
     img.paste(grid_img, (0, 0), grid_img)
     
-    # 4. Seta Futurista Luminosa Central (x=500 até x=820)
+    # 4. Seta Futurista Luminosa Central (de x=245 até x=415, y=195)
     arrow_layer = Image.new('RGBA', (width, height), (0, 0, 0, 0))
     a_draw = ImageDraw.Draw(arrow_layer)
     
-    arrow_y = 420
-    arrow_start_x = 510
-    arrow_end_x = 810
-    arrow_shaft_h = 24
+    arrow_y = 195
+    arrow_start_x = 245
+    arrow_end_x = 405
+    arrow_shaft_h = 12
     
     # Corpo da Seta
-    a_draw.rounded_rectangle([arrow_start_x, arrow_y - arrow_shaft_h // 2, arrow_end_x - 30, arrow_y + arrow_shaft_h // 2], radius=12, fill=(14, 165, 233, 230))
+    a_draw.rounded_rectangle([arrow_start_x, arrow_y - arrow_shaft_h // 2, arrow_end_x - 16, arrow_y + arrow_shaft_h // 2], radius=6, fill=(14, 165, 233, 230))
     
     # Ponta da Seta
     pts = [
-        (arrow_end_x - 30, arrow_y - 45),
-        (arrow_end_x + 35, arrow_y),
-        (arrow_end_x - 30, arrow_y + 45)
+        (arrow_end_x - 16, arrow_y - 24),
+        (arrow_end_x + 18, arrow_y),
+        (arrow_end_x - 16, arrow_y + 24)
     ]
     a_draw.polygon(pts, fill=(6, 182, 212, 255))
-    
-    # Pulso luminoso na ponta
-    a_draw.line(pts, fill=(255, 255, 255, 220), width=4, joint='curve')
+    a_draw.line(pts, fill=(255, 255, 255, 240), width=2, joint='curve')
     
     img.paste(arrow_layer, (0, 0), arrow_layer)
+    
+    # 5. Textos e Identidade Visual no Fundo
+    text_layer = Image.new('RGBA', (width, height), (0, 0, 0, 0))
+    t_draw = ImageDraw.Draw(text_layer)
+    
+    # Carrega fontes padrão ou básicas
+    try:
+        font_title = ImageFont.truetype("/System/Library/Fonts/SFNS.ttf", 22)
+        font_sub = ImageFont.truetype("/System/Library/Fonts/SFNS.ttf", 12)
+        font_label = ImageFont.truetype("/System/Library/Fonts/SFNS.ttf", 11)
+    except Exception:
+        font_title = font_sub = font_label = None
+        
+    def center_text(y, text, fill, font):
+        bbox = t_draw.textbbox((0, 0), text, font=font) if font else (0, 0, len(text)*7, 12)
+        w = bbox[2] - bbox[0]
+        t_draw.text(((width - w) // 2, y), text, fill=fill, font=font)
+        
+    def draw_lbl(cx, y, text, fill, font):
+        bbox = t_draw.textbbox((0, 0), text, font=font) if font else (0, 0, len(text)*6, 10)
+        w = bbox[2] - bbox[0]
+        t_draw.text((cx - w // 2, y), text, fill=fill, font=font)
+
+    center_text(35, "FLUX VPN", (255, 255, 255, 255), font_title)
+    center_text(65, "Instalação Oficial para macOS", (14, 165, 233, 230), font_sub)
+    center_text(160, "ARRAS TE PARA INSTALAR", (255, 255, 255, 200), font_label)
+    center_text(220, "100% Embutido • Zero Logs", (6, 182, 212, 180), font_label)
+    
+    draw_lbl(left_cx, 285, "Arraste o FLUX VPN", (14, 165, 233, 220), font_label)
+    draw_lbl(right_cx, 285, "Solte em Aplicativos", (6, 182, 212, 220), font_label)
+    
+    img.paste(text_layer, (0, 0), text_layer)
     return img
 
 def render_dmg_background_pure(width=1320, height=840):
