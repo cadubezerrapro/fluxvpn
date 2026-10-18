@@ -24,7 +24,7 @@
 
 ---
 
-## ⚡ Conexão 100% Real de Sistema via WireGuard® Oficial (Recomendado)
+## ⚡ Conexão em Nível de Kernel (Engine WireGuard® Oficial)
 
 > **Roteamento Total em Nível de Kernel (OS-Level Routing):**  
 > Para conectar 100% do tráfego de todo o computador (jogos, navegadores, torrents, Discord, etc.) mudando o IP público real com zero atrito de quarentena do macOS (`xattr -cr`) ou avisos do Windows SmartScreen:

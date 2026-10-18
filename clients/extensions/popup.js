@@ -4,8 +4,11 @@
 
 const EXT_SERVERS = [
   { id: "br-sp", country: "Brasil", city: "São Paulo #1", flag: "🇧🇷", ping: 18, host: "br-sp.node.fluxvpn.net", port: 443 },
+  { id: "de-fra", country: "Alemanha", city: "Frankfurt #1", flag: "🇩🇪", ping: 32, host: "de-fra.node.fluxvpn.net", port: 443 },
   { id: "us-ny", country: "Estados Unidos", city: "Nova York #3", flag: "🇺🇸", ping: 68, host: "us-ny.node.fluxvpn.net", port: 443 },
-  { id: "ch-zur", country: "Suíça", city: "Zurique #1", flag: "🇨🇭", ping: 118, host: "ch-zur.node.fluxvpn.net", port: 443 }
+  { id: "ch-zur", country: "Suíça", city: "Zurique #1", flag: "🇨🇭", ping: 118, host: "ch-zur.node.fluxvpn.net", port: 443 },
+  { id: "is-rey", country: "Islândia", city: "Reykjavík #1", flag: "🇮🇸", ping: 142, host: "is-rey.node.fluxvpn.net", port: 443 },
+  { id: "jp-tyo", country: "Japão", city: "Tóquio #2", flag: "🇯🇵", ping: 210, host: "jp-tyo.node.fluxvpn.net", port: 443 }
 ];
 
 let isConnected = false;

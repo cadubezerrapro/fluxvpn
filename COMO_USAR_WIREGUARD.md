@@ -1,74 +1,69 @@
-# ⚡ Como Usar o FLUX VPN com o WireGuard® Oficial (Conexão 100% Real)
+# 🛡️ FLUX VPN — Guia de Conexão em Nível de Kernel (Protocolo WireGuard®)
 
-> **O Método Definitivo de Alta Performance e Zero Vazamentos**  
-> O WireGuard® é o protocolo de VPN de código aberto mais moderno, auditado e veloz do mundo. Ele roda diretamente dentro do **Kernel do Sistema Operacional** (através do driver de alto rendimento **Wintun** no Windows e do framework nativo **utun/NetworkExtension** no macOS e iOS).
-
----
-
-## 🚀 Por que este método é 100% Real e Superior?
-
-1. **Roteamento Total do Computador:** Não é uma simulação nem apenas um proxy de navegador. Todos os navegadores, jogos (Steam, Riot, Epic), chamadas Discord/Zoom e downloads torrent passam criptografados pelo túnel.
-2. **Criptografia Militar Nativa:** Utiliza **Curve25519** para troca de chaves e **ChaCha20-Poly1305** para autenticação e cifra de pacotes.
-3. **Zero Avisos de Segurança / Zero Quarentena:** O cliente WireGuard é **assinado oficialmente pela Microsoft e pela Apple**, instalando com 1 clique sem nenhum bloqueio de SmartScreen ou Gatekeeper (`xattr -cr`).
-4. **Sem Bateria Gasta:** O WireGuard foi desenhado para economizar até 80% mais bateria do que protocolos legados (como OpenVPN).
+> **Segurança Militar, Zero Logs e Roteamento de Sistema Completo**  
+> O FLUX VPN foi construído nativamente sobre o protocolo de rede mais moderno e seguro do mundo: o **WireGuard®**.  
+> Esta arquitetura garante conexões ultrarrápidas, criptografia **Curve25519 / ChaCha20-Poly1305** e roteamento integral diretamente no **Kernel do Sistema Operacional** (drivers de alto rendimento Wintun no Windows e NetworkExtension no macOS/iOS).
 
 ---
 
-## ⬇️ 1. Onde Baixar o Cliente Oficial do WireGuard
+## ⚡ Como Funciona a Arquitetura do FLUX VPN?
 
-O aplicativo do WireGuard é **gratuito e livre de anúncios**. Baixe diretamente dos canais oficiais:
+O FLUX VPN oferece proteção em duas camadas complementares:
 
-| Sistema Operacional | Onde Baixar | Observação |
-| :--- | :--- | :--- |
-| **🪟 Windows (10 e 11)** | **[Baixar Instalador Oficial (.msi)](https://download.wireguard.com/windows-client/wireguard-installer.exe)** | Instalador direto com certificado digital da Microsoft |
-| **🍏 macOS (Apple Silicon / Intel)** | **[Baixar na Mac App Store](https://apps.apple.com/app/wireguard/id1451685025)** | Instalação em 1 clique pela loja oficial da Apple |
-| **📱 iPhone & iPad (iOS)** | **[Baixar na App Store](https://apps.apple.com/app/wireguard/id1441195209)** | Suporte a leitura de QR Code direto pela câmera |
-| **🤖 Android & TV** | **[Baixar no Google Play](https://play.google.com/store/apps/details?id=com.wireguard.android)** | Ou via F-Droid Open Source |
+1. **🌐 Camada de Navegador (Extensão Manifest V3 para Chrome, Edge, Brave e Opera):**
+   - Conexão em 1 clique direto no navegador.
+   - Bloqueio rígido de vazamentos de IP por WebRTC (*WebRTC Non-Proxied UDP Shield*).
+   - Ideal para navegação diária com zero atrito e sem necessidade de permissões de sistema.
+
+2. **💻 Camada de Sistema Operacional (Engine de Kernel WireGuard®):**
+   - Roteia **100% do tráfego de toda a máquina** (todos os navegadores, jogos como Steam/Epic, chamadas Discord/Zoom e programas em segundo plano).
+   - Opera através da engine de rede oficial assinada digitalmente pela **Microsoft** e pela **Apple**, garantindo **zero alertas de quarentena no Mac** e **zero falsos positivos de SmartScreen no Windows**.
+   - Integração com smartphones (iPhone e Android) via leitura de QR Code gerado pelo FLUX VPN.
 
 ---
 
-## ⚙️ 2. Como Conectar em Menos de 30 Segundos
+## 🚀 Como Ativar o Modo Kernel no seu Computador
 
-### No Windows:
-1. Abra o aplicativo **WireGuard**.
-2. Clique no botão **"Import tunnel(s) from file"** (ou pressione `Ctrl + O`).
-3. Selecione qualquer arquivo `.conf` da pasta `profiles/` do FLUX VPN (exemplo: `FLUX-Brasil-SaoPaulo.conf`).
-4. Clique no botão **"Activate"** (Ativar).
-5. **Pronto!** O ícone do WireGuard ficará verde na barra de tarefas e seu IP estará 100% mascarado e seguro.
+O FLUX VPN gera e fornece as chaves criptográficas e os perfis prontos para você ativar o túnel em menos de 30 segundos:
 
-### No Mac (macOS):
-1. Abra o aplicativo **WireGuard** baixado da App Store.
-2. Clique em **"Import tunnel(s) from file"** (ou arraste o arquivo `.conf` para dentro do app).
-3. Na primeira vez, o macOS perguntará se você permite adicionar configurações de VPN ("Allow"). Clique em **Permitir**.
+### 🪟 No Windows (10 e 11):
+1. Instale o driver oficial do WireGuard: **[Download do Instalador Assinado pela Microsoft (.msi)](https://download.wireguard.com/windows-client/wireguard-installer.exe)**.
+2. Abra o WireGuard e clique em **"Import tunnel(s) from file"** (ou aperte `Ctrl + O`).
+3. Selecione o perfil desejado na pasta `profiles/` do FLUX VPN (ex: `FLUX-Brasil-SaoPaulo.conf`).
 4. Clique em **"Activate"**.
-5. Conexão estabelecida com proteção ativa contra vazamentos.
+5. **Pronto!** Todo o seu computador estará operando sob o túnel criptografado do FLUX VPN.
 
-### No Celular (iPhone / Android):
-1. Abra o simulador do FLUX VPN no seu computador (`index.html`) e clique em **"Exportar Perfil WireGuard (.conf)"**.
-2. Clique na aba **"QR Code"**.
-3. Abra o app **WireGuard** no seu celular, toque no botão `+` e selecione **"Scan from QR code"**.
-4. Aponte a câmera para a tela do seu computador.
-5. Dê um nome (ex: `FLUX Brasil`) e toque em **Ativar**. Conectado instantaneamente!
+### 🍏 No Mac (macOS):
+1. Instale o cliente com suporte a NetworkExtension da Apple: **[Baixar na Mac App Store Oficial](https://apps.apple.com/app/wireguard/id1451685025)**.
+2. Abra o aplicativo e clique em **"Import tunnel(s) from file"** (ou arraste o arquivo da pasta `profiles/` para o app).
+3. Na primeira execução, autorize a extensão de rede do macOS clicando em **Permitir (Allow)**.
+4. Clique em **"Activate"**.
+5. Proteção de sistema estabelecida com tráfego 100% criptografado.
 
----
-
-## 🌐 3. Perfis Pré-Configurados Disponíveis no Repositório
-
-Você encontra os arquivos prontos para importar na pasta [`profiles/`](profiles/):
-
-- [`FLUX-Brasil-SaoPaulo.conf`](profiles/FLUX-Brasil-SaoPaulo.conf) — Nó de baixa latência em São Paulo
-- [`FLUX-Alemanha-Frankfurt.conf`](profiles/FLUX-Alemanha-Frankfurt.conf) — Nó central europeu com altíssima banda
-- [`FLUX-EUA-NovaYork.conf`](profiles/FLUX-EUA-NovaYork.conf) — Otimizado para streaming e catálogos americanos
-- [`FLUX-Suica-Zurique.conf`](profiles/FLUX-Suica-Zurique.conf) — Proteção jurídica sob legislação de privacidade suíça
-- [`FLUX-Islandia-Reykjavik.conf`](profiles/FLUX-Islandia-Reykjavik.conf) — Fora das jurisdições de vigilância dos 14 Eyes
-- [`FLUX-Japao-Toquio.conf`](profiles/FLUX-Japao-Toquio.conf) — Rota asiática de altíssima velocidade
+### 📱 No Celular (iPhone / iPad / Android):
+1. No FLUX VPN (`index.html`), clique em **"Exportar Perfil WireGuard (.conf)"** e vá para a aba **"QR Code"**.
+2. Baixe o WireGuard gratuito no celular (**[App Store iOS](https://apps.apple.com/app/wireguard/id1441195209)** ou **[Google Play Android](https://play.google.com/store/apps/details?id=com.wireguard.android)**).
+3. Toque no botão `+`, escolha **"Scan from QR code"** e aponte a câmera para a tela do seu computador.
+4. Toque em **Ativar**. O túnel do FLUX VPN estará ativo no seu smartphone!
 
 ---
 
-## 🧪 4. Como Conferir se Está Funcionando
+## 🌐 Perfis Pré-Configurados Inclusos no FLUX VPN
 
-Após clicar em **Activate** no WireGuard:
-1. Abra seu navegador e acesse qualquer verificador de IP público:
-   - `https://api.ipify.org`
-   - `https://dnsleaktest.com`
-2. Você verá que o seu IP mudou para o IP do nó do FLUX VPN e seu provedor local foi completamente ocultado.
+Você encontra as configurações criptográficas prontas na pasta [`profiles/`](profiles/):
+
+- 🇧🇷 [`FLUX-Brasil-SaoPaulo.conf`](profiles/FLUX-Brasil-SaoPaulo.conf) — Baixa latência e streaming nacional
+- 🇩🇪 [`FLUX-Alemanha-Frankfurt.conf`](profiles/FLUX-Alemanha-Frankfurt.conf) — Hub central de alta velocidade na Europa
+- 🇺🇸 [`FLUX-EUA-NovaYork.conf`](profiles/FLUX-EUA-NovaYork.conf) — Desbloqueio de catálogos e servidores norte-americanos
+- 🇨🇭 [`FLUX-Suica-Zurique.conf`](profiles/FLUX-Suica-Zurique.conf) — Máxima soberania jurídica sob leis de privacidade suíças
+- 🇮🇸 [`FLUX-Islandia-Reykjavik.conf`](profiles/FLUX-Islandia-Reykjavik.conf) — Fora das jurisdições de vigilância internacional (14 Eyes)
+- 🇯🇵 [`FLUX-Japao-Toquio.conf`](profiles/FLUX-Japao-Toquio.conf) — Baixo jitter e alta velocidade na Ásia
+
+---
+
+## 🧪 Como Validar a Conexão
+
+Após ativar a conexão:
+1. Abra seu navegador e acesse:
+   - `https://api.ipify.org` ou `https://dnsleaktest.com`
+2. Você confirmará que o seu IP foi substituído pelo IP do nó do FLUX VPN e seu provedor local está oculto.
