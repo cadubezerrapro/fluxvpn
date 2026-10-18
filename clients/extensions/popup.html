@@ -22,7 +22,7 @@
 
     <!-- Escudo Central -->
     <div class="shield-container">
-      <button class="shield-btn connected" id="btnToggleConnect">
+      <button class="shield-btn disconnected" id="btnToggleConnect">
         <div class="shield-inner">
           <svg viewBox="0 0 100 120" fill="none">
             <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" stroke="#0284C7" stroke-width="5" stroke-linejoin="round"/>
@@ -36,10 +36,10 @@
     <!-- Status e Timer -->
     <div class="status-box">
       <div class="status-row">
-        <span class="status-dot green" id="statusDot"></span>
-        <span class="status-text" id="statusText">Protegido</span>
+        <span class="status-dot red" id="statusDot"></span>
+        <span class="status-text" id="statusText">Desprotegido</span>
       </div>
-      <div class="timer" id="popupTimer">00:12:45</div>
+      <div class="timer" id="popupTimer">00:00</div>
     </div>
 
     <!-- Seletor de Servidor -->
@@ -55,7 +55,7 @@
     </div>
 
     <!-- Botão de Ação -->
-    <button class="action-btn disconnect" id="btnAction">Desconectar</button>
+    <button class="action-btn connect" id="btnAction">Conectar Agora</button>
 
     <!-- Mini Auditoria de Vazamentos -->
     <div class="leak-audit-card">

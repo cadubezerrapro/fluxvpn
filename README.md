@@ -16,6 +16,10 @@
 
 [⬇️ Onde Baixar](#️-onde-baixar-e-como-instalar) • [🤖 Guia para Agentes de IA](AGENTS.md) • [Testar Simulador](index.html) • [Landing Page](landing.html) • [Extensão Chrome](clients/extensions/) • [Plano Técnico](PLANO_MESTRE_FLUX_VPN.md)
 
+<br/>
+
+<img src="flux_app_preview.jpg" alt="FLUX VPN Professional Desktop and Mobile App" width="850" style="border-radius: 14px; box-shadow: 0 20px 45px rgba(0,0,0,0.35);" />
+
 </div>
 
 ---

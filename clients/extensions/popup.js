@@ -8,9 +8,9 @@ const EXT_SERVERS = [
   { id: "ch-zur", country: "Suíça", city: "Zurique #1", flag: "🇨🇭", ping: 118, host: "ch-zur.node.fluxvpn.net", port: 443 }
 ];
 
-let isConnected = true;
+let isConnected = false;
 let currentServerIndex = 0;
-let timerSeconds = 765;
+let timerSeconds = 0;
 let timerInterval = null;
 
 function updatePopupUI() {
@@ -90,7 +90,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  startPopupTimer();
   updatePopupUI();
 
   // Recupera status real do service worker no Chrome
@@ -104,6 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const foundIdx = EXT_SERVERS.findIndex(s => s.id === response.selectedServer.id);
             if (foundIdx !== -1) currentServerIndex = foundIdx;
           }
+          if (isConnected) startPopupTimer();
           updatePopupUI();
         }
       });

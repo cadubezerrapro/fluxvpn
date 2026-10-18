@@ -432,6 +432,32 @@ body {
   stroke: #CBD5E1 !important;
 }
 
+/* Estado Conectando (Handshake WireGuard Dinâmico) */
+.shield-button.connecting {
+  border-color: #0EA5E9;
+  box-shadow: 0 0 28px rgba(14, 165, 233, 0.45);
+  animation: shieldPulseConnecting 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes shieldPulseConnecting {
+  from { transform: scale(1); box-shadow: 0 0 16px rgba(14, 165, 233, 0.25); }
+  to { transform: scale(1.04); box-shadow: 0 0 36px rgba(14, 165, 233, 0.65); }
+}
+
+.shield-button.connecting::before {
+  border-color: #0EA5E9;
+  animation: fluxOrbit 2.5s linear infinite !important;
+}
+
+.shield-button.connecting .shield-path {
+  stroke: #0EA5E9 !important;
+  filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.5));
+}
+
+.shield-button.connecting .shield-flux-core path {
+  fill: #0EA5E9 !important;
+}
+
 /* Status e Timer Mobile */
 .mobile-status-section {
   text-align: center;
@@ -451,6 +477,18 @@ body {
   height: 8px;
   border-radius: 50%;
   display: inline-block;
+  transition: all 0.25s ease;
+}
+
+.status-dot.yellow {
+  background-color: #F59E0B;
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.25);
+  animation: dotBlink 0.6s infinite alternate;
+}
+
+@keyframes dotBlink {
+  from { opacity: 0.35; }
+  to { opacity: 1; }
 }
 
 .status-dot.green {
@@ -557,6 +595,43 @@ body {
 
 .action-btn-primary.connect:hover {
   background-color: #0369A1;
+}
+
+.action-btn-primary.connecting {
+  background: linear-gradient(135deg, #0284C7, #0EA5E9);
+  color: #FFFFFF;
+  cursor: wait;
+  box-shadow: 0 0 16px rgba(14, 165, 233, 0.4);
+  animation: btnPulse 1s infinite alternate;
+}
+
+@keyframes btnPulse {
+  from { opacity: 0.85; transform: scale(0.99); }
+  to { opacity: 1; transform: scale(1.01); }
+}
+
+.desktop-bandwidth-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--brand-cyan);
+  background: rgba(2, 132, 199, 0.08);
+  padding: 4px 12px;
+  border-radius: 6px;
+  margin-top: 6px;
+}
+
+.bandwidth-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.bandwidth-sep {
+  color: var(--text-muted);
 }
 
 .action-btn-primary.disconnect {
