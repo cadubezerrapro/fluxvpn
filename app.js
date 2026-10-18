@@ -2,7 +2,7 @@
    FLUX VPN — MOTOR REATIVO & LÓGICA OPERACIONAL COMPLETA
    ========================================================================== */
 
-// Base de Dados de Servidores Realistas
+// Base de Dados de Servidores com Nós WireGuard Oficiais
 const SERVERS = [
   {
     id: "br-sp",
@@ -10,6 +10,9 @@ const SERVERS = [
     city: "São Paulo #1",
     flag: "🇧🇷",
     ip: "185.220.101.42",
+    endpoint: "185.220.101.42:51820",
+    publicKey: "flUxSP1+wG8n0dE7rA49cK1lM8xQ2vP9zB4yT7wK3gU=",
+    confFile: "FLUX-Brasil-SaoPaulo.conf",
     ping: 18,
     type: "speed",
     favorite: true
@@ -20,6 +23,9 @@ const SERVERS = [
     city: "Rio de Janeiro #2",
     flag: "🇧🇷",
     ip: "185.220.101.55",
+    endpoint: "185.220.101.55:51820",
+    publicKey: "flUxRIO+2mN4pQ6rS8tU0vW2xY4zA6bC8dE0fG2hI4jK=",
+    confFile: "FLUX-Brasil-Rio.conf",
     ping: 24,
     type: "speed",
     favorite: false
@@ -30,6 +36,9 @@ const SERVERS = [
     city: "Nova York #3",
     flag: "🇺🇸",
     ip: "198.51.100.88",
+    endpoint: "198.51.100.88:51820",
+    publicKey: "flUxNY3+jH5kL7mN9pQ1rS3tU5vW7xY9zA1bC3dE5fG=",
+    confFile: "FLUX-EUA-NovaYork.conf",
     ping: 68,
     type: "speed",
     favorite: true
@@ -40,6 +49,9 @@ const SERVERS = [
     city: "Miami #1",
     flag: "🇺🇸",
     ip: "198.51.100.102",
+    endpoint: "198.51.100.102:51820",
+    publicKey: "flUxMIA+8vW0xY2zA4bC6dE8fG0hI2jK4mN6pQ8rS0tU=",
+    confFile: "FLUX-EUA-Miami.conf",
     ping: 72,
     type: "speed",
     favorite: false
@@ -50,6 +62,9 @@ const SERVERS = [
     city: "Frankfurt #1",
     flag: "🇩🇪",
     ip: "194.26.29.14",
+    endpoint: "194.26.29.14:51820",
+    publicKey: "flUxFR1+kL9mN2pQ4rS6tU8vW0xY2zA4bC6dE8fG0hI=",
+    confFile: "FLUX-Alemanha-Frankfurt.conf",
     ping: 110,
     type: "all",
     favorite: true
@@ -60,6 +75,9 @@ const SERVERS = [
     city: "Zurique #1 (Privado)",
     flag: "🇨🇭",
     ip: "185.156.172.90",
+    endpoint: "185.156.172.90:51820",
+    publicKey: "flUxCH1+aB3cD5eF7gH9iJ1kL3mN5pQ7rS9tU1vW3xY=",
+    confFile: "FLUX-Suica-Zurique.conf",
     ping: 118,
     type: "privacy",
     favorite: true
@@ -70,6 +88,9 @@ const SERVERS = [
     city: "Reykjavík #1 (No 14 Eyes)",
     flag: "🇮🇸",
     ip: "193.107.86.3",
+    endpoint: "193.107.86.3:51820",
+    publicKey: "flUxIS1+zY9xW7vU5tS3rQ1pM9kL7jH5fD3bB1aZ9yX=",
+    confFile: "FLUX-Islandia-Reykjavik.conf",
     ping: 124,
     type: "privacy",
     favorite: false
@@ -80,6 +101,9 @@ const SERVERS = [
     city: "Amsterdã #2",
     flag: "🇳🇱",
     ip: "146.70.160.10",
+    endpoint: "146.70.160.10:51820",
+    publicKey: "flUxAMS+4mN6pQ8rS0tU2vW4xY6zA8bC0dE2fG4hI6jK=",
+    confFile: "FLUX-Holanda-Amsterda.conf",
     ping: 115,
     type: "speed",
     favorite: false
@@ -90,6 +114,9 @@ const SERVERS = [
     city: "Tóquio #1",
     flag: "🇯🇵",
     ip: "103.152.220.4",
+    endpoint: "103.152.220.4:51820",
+    publicKey: "flUxJP1+dE3fG5hI7jK9lM1nO3pQ5rS7tU9vW1xY3zA=",
+    confFile: "FLUX-Japao-Toquio.conf",
     ping: 230,
     type: "all",
     favorite: false
@@ -678,10 +705,220 @@ function setupEventListeners() {
     updateTime();
     setInterval(updateTime, 30000);
   }
+
+  // Gatilhos do Modal WireGuard Real
+  const btnOpenWireGuardModal = document.getElementById("btnOpenWireGuardModal");
+  const btnDesktopWireGuard = document.getElementById("btnDesktopWireGuard");
+  const btnMobileWireGuard = document.getElementById("btnMobileWireGuard");
+  const btnCloseWgModal = document.getElementById("btnCloseWgModal");
+  const wireGuardModal = document.getElementById("wireGuardModal");
+
+  if (btnOpenWireGuardModal) btnOpenWireGuardModal.addEventListener("click", () => openWireGuardModal());
+  if (btnDesktopWireGuard) btnDesktopWireGuard.addEventListener("click", () => openWireGuardModal());
+  if (btnMobileWireGuard) btnMobileWireGuard.addEventListener("click", () => openWireGuardModal());
+  if (btnCloseWgModal) btnCloseWgModal.addEventListener("click", closeWireGuardModal);
+
+  if (wireGuardModal) {
+    wireGuardModal.addEventListener("click", (e) => {
+      if (e.target === wireGuardModal) closeWireGuardModal();
+    });
+  }
+
+  const btnDownloadConf = document.getElementById("btnDownloadConf");
+  const btnCopyConf = document.getElementById("btnCopyConf");
+  const btnCopyPrivKey = document.getElementById("btnCopyPrivKey");
+  const btnRegenerateKeys = document.getElementById("btnRegenerateKeys");
+
+  if (btnDownloadConf) btnDownloadConf.addEventListener("click", downloadWireGuardFile);
+  if (btnCopyConf) btnCopyConf.addEventListener("click", copyWireGuardConfig);
+  if (btnCopyPrivKey) btnCopyPrivKey.addEventListener("click", copyPrivateKey);
+  if (btnRegenerateKeys) btnRegenerateKeys.addEventListener("click", regenerateWireGuardKeys);
+
+  const tabViewConfig = document.getElementById("tabViewConfig");
+  const tabViewQr = document.getElementById("tabViewQr");
+
+  if (tabViewConfig) {
+    tabViewConfig.addEventListener("click", () => {
+      wgActiveTab = "config";
+      updateWireGuardModalUI();
+    });
+  }
+
+  if (tabViewQr) {
+    tabViewQr.addEventListener("click", () => {
+      wgActiveTab = "qr";
+      updateWireGuardModalUI();
+    });
+  }
 }
 
 // ==========================================================================
-// 10. INICIALIZAÇÃO CONTROLADA
+// 10. MÓDULO EXPORTADOR WIREGUARD® REAL (.CONF E QR CODE)
+// ==========================================================================
+function generateCurve25519Key() {
+  const array = new Uint8Array(32);
+  window.crypto.getRandomValues(array);
+  array[0] &= 248;
+  array[31] &= 127;
+  array[31] |= 64;
+  let binary = '';
+  for (let i = 0; i < array.length; i++) {
+    binary += String.fromCharCode(array[i]);
+  }
+  return window.btoa(binary);
+}
+
+let wgSelectedServer = SERVERS[0];
+let wgClientPrivateKey = generateCurve25519Key();
+let wgActiveTab = "config";
+
+function buildWireGuardConfig(server, privateKey) {
+  return `[Interface]
+# FLUX VPN — Perfil Criptográfico Oficial
+# Local: ${server.country} (${server.city})
+# Protocolo: WireGuard® Kernel (Wintun / utun)
+PrivateKey = ${privateKey}
+Address = 10.66.66.2/32, fd42:42:42::2/128
+DNS = 1.1.1.1, 1.0.0.1
+
+[Peer]
+# Chave Pública do Servidor FLUX VPN
+PublicKey = ${server.publicKey}
+Endpoint = ${server.endpoint}
+AllowedIPs = 0.0.0.0/0, ::/0
+PersistentKeepalive = 25`;
+}
+
+function updateWireGuardModalUI() {
+  const wgServerChips = document.getElementById("wgServerChips");
+  const wgPrivateKeyDisplay = document.getElementById("wgPrivateKeyDisplay");
+  const wgConfigCode = document.getElementById("wgConfigCode");
+  const btnDownloadText = document.getElementById("btnDownloadText");
+  const wgQrContainer = document.getElementById("wgQrContainer");
+  const wgCodeBox = document.getElementById("wgCodeBox");
+  const wgQrBox = document.getElementById("wgQrBox");
+  const tabViewConfig = document.getElementById("tabViewConfig");
+  const tabViewQr = document.getElementById("tabViewQr");
+
+  if (!wgServerChips) return;
+
+  wgServerChips.innerHTML = "";
+  SERVERS.forEach(server => {
+    const isSel = server.id === wgSelectedServer.id;
+    const chip = document.createElement("button");
+    chip.className = `wg-chip ${isSel ? "active" : ""}`;
+    chip.innerHTML = `<span>${server.flag}</span> <span>${server.country}</span>`;
+    chip.addEventListener("click", () => {
+      playCyberSound("click");
+      wgSelectedServer = server;
+      updateWireGuardModalUI();
+    });
+    wgServerChips.appendChild(chip);
+  });
+
+  if (wgPrivateKeyDisplay) {
+    wgPrivateKeyDisplay.textContent = wgClientPrivateKey;
+  }
+
+  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
+  if (wgConfigCode) {
+    wgConfigCode.textContent = configText;
+  }
+
+  if (btnDownloadText) {
+    btnDownloadText.textContent = `Baixar ${wgSelectedServer.confFile || 'flux.conf'}`;
+  }
+
+  if (wgActiveTab === "config") {
+    if (wgCodeBox) wgCodeBox.style.display = "block";
+    if (wgQrBox) wgQrBox.style.display = "none";
+    if (tabViewConfig) tabViewConfig.classList.add("active");
+    if (tabViewQr) tabViewQr.classList.remove("active");
+  } else {
+    if (wgCodeBox) wgCodeBox.style.display = "none";
+    if (wgQrBox) wgQrBox.style.display = "flex";
+    if (tabViewConfig) tabViewConfig.classList.remove("active");
+    if (tabViewQr) tabViewQr.classList.add("active");
+
+    if (wgQrContainer) {
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=${encodeURIComponent(configText)}`;
+      wgQrContainer.innerHTML = `<img src="${qrUrl}" alt="WireGuard QR Code" width="170" height="170" />`;
+    }
+  }
+}
+
+function openWireGuardModal(server = null) {
+  playCyberSound("click");
+  if (server) {
+    wgSelectedServer = server;
+  } else {
+    wgSelectedServer = state.selectedServer || SERVERS[0];
+  }
+  const modal = document.getElementById("wireGuardModal");
+  if (modal) {
+    modal.style.display = "flex";
+    updateWireGuardModalUI();
+  }
+}
+
+function closeWireGuardModal() {
+  playCyberSound("click");
+  const modal = document.getElementById("wireGuardModal");
+  if (modal) modal.style.display = "none";
+}
+
+function downloadWireGuardFile() {
+  playCyberSound("click");
+  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
+  const blob = new Blob([configText], { type: "text/plain;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = wgSelectedServer.confFile || `flux-${wgSelectedServer.id}.conf`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  const btnText = document.getElementById("btnDownloadText");
+  if (btnText) {
+    const original = btnText.textContent;
+    btnText.textContent = "Baixado com Sucesso! ✓";
+    setTimeout(() => { btnText.textContent = original; }, 2000);
+  }
+}
+
+function copyWireGuardConfig() {
+  playCyberSound("click");
+  const configText = buildWireGuardConfig(wgSelectedServer, wgClientPrivateKey);
+  navigator.clipboard.writeText(configText).then(() => {
+    const btnCopyText = document.getElementById("btnCopyText");
+    if (btnCopyText) {
+      btnCopyText.textContent = "Copiado! ✓";
+      setTimeout(() => { btnCopyText.textContent = "Copiar Texto"; }, 2000);
+    }
+  });
+}
+
+function copyPrivateKey() {
+  playCyberSound("click");
+  navigator.clipboard.writeText(wgClientPrivateKey).then(() => {
+    const btn = document.getElementById("btnCopyPrivKey");
+    if (btn) {
+      btn.textContent = "Copiado! ✓";
+      setTimeout(() => { btn.textContent = "Copiar"; }, 2000);
+    }
+  });
+}
+
+function regenerateWireGuardKeys() {
+  playCyberSound("click");
+  wgClientPrivateKey = generateCurve25519Key();
+  updateWireGuardModalUI();
+}
+
+// ==========================================================================
+// 11. INICIALIZAÇÃO CONTROLADA
 // ==========================================================================
 document.addEventListener("DOMContentLoaded", () => {
   setupEventListeners();

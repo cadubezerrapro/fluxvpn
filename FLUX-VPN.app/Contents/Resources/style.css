@@ -211,6 +211,7 @@ body {
   transition: all 0.3s ease;
 }
 
+/* Modos de visualização */
 .showcase-container.view-desktop-only .mobile-column {
   display: none;
 }
@@ -320,6 +321,7 @@ body {
   justify-content: space-between;
 }
 
+/* Escudo Mobile */
 .mobile-shield-wrapper {
   margin: 6px 0;
 }
@@ -339,6 +341,7 @@ body {
   box-shadow: 0 12px 32px -4px rgba(2, 132, 199, 0.16), 0 2px 8px rgba(15, 23, 42, 0.04);
 }
 
+/* Anel Orbital de Fluxo de Dados (Sutil e Tecnológico) */
 .shield-button::before {
   content: "";
   position: absolute;
@@ -383,6 +386,7 @@ body {
   overflow: visible;
 }
 
+/* Animações e Efeitos do Novo Emblema FLUX */
 .shield-button.connected .shield-path {
   filter: drop-shadow(0 4px 10px rgba(2, 132, 199, 0.25));
 }
@@ -398,6 +402,7 @@ body {
   100% { transform: scale(0.9); opacity: 0.8; }
 }
 
+/* Estado Desconectado */
 .shield-button.disconnected {
   border-color: var(--border-light);
   box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05), 0 0 0 1px var(--border-light);
@@ -427,6 +432,7 @@ body {
   stroke: #CBD5E1 !important;
 }
 
+/* Estado Conectando (Handshake WireGuard Dinâmico) */
 .shield-button.connecting {
   border-color: #0EA5E9;
   box-shadow: 0 0 28px rgba(14, 165, 233, 0.45);
@@ -452,6 +458,7 @@ body {
   fill: #0EA5E9 !important;
 }
 
+/* Status e Timer Mobile */
 .mobile-status-section {
   text-align: center;
   margin-bottom: 6px;
@@ -502,6 +509,7 @@ body {
   margin-top: 2px;
 }
 
+/* Pill de Seleção Mobile */
 .mobile-server-pill {
   width: 100%;
   background-color: var(--bg-subtle);
@@ -564,6 +572,7 @@ body {
   border-radius: 6px;
 }
 
+/* Botão de Ação Primária */
 .action-btn-primary {
   width: 100%;
   padding: 11px 16px;
@@ -635,6 +644,7 @@ body {
   background-color: #FEE2E2;
 }
 
+/* Card de Métricas Mobile */
 .mobile-card-metrics {
   width: 100%;
   background-color: var(--bg-subtle);
@@ -698,6 +708,7 @@ body {
   height: 600px;
 }
 
+/* Barra de Título (Window Header) */
 .window-titlebar {
   height: 42px;
   background-color: #FAFAFA;
@@ -765,6 +776,7 @@ body {
   background-color: var(--border-light);
 }
 
+/* Layout Interno do Desktop */
 .window-content {
   flex: 1;
   display: grid;
@@ -772,6 +784,7 @@ body {
   overflow: hidden;
 }
 
+/* Painel Esquerdo (Controle & Segurança) */
 .panel-left {
   background-color: #FCFDFF;
   border-right: 1px solid var(--border-light);
@@ -828,6 +841,7 @@ body {
   margin: 16px 0;
 }
 
+/* Controles de Segurança Avançada */
 .security-toggles {
   width: 100%;
   display: flex;
@@ -857,6 +871,7 @@ body {
   color: var(--text-secondary);
 }
 
+/* Switch Apple Style */
 .switch {
   position: relative;
   display: inline-block;
@@ -912,6 +927,7 @@ input:checked + .slider:before {
   color: var(--accent-green-text);
 }
 
+/* Painel Direito (Lista e Seleção de Servidores) */
 .panel-right {
   display: flex;
   flex-direction: column;
@@ -920,6 +936,7 @@ input:checked + .slider:before {
   overflow: hidden;
 }
 
+/* Campo de Busca */
 .search-box {
   display: flex;
   align-items: center;
@@ -961,6 +978,7 @@ input:checked + .slider:before {
   font-size: 12px;
 }
 
+/* Acesso Rápido / Favoritos */
 .quick-favorites-section {
   margin-bottom: 14px;
 }
@@ -1007,6 +1025,7 @@ input:checked + .slider:before {
   color: var(--brand-cyan);
 }
 
+/* Abas de Servidores */
 .server-tabs {
   display: flex;
   gap: 16px;
@@ -1046,6 +1065,7 @@ input:checked + .slider:before {
   border-radius: 2px;
 }
 
+/* Lista de Servidores com Scroll Elegante */
 .server-list {
   flex: 1;
   overflow-y: auto;
@@ -1068,6 +1088,7 @@ input:checked + .slider:before {
   border-radius: 10px;
 }
 
+/* Card Individual de Servidor */
 .server-item {
   display: flex;
   align-items: center;
@@ -1173,6 +1194,7 @@ input:checked + .slider:before {
   color: #F59E0B;
 }
 
+/* Rodapé da Janela */
 .window-footer {
   height: 34px;
   background-color: #FAFAFA;
@@ -1202,6 +1224,7 @@ input:checked + .slider:before {
   background-color: var(--accent-green);
 }
 
+/* Responsividade Geral */
 @media (max-width: 1100px) {
   .showcase-container {
     flex-direction: column;
@@ -1212,4 +1235,488 @@ input:checked + .slider:before {
     width: 100%;
     max-width: 760px;
   }
+}
+
+/* ==========================================================================
+   BOTÕES E COMPONENTES WIREGUARD® REAL (.CONF)
+   ========================================================================== */
+.nav-btn-wireguard {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #FFFFFF;
+  background: linear-gradient(135deg, #0284C7, #06B6D4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 6px 14px;
+  border-radius: var(--radius-btn);
+  cursor: pointer;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(2, 132, 199, 0.35);
+  transition: all 0.2s ease;
+}
+
+.nav-btn-wireguard:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 14px rgba(6, 182, 212, 0.5);
+  filter: brightness(1.1);
+}
+
+.action-btn-wireguard {
+  width: 100%;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border-radius: var(--radius-btn);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--brand-cyan);
+  background-color: var(--brand-cyan-light);
+  border: 1px dashed var(--brand-cyan-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.action-btn-wireguard:hover {
+  background-color: #BAE6FD;
+  border-color: var(--brand-cyan);
+  transform: translateY(-1px);
+}
+
+.mobile-wireguard-btn {
+  width: 100%;
+  margin-top: 6px;
+  padding: 9px 12px;
+  border-radius: var(--radius-btn);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--brand-cyan);
+  background: var(--brand-cyan-light);
+  border: 1px dashed var(--brand-cyan-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+
+.mobile-wireguard-btn:hover {
+  background: #BAE6FD;
+}
+
+/* ==========================================================================
+   MODAL DE EXPORTAÇÃO WIREGUARD (DARK CYBER APPLE STYLE)
+   ========================================================================== */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+  animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modal-container {
+  background: #0B1120;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 660px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 35px rgba(14, 165, 233, 0.2);
+  color: #F8FAFC;
+  overflow: hidden;
+  animation: scaleUpModal 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes scaleUpModal {
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.modal-header {
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.wg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: #38BDF8;
+  background: rgba(14, 165, 233, 0.15);
+  padding: 3px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(14, 165, 233, 0.3);
+  margin-bottom: 6px;
+}
+
+.modal-title {
+  font-size: 19px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.01em;
+}
+
+.modal-subtitle {
+  font-size: 12px;
+  color: #94A3B8;
+  margin-top: 2px;
+}
+
+.modal-close-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94A3B8;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+}
+
+.modal-close-btn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  color: #EF4444;
+  border-color: rgba(239, 68, 68, 0.4);
+}
+
+.modal-body {
+  padding: 20px 24px 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.modal-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-label {
+  font-size: 12px;
+  font-weight: 700;
+  color: #E2E8F0;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.modal-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-regenerate-keys {
+  background: transparent;
+  border: none;
+  color: #38BDF8;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.btn-regenerate-keys:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+/* Seletor de Servidores em Chips */
+.wg-server-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wg-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #CBD5E1;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wg-chip:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #FFFFFF;
+}
+
+.wg-chip.active {
+  background: rgba(14, 165, 233, 0.2);
+  border-color: #0EA5E9;
+  color: #38BDF8;
+  box-shadow: 0 0 12px rgba(14, 165, 233, 0.3);
+}
+
+/* Linha da Chave Privada */
+.wg-key-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-size: 11px;
+}
+
+.key-tag {
+  color: #94A3B8;
+  font-weight: 600;
+}
+
+.key-value {
+  color: #38BDF8;
+  font-family: var(--font-mono);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 320px;
+}
+
+.btn-copy-mini {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #CBD5E1;
+  padding: 3px 8px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.btn-copy-mini:hover {
+  background: rgba(14, 165, 233, 0.25);
+  color: #38BDF8;
+  border-color: #0EA5E9;
+}
+
+/* Abas de Visualização (Config vs QR) */
+.modal-view-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.wg-view-tab {
+  background: transparent;
+  border: 1px solid transparent;
+  color: #94A3B8;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.wg-view-tab.active {
+  background: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* Caixa de Código */
+.wg-code-box {
+  background: #030712;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 14px 16px;
+  max-height: 175px;
+  overflow-y: auto;
+}
+
+.wg-code-box pre {
+  margin: 0;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  line-height: 1.5;
+  color: #E2E8F0;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* Caixa do QR Code */
+.wg-qr-box {
+  background: #030712;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.qr-canvas-wrap {
+  background: #FFFFFF;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.qr-canvas-wrap img, .qr-canvas-wrap canvas, .qr-canvas-wrap svg {
+  display: block;
+  width: 170px;
+  height: 170px;
+}
+
+.qr-instructions {
+  font-size: 12px;
+  color: #94A3B8;
+  text-align: center;
+  max-width: 400px;
+}
+
+.qr-instructions strong {
+  color: #38BDF8;
+}
+
+/* Botões de Ação na Modal */
+.modal-actions-bar {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-download-conf {
+  flex: 2;
+  background: linear-gradient(135deg, #0284C7, #0EA5E9);
+  color: #FFFFFF;
+  border: none;
+  border-radius: 10px;
+  padding: 12px 18px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 16px rgba(14, 165, 233, 0.4);
+  transition: all 0.2s ease;
+}
+
+.btn-download-conf:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 22px rgba(14, 165, 233, 0.55);
+}
+
+.btn-copy-conf {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #F8FAFC;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: all 0.15s ease;
+}
+
+.btn-copy-conf:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Guia de 4 Passos */
+.wg-quick-guide {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.guide-title {
+  font-size: 11px;
+  font-weight: 700;
+  color: #94A3B8;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.guide-steps {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.guide-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 11px;
+  color: #CBD5E1;
+  line-height: 1.4;
+}
+
+.guide-step a {
+  color: #38BDF8;
+  text-decoration: underline;
+}
+
+.step-num {
+  background: rgba(14, 165, 233, 0.2);
+  color: #38BDF8;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 9px;
+  font-weight: 800;
+  flex-shrink: 0;
+  margin-top: 1px;
 }

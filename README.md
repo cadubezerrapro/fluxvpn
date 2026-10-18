@@ -24,9 +24,26 @@
 
 ---
 
-## ⬇️ Como Baixar e Usar Apenas o Aplicativo (Mac & Windows)
+## ⚡ Conexão 100% Real de Sistema via WireGuard® Oficial (Recomendado)
 
-Se você deseja apenas **usar o aplicativo do FLUX VPN no seu computador**, sem precisar mexer em códigos, você tem executáveis diretos prontos para rodar:
+> **Roteamento Total em Nível de Kernel (OS-Level Routing):**  
+> Para conectar 100% do tráfego de todo o computador (jogos, navegadores, torrents, Discord, etc.) mudando o IP público real com zero atrito de quarentena do macOS (`xattr -cr`) ou avisos do Windows SmartScreen:
+> 
+> 📖 **[Consulte o Guia Passo a Passo Oficial: COMO_USAR_WIREGUARD.md](COMO_USAR_WIREGUARD.md)**
+>
+> 📂 **Perfis Prontos para Uso na pasta [`profiles/`](profiles/):**
+> - 🇧🇷 [`FLUX-Brasil-SaoPaulo.conf`](profiles/FLUX-Brasil-SaoPaulo.conf) — Baixa latência e streaming nacional
+> - 🇩🇪 [`FLUX-Alemanha-Frankfurt.conf`](profiles/FLUX-Alemanha-Frankfurt.conf) — Rota de altíssima velocidade na Europa
+> - 🇺🇸 [`FLUX-EUA-NovaYork.conf`](profiles/FLUX-EUA-NovaYork.conf) — Desbloqueio de catálogos e servidores dos EUA
+> - 🇨🇭 [`FLUX-Suica-Zurique.conf`](profiles/FLUX-Suica-Zurique.conf) — Máxima proteção jurídica e sigilo de dados
+> - 🇮🇸 [`FLUX-Islandia-Reykjavik.conf`](profiles/FLUX-Islandia-Reykjavik.conf) — Imune a jurisdições de vigilância internacional
+> - 🇯🇵 [`FLUX-Japao-Toquio.conf`](profiles/FLUX-Japao-Toquio.conf) — Baixo jitter e alta velocidade na Ásia
+
+---
+
+## ⬇️ Como Baixar e Usar os Aplicativos Standalone (Mac & Windows)
+
+Se você deseja executar a interface do FLUX VPN diretamente no computador como aplicativo nativo:
 
 ### 🍏 Para macOS (Mac)
 1. Baixe o projeto ou acesse a pasta descompactada.

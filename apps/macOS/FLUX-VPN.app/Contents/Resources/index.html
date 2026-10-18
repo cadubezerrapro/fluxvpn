@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLUX VPN — Interface Oficial & Protótipo Interativo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra Superior de Controle de Visualização -->
+  <header class="top-nav">
+    <div class="nav-brand">
+        <svg viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="brandGrad" x1="4" y1="2" x2="28" y2="30" gradientUnits="userSpaceOnUse">
+              <stop stop-color="#0284C7"/>
+              <stop offset="60%" stop-color="#0EA5E9"/>
+              <stop offset="100%" stop-color="#06B6D4"/>
+            </linearGradient>
+          </defs>
+          <!-- Escudo Aerodinâmico FLUX -->
+          <path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="url(#brandGrad)"/>
+          <!-- Monograma Cinético FLUX (Fluxo Dinâmico + Criptografia) -->
+          <path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/>
+          <circle cx="18.5" cy="19.5" r="1.5" fill="#FFFFFF"/>
+        </svg>
+      <div class="brand-text">
+        <span class="brand-title">FLUX VPN</span>
+        <span class="brand-badge">OPEN SOURCE</span>
+      </div>
+    </div>
+
+    <!-- Seletor de Modo de Exibição -->
+    <div class="view-switcher" role="tablist">
+      <button class="switcher-btn active" id="btnViewDesktop" data-view="desktop">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>App Desktop (macOS / Windows)</span>
+      </button>
+      <button class="switcher-btn" id="btnViewMobile" data-view="mobile">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="3"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        <span>App Mobile (iPhone / Android)</span>
+      </button>
+      <button class="switcher-btn" id="btnViewBoth" data-view="both">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <span>Apresentação Lado a Lado</span>
+      </button>
+    </div>
+
+    <div class="nav-actions">
+      <button class="nav-btn-wireguard" id="btnOpenWireGuardModal" title="Exportar Perfil Real do WireGuard">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <span>⚡ Perfil WireGuard® (.conf)</span>
+      </button>
+      <a href="COMO_USAR_WIREGUARD.md" target="_blank" class="nav-doc-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+        <span>Tutorial WireGuard</span>
+      </a>
+      <a href="https://github.com/cadubezerrapro/fluxvpn" target="_blank" class="nav-doc-link">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Showcase Principal (Inicia Focado no Desktop) -->
+  <main class="showcase-container view-desktop-only" id="showcaseContainer">
+
+    <!-- ========================================================= -->
+    <!-- 1. MOCKUP DO APLICATIVO MOBILE (IPHONE / ANDROID) -->
+    <!-- ========================================================= -->
+    <div class="mockup-column mobile-column" id="mobileColumn">
+      <div class="device-frame iphone-frame">
+        <!-- Dynamic Island e Sensores -->
+        <div class="iphone-speaker"></div>
+        <div class="dynamic-island">
+          <div class="island-camera"></div>
+        </div>
+
+        <!-- Tela do Celular -->
+        <div class="mobile-screen">
+          <!-- Status Bar -->
+          <div class="mobile-status-bar">
+            <span class="status-time" id="mobileTime">10:08</span>
+            <div class="status-icons">
+              <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M0 2C0 0.895431 0.895431 0 2 0H14C15.1046 0 16 0.895431 16 2V10C16 11.1046 15.1046 12 14 12H2C0.895431 12 0 11.1046 0 10V2Z" fill-opacity="0.3"/><rect x="2" y="2" width="10" height="8" rx="1"/><path d="M16 4V8C16.5523 8 17 7.55228 17 7V5C17 4.44772 16.5523 4 16 4Z"/></svg>
+            </div>
+          </div>
+
+          <!-- Header do App Mobile -->
+          <div class="mobile-app-header">
+            <button class="mobile-icon-btn" id="mobileMenuBtn" aria-label="Menu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <div class="mobile-title-wrap">
+              <span class="mobile-app-title">FLUX VPN</span>
+            </div>
+            <button class="mobile-icon-btn" id="mobileSettingsBtn" aria-label="Configurações">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+          </div>
+
+          <!-- Corpo do App Mobile -->
+          <div class="mobile-body">
+
+            <!-- Escudo Central Interativo Mobile -->
+            <div class="mobile-shield-wrapper">
+              <button class="shield-button mobile-shield disconnected" id="mobileShieldBtn" aria-label="Conectar ou Desconectar VPN">
+                <div class="shield-glow"></div>
+                <div class="shield-inner">
+                  <svg class="shield-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="shieldGradMobile" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0284C7"/>
+                        <stop offset="50%" stop-color="#0EA5E9"/>
+                        <stop offset="100%" stop-color="#06B6D4"/>
+                      </linearGradient>
+                      <linearGradient id="fluxWaveGradMobile" x1="30" y1="35" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0284C7"/>
+                        <stop offset="100%" stop-color="#06B6D4"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Escudo Base Aerodinâmico -->
+                    <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" 
+                          stroke="url(#shieldGradMobile)" stroke-width="5" stroke-linejoin="round"/>
+                    <!-- Linha Interna de Reforço Dinâmico -->
+                    <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" 
+                          stroke="url(#shieldGradMobile)" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
+                    <!-- Emblema Cinético FLUX (Fluxo de Criptografia + Monograma) -->
+                    <g class="shield-flux-core">
+                      <path d="M40 40C40 37.7909 41.7909 36 44 36H64C66.2091 36 68 37.7909 68 40C68 42.2091 66.2091 44 64 44H47V51H60C62.2091 51 64 52.7909 64 55C64 57.2091 62.2091 59 60 59H47V74C47 76.2091 45.2091 78 43 78C40.7909 78 40 76.2091 40 74V40Z" 
+                            fill="url(#fluxWaveGradMobile)"/>
+                      <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
+                      <circle cx="58" cy="69" r="7.5" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+                    </g>
+                  </svg>
+                </div>
+              </button>
+            </div>
+
+            <!-- Status e Timer Mobile -->
+            <div class="mobile-status-section">
+              <div class="status-indicator">
+                <span class="status-dot red" id="mobileStatusDot"></span>
+                <span class="status-text" id="mobileStatusText">Desconectado</span>
+              </div>
+              <div class="timer-display" id="mobileTimer">00:00</div>
+            </div>
+
+            <!-- Pill do Servidor Selecionado Mobile -->
+            <div class="mobile-server-pill" id="mobileServerPill">
+              <div class="pill-left">
+                <span class="pill-flag" id="mobilePillFlag">🇧🇷</span>
+                <div class="pill-info">
+                  <span class="pill-country" id="mobilePillCountry">Brasil</span>
+                  <span class="pill-city" id="mobilePillCity">São Paulo #1</span>
+                </div>
+              </div>
+              <div class="pill-right">
+                <span class="ping-badge" id="mobilePingBadge">18 ms</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+              </div>
+            </div>
+
+            <!-- Botão de Ação Primária Mobile -->
+            <button class="action-btn-primary connect" id="mobileActionBtn">
+              Proteger Minha Conexão
+            </button>
+
+            <!-- Botão WireGuard Real Mobile -->
+            <button class="mobile-wireguard-btn" id="btnMobileWireGuard" title="Exportar Perfil Oficial WireGuard">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>⚡ Exportar Perfil WireGuard® (.conf)</span>
+            </button>
+
+            <!-- Card de Métricas Mobile -->
+            <div class="mobile-card-metrics">
+              <div class="metric-row">
+                <span class="metric-label">Status do IP</span>
+                <span class="metric-value font-mono" id="mobileVirtualIp">Exposto: Detectando...</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Tráfego Criptografado</span>
+                <span class="metric-value font-mono" id="mobileTrafficSpeed">0.0 MB/s</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Protocolo</span>
+                <span class="metric-value">WireGuard® • ChaCha20</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Kill Switch</span>
+                <span class="metric-badge" id="mobileKillBadge" style="background:#F1F5F9;color:#64748B;">Pronto</span>
+              </div>
+              <div class="metric-row">
+                <span class="metric-label">Proteção Wi-Fi</span>
+                <span class="metric-badge green">Ativa</span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Bottom Bar da Home do iPhone -->
+          <div class="home-indicator"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================================================= -->
+    <!-- 2. MOCKUP DO APLICATIVO DESKTOP (MACOS / WINDOWS) -->
+    <!-- ========================================================= -->
+    <div class="mockup-column desktop-column" id="desktopColumn">
+      <div class="desktop-window">
+        
+        <!-- Barra de Título do Sistema Operacional (Window Header) -->
+        <div class="window-titlebar">
+          <div class="traffic-lights">
+            <span class="tl-btn close"></span>
+            <span class="tl-btn minimize"></span>
+            <span class="tl-btn zoom"></span>
+          </div>
+          <div class="window-title">
+            <span class="title-app-name">FLUX VPN</span>
+            <span class="title-separator">—</span>
+            <span class="title-sub" id="desktopTitleStatus">Conexão Desprotegida • Clique para Conectar</span>
+          </div>
+          <div class="window-actions">
+            <button class="win-btn" title="Configurações Rápidas">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </button>
+          </div>
+        </div>
+
+        <!-- Conteúdo Interno da Janela do Desktop -->
+        <div class="window-content">
+
+          <!-- Painel Esquerdo: Painel de Conexão e Segurança -->
+          <div class="panel-left">
+
+            <!-- Escudo Minimalista Desktop -->
+            <div class="desktop-shield-container">
+              <button class="shield-button desktop-shield disconnected" id="desktopShieldBtn" aria-label="Alternar Conexão">
+                <div class="shield-glow"></div>
+                <div class="shield-inner">
+                  <svg class="shield-svg" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                      <linearGradient id="shieldGradDesktop" x1="15" y1="10" x2="85" y2="110" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0284C7"/>
+                        <stop offset="50%" stop-color="#0EA5E9"/>
+                        <stop offset="100%" stop-color="#06B6D4"/>
+                      </linearGradient>
+                      <linearGradient id="fluxWaveGradDesktop" x1="30" y1="35" x2="70" y2="85" gradientUnits="userSpaceOnUse">
+                        <stop offset="0%" stop-color="#0284C7"/>
+                        <stop offset="100%" stop-color="#06B6D4"/>
+                      </linearGradient>
+                    </defs>
+                    <!-- Escudo Base Aerodinâmico -->
+                    <path class="shield-path" d="M50 10C68 22 83 24 87 28C88 52 82 82 50 108C18 82 12 52 13 28C17 24 32 22 50 10Z" 
+                          stroke="url(#shieldGradDesktop)" stroke-width="5" stroke-linejoin="round"/>
+                    <!-- Linha Interna de Reforço Dinâmico -->
+                    <path class="shield-flow-line" d="M50 20C63 29 74 31 77 34C78 49 74 72 50 94C26 72 22 49 23 34C26 31 37 29 50 20Z" 
+                          stroke="url(#shieldGradDesktop)" stroke-width="1.8" stroke-dasharray="3 3" opacity="0.45"/>
+                    <!-- Emblema Cinético FLUX (Fluxo de Criptografia + Monograma) -->
+                    <g class="shield-flux-core">
+                      <path d="M40 40C40 37.7909 41.7909 36 44 36H64C66.2091 36 68 37.7909 68 40C68 42.2091 66.2091 44 64 44H47V51H60C62.2091 51 64 52.7909 64 55C64 57.2091 62.2091 59 60 59H47V74C47 76.2091 45.2091 78 43 78C40.7909 78 40 76.2091 40 74V40Z" 
+                            fill="url(#fluxWaveGradDesktop)"/>
+                      <circle cx="58" cy="69" r="4" fill="#06B6D4"/>
+                      <circle cx="58" cy="69" r="7.5" stroke="#06B6D4" stroke-width="1.5" opacity="0.6"/>
+                    </g>
+                  </svg>
+                </div>
+              </button>
+            </div>
+
+            <!-- Informação Central de Conexão -->
+            <div class="desktop-status-info">
+              <div class="status-indicator">
+                <span class="status-dot red" id="desktopStatusDot"></span>
+                <span class="status-text" id="desktopStatusText">Desconectado</span>
+              </div>
+              <div class="timer-display" id="desktopTimer">00:00</div>
+              <div class="desktop-ip-row">
+                <span class="ip-label">Status do IP:</span>
+                <span class="ip-value font-mono" id="desktopVirtualIp">Exposto: Detectando...</span>
+              </div>
+              <div class="desktop-bandwidth-row" id="desktopBandwidthRow">
+                <span class="bandwidth-item">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 13 12 18 17 13"/><line x1="12" y1="6" x2="12" y2="18"/></svg>
+                  <span id="statDownSpeed">↓ 0.0 MB/s</span>
+                </span>
+                <span class="bandwidth-sep">•</span>
+                <span class="bandwidth-item">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="17 11 12 6 7 11"/><line x1="12" y1="18" x2="12" y2="6"/></svg>
+                  <span id="statUpSpeed">↑ 0.0 MB/s</span>
+                </span>
+              </div>
+            </div>
+
+            <!-- Botão Primário Desktop -->
+            <button class="action-btn-primary connect" id="desktopActionBtn">
+              Proteger Minha Conexão
+            </button>
+
+            <!-- Botão Secundário WireGuard Desktop -->
+            <button class="action-btn-wireguard" id="btnDesktopWireGuard" title="Exportar Perfil Oficial WireGuard">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+              <span>Conexão Real: Baixar Perfil WireGuard®</span>
+            </button>
+
+            <div class="desktop-divider"></div>
+
+            <!-- Preferências de Segurança e Rede (Padrão Apple Settings) -->
+            <div class="security-toggles">
+              <div class="toggle-item">
+                <div class="toggle-text">
+                  <span class="toggle-title">Kill Switch</span>
+                  <span class="toggle-desc">Bloquear tráfego sem VPN</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="checkKillSwitch" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-item">
+                <div class="toggle-text">
+                  <span class="toggle-title">Proteção Wi-Fi</span>
+                  <span class="toggle-desc">Auto-conectar em redes públicas</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="checkWifiShield" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-item">
+                <div class="toggle-text">
+                  <span class="toggle-title">Invisibilidade LAN</span>
+                  <span class="toggle-desc">Ocultar de outros aparelhos locais</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="checkLanShield" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+
+              <div class="toggle-item">
+                <div class="toggle-text">
+                  <span class="toggle-title">Prevenção de Vazamentos</span>
+                  <span class="toggle-desc">DNS Próprio e Blackhole IPv6</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="checkLeakShield" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Painel Direito: Busca, Filtros e Lista de Servidores -->
+          <div class="panel-right">
+
+            <!-- Campo de Busca de Servidores -->
+            <div class="search-box">
+              <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+              <input type="text" id="serverSearchInput" placeholder="Buscar país, cidade ou nó..." autocomplete="off">
+              <button class="search-clear-btn" id="searchClearBtn" style="display:none;">✕</button>
+            </div>
+
+            <!-- Seção de Favoritos / Atalhos Rápidos -->
+            <div class="quick-favorites-section">
+              <span class="section-label">Acesso Rápido</span>
+              <div class="favorites-chips">
+                <button class="fav-chip active" data-server="br-sp">
+                  <span class="flag">🇧🇷</span>
+                  <span class="name">Brasil</span>
+                </button>
+                <button class="fav-chip" data-server="us-ny">
+                  <span class="flag">🇺🇸</span>
+                  <span class="name">EUA</span>
+                </button>
+                <button class="fav-chip" data-server="de-fra">
+                  <span class="flag">🇩🇪</span>
+                  <span class="name">Alemanha</span>
+                </button>
+                <button class="fav-chip" data-server="ch-zur">
+                  <span class="flag">🇨🇭</span>
+                  <span class="name">Suíça</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Abas de Categoria -->
+            <div class="server-tabs">
+              <button class="tab-btn active" data-tab="all">Todos os Locais (<span id="countAll">9</span>)</button>
+              <button class="tab-btn" data-tab="speed">Mais Rápidos</button>
+              <button class="tab-btn" data-tab="privacy">Alta Privacidade</button>
+            </div>
+
+            <!-- Lista Dinâmica de Servidores -->
+            <div class="server-list" id="serverListContainer">
+              <!-- Renderizado via JavaScript -->
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Rodapé Discreto da Janela -->
+        <div class="window-footer">
+          <div class="footer-left">
+            <span class="footer-dot green"></span>
+            <span class="footer-protocol">WireGuard® Kernel • ChaCha20-Poly1305</span>
+          </div>
+          <div class="footer-right">
+            <span>Rede 100% em RAM (Diskless)</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ========================================================= -->
+  <!-- MODAL: EXPORTADOR DE PERFIL WIREGUARD® OFICIAL (.CONF) -->
+  <!-- ========================================================= -->
+  <div class="modal-overlay" id="wireGuardModal" style="display: none;">
+    <div class="modal-container">
+      <div class="modal-header">
+        <div class="modal-header-left">
+          <div class="wg-badge">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <span>WIREGUARD® KERNEL OFICIAL</span>
+          </div>
+          <h2 class="modal-title">Exportar Perfil Real de VPN</h2>
+          <p class="modal-subtitle">Conexão 100% nativa no Kernel do Sistema Operacional (Windows / Mac / Linux / Mobile)</p>
+        </div>
+        <button class="modal-close-btn" id="btnCloseWgModal" aria-label="Fechar Modal">✕</button>
+      </div>
+
+      <div class="modal-body">
+        <!-- 1. Seletor de Servidores -->
+        <div class="modal-section">
+          <label class="modal-label">1. Localização do Servidor:</label>
+          <div class="wg-server-chips" id="wgServerChips"></div>
+        </div>
+
+        <!-- 2. Chaves Curve25519 -->
+        <div class="modal-section">
+          <div class="modal-section-header">
+            <label class="modal-label">2. Par de Chaves Criptográficas Curve25519:</label>
+            <button class="btn-regenerate-keys" id="btnRegenerateKeys">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+              <span>Gerar Novas Chaves</span>
+            </button>
+          </div>
+          <div class="wg-key-row">
+            <span class="key-tag">Sua Chave Privada:</span>
+            <code class="key-value" id="wgPrivateKeyDisplay">•••••••••••••••••••••••••••••••••••••••••••</code>
+            <button class="btn-copy-mini" id="btnCopyPrivKey">Copiar</button>
+          </div>
+        </div>
+
+        <!-- 3. Visualização e Download -->
+        <div class="modal-section">
+          <div class="modal-section-header">
+            <label class="modal-label">3. Perfil de Configuração (.conf):</label>
+            <div class="modal-view-tabs">
+              <button class="wg-view-tab active" id="tabViewConfig">Arquivo .conf</button>
+              <button class="wg-view-tab" id="tabViewQr">QR Code (Celular)</button>
+            </div>
+          </div>
+
+          <div class="wg-code-box" id="wgCodeBox">
+            <pre><code class="font-mono" id="wgConfigCode"></code></pre>
+          </div>
+
+          <div class="wg-qr-box" id="wgQrBox" style="display: none;">
+            <div class="qr-canvas-wrap" id="wgQrContainer"></div>
+            <p class="qr-instructions">Abra o app <strong>WireGuard</strong> no celular → Toque em <strong>+</strong> → <strong>Escanear do código QR</strong></p>
+          </div>
+        </div>
+
+        <!-- Barra de Ações -->
+        <div class="modal-actions-bar">
+          <button class="btn-download-conf" id="btnDownloadConf">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            <span id="btnDownloadText">Baixar flux-brasil.conf</span>
+          </button>
+          <button class="btn-copy-conf" id="btnCopyConf">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <span id="btnCopyText">Copiar Texto</span>
+          </button>
+        </div>
+
+        <!-- Guia Passo a Passo -->
+        <div class="wg-quick-guide">
+          <span class="guide-title">Como Conectar no WireGuard Oficial (4 Passos Rápidos):</span>
+          <div class="guide-steps">
+            <div class="guide-step">
+              <span class="step-num">1</span>
+              <span>Instale o aplicativo oficial gratuito do <a href="https://www.wireguard.com/install/" target="_blank">WireGuard</a> (Windows, Mac, iOS ou Android).</span>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">2</span>
+              <span>Baixe o arquivo <strong>.conf</strong> no botão acima ou escaneie o <strong>QR Code</strong> com seu celular.</span>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">3</span>
+              <span>No aplicativo WireGuard, clique em <strong>Import tunnel(s) from file</strong> e selecione o arquivo baixado.</span>
+            </div>
+            <div class="guide-step">
+              <span class="step-num">4</span>
+              <span>Clique no botão <strong>Activate</strong>. Sua conexão inteira está 100% protegida e o IP alterado em nível de sistema operacional!</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

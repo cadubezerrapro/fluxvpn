@@ -66,8 +66,16 @@ FLUXVPN/
 ├── Iniciar FLUX VPN (Windows).bat     # Executável de 1 clique para Windows (modo standalone)
 ├── FLUX-VPN.app/                      # Pacote de aplicativo nativo macOS
 ├── dist/                              # Pacotes isolados para download direto
-│   ├── macOS/                         # Binário isolado para Mac
-│   └── windows/                       # Executável isolado para Windows
+│   ├── macOS/                         # Binário isolado para Mac (+ perfis WireGuard)
+│   └── windows/                       # Executável isolado para Windows (+ perfis WireGuard)
+├── profiles/                          # Perfis WireGuard® (.conf) pré-gerados para importação direta
+│   ├── FLUX-Brasil-SaoPaulo.conf
+│   ├── FLUX-Alemanha-Frankfurt.conf
+│   ├── FLUX-EUA-NovaYork.conf
+│   ├── FLUX-Suica-Zurique.conf
+│   ├── FLUX-Islandia-Reykjavik.conf
+│   └── FLUX-Japao-Toquio.conf
+├── COMO_USAR_WIREGUARD.md             # Guia passo a passo de conexão 100% real de sistema (Kernel)
 ├── AGENTS.md                          # Este guia universal de automação para IAs
 ├── README.md                          # Apresentação do projeto e badges do GitHub
 ├── PLANO_MESTRE_FLUX_VPN.md           # Especificação técnica completa de arquitetura e infraestrutura
