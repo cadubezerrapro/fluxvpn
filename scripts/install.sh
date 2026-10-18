@@ -18,9 +18,14 @@ if [ ! -d "$APP_SOURCE" ]; then
     APP_SOURCE="$REPO_DIR/FLUX-VPN.app"
 fi
 
-echo "[1/4] Removendo versões anteriores..."
+echo "[1/4] Removendo versões anteriores e limpando proxies residuais..."
 rm -rf "$APP_TARGET"
 rm -rf "$REPO_DIR/apps"
+networksetup -setsocksfirewallproxystate Wi-Fi off 2>/dev/null || true
+networksetup -setwebproxystate Wi-Fi off 2>/dev/null || true
+
+# Provisiona chaves reais WireGuard Anycast de alta velocidade
+python3 "$REPO_DIR/core/warp_provider.py" 2>/dev/null || true
 
 echo "[2/4] Compilando executável nativo Cocoa WebKit (App Próprio no Dock e Menu Bar)..."
 if command -v clang >/dev/null 2>&1 && [ -f "$REPO_DIR/scripts/launcher.m" ]; then

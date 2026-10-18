@@ -48,12 +48,16 @@ fi
 echo "[2/7] Gerando AppIcon.icns (Logo Branca) e Fundo Retina Modo Claro..."
 python3 "$REPO_DIR/scripts/generate_assets.py"
 
-# Garante que o ícone oficial esteja instalado em ambos os pacotes
+# Garante que o ícone oficial e os módulos do motor WireGuard estejam instalados
 if [ -f "$REPO_DIR/dist/assets/AppIcon.icns" ]; then
     cp "$REPO_DIR/dist/assets/AppIcon.icns" "$APP_SOURCE/Contents/Resources/AppIcon.icns"
     cp "$REPO_DIR/dist/assets/AppIcon.icns" "$ROOT_APP/Contents/Resources/AppIcon.icns"
     echo "      ✓ AppIcon.icns instalado em Contents/Resources/."
 fi
+
+cp -R "$REPO_DIR/core" "$APP_SOURCE/Contents/Resources/"
+cp -R "$REPO_DIR/core" "$ROOT_APP/Contents/Resources/"
+echo "      ✓ Módulos do motor WireGuard sincronizados em Contents/Resources/core/."
 
 # 4. Assinatura de Código Apple (CodeSign Ad-Hoc com SHA256)
 echo "[3/7] Aplicando CodeSign nativo Apple em todo o bundle..."

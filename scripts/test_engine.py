@@ -44,14 +44,15 @@ def run_tests():
     except Exception as e:
         print(f"      ✗ Falha ao identificar serviço: {e}")
 
-    # Teste 3: Busca e Verificação de Nó SOCKS5 com Teste de Socket
-    print("[3/5] Testando busca e responsividade de nós de saída...")
+    # Teste 3: Provisionamento e Validação de Chaves WireGuard® Curve25519
+    print("[3/5] Testando provisionamento de chaves Curve25519 e túnel Anycast...")
     try:
-        host, port = flux_engine.fetch_fastest_us_proxy()
-        print(f"      ✓ Nó verificado: {host}:{port}")
+        from core import warp_provider
+        conf_res = warp_provider.provision_real_wireguard_profile()
+        print(f"      ✓ Endpoint WireGuard verificado: {conf_res.get('endpoint')}")
         passed += 1
     except Exception as e:
-        print(f"      ✗ Falha na busca de nós: {e}")
+        print(f"      ✗ Falha no provisionamento: {e}")
 
     # Teste 4: Ciclo Seguro de Conexão e Desconexão (Sem Derrubar a Internet)
     print("[4/5] Testando ativação e restauração de segurança de rede...")

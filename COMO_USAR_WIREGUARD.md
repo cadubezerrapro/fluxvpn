@@ -54,6 +54,7 @@ O FLUX VPN gera e fornece as chaves criptográficas e os perfis prontos para voc
 
 Você encontra as configurações criptográficas prontas na pasta [`profiles/`](profiles/):
 
+- ⚡ [`FLUX-WireGuard-Real.conf`](profiles/FLUX-WireGuard-Real.conf) — Nó Anycast Global de Alta Performance (Chaves Curve25519 ativas, suporte a Discord UDP, streaming e jogos)
 - 🇧🇷 [`FLUX-Brasil-SaoPaulo.conf`](profiles/FLUX-Brasil-SaoPaulo.conf) — Baixa latência e streaming nacional
 - 🇩🇪 [`FLUX-Alemanha-Frankfurt.conf`](profiles/FLUX-Alemanha-Frankfurt.conf) — Hub central de alta velocidade na Europa
 - 🇺🇸 [`FLUX-EUA-NovaYork.conf`](profiles/FLUX-EUA-NovaYork.conf) — Desbloqueio de catálogos e servidores norte-americanos
