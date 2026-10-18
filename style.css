@@ -1721,3 +1721,178 @@ input:checked + .slider:before {
   margin-top: 1px;
 }
 
+/* ==========================================================================
+   MODO APLICATIVO NATIVO PURO (EDGE-TO-EDGE, SEM MOLDURAS FALSAS)
+   ========================================================================== */
+html, body.app-body-root {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+
+.app-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--bg-surface);
+  overflow: hidden;
+}
+
+/* 1. Header do App */
+.app-header {
+  height: 52px;
+  background-color: #FAFAFA;
+  border-bottom: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.app-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.app-brand .brand-svg {
+  width: 28px;
+  height: 28px;
+}
+
+.app-brand .brand-name {
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+}
+
+.status-pill-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 12px;
+  background-color: #F1F5F9;
+  border-radius: var(--radius-pill);
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-light);
+}
+
+.app-header-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-btn-wireguard {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
+  background: var(--brand-cyan-light);
+  border: 1px solid var(--brand-cyan-border);
+  color: var(--brand-cyan);
+  border-radius: var(--radius-btn);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.header-btn-wireguard:hover {
+  background: #BAE6FD;
+  transform: translateY(-1px);
+}
+
+.header-icon-btn {
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  border: 1px solid var(--border-light);
+  background: #FFFFFF;
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.header-icon-btn:hover {
+  background: #F1F5F9;
+  color: var(--text-primary);
+}
+
+/* 2. Conteúdo Principal */
+.app-main-content {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  overflow: hidden;
+  background-color: var(--bg-surface);
+}
+
+.app-main-content .panel-left {
+  border-right: 1px solid var(--border-light);
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  background-color: #FFFFFF;
+}
+
+.app-main-content .panel-right {
+  padding: 24px 28px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  background-color: #FAFAFA;
+}
+
+/* 3. Rodapé do App */
+.app-footer {
+  height: 36px;
+  background-color: #FAFAFA;
+  border-top: 1px solid var(--border-light);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  font-size: 12px;
+  color: var(--text-muted);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+.app-footer .footer-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.app-footer .footer-protocol {
+  color: var(--text-secondary);
+}
+
+.app-footer .footer-right {
+  font-size: 11px;
+}
+
+

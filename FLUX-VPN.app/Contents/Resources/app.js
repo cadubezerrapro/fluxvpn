@@ -400,6 +400,8 @@ function updateUI() {
     desktopShieldBtn.className = `shield-button desktop-shield ${shieldClass}`;
   }
   if (desktopStatusDot) desktopStatusDot.className = `status-dot ${dotClass}`;
+  const desktopStatusDotIndicator = document.getElementById("desktopStatusDotIndicator");
+  if (desktopStatusDotIndicator) desktopStatusDotIndicator.className = `status-dot ${dotClass}`;
   if (desktopStatusText) desktopStatusText.textContent = statusText;
   if (desktopActionBtn) {
     desktopActionBtn.className = `action-btn-primary ${btnClass}`;
