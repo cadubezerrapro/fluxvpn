@@ -47,7 +47,15 @@ O **FLUX VPN** foi desenhado para ser imediatamente utilizável sem necessidade 
 1. Baixe o instalador oficial: **[Baixar FLUX-VPN-macOS.dmg](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.dmg)** *(ou a versão portátil [FLUX-VPN-macOS.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-macOS.zip))*.
 2. Dê **duplo clique no arquivo `.dmg`** baixado.
 3. Arraste o ícone do **FLUX VPN** para a pasta **Applications** (Aplicativos).
-4. Abra o FLUX VPN pelo Launchpad ou Spotlight. O aplicativo abrirá imediatamente como uma janela nativa com motor de conexão embutido!
+4. Abra o FLUX VPN pelo Launchpad, Spotlight ou Finder.
+   > **💡 Dica para macOS Sequoia (15+) e Gatekeeper:**  
+   > Como o app é open-source e baixado diretamente da web, o macOS pode exibir o aviso *"O Item FLUX-VPN Não Foi Aberto"*.  
+   > **Como autorizar em 10 segundos sem terminal:**  
+   > 1. Clique em **[OK]** no aviso.  
+   > 2. Abra **Ajustes do Sistema ➜ Privacidade e Segurança**.  
+   > 3. Role até **Segurança** e clique no botão **[Abrir Mesmo Assim]**.  
+   > 4. Confirme com sua senha ou Touch ID. O Mac grava a autorização permanente!  
+   > *(Ou se preferir via terminal: `xattr -cr /Applications/FLUX-VPN.app && open /Applications/FLUX-VPN.app`)*
 
 ### 🪟 Para Windows (PC)
 1. Baixe o pacote oficial: **[Baixar FLUX-VPN-Windows.zip](https://github.com/cadubezerrapro/fluxvpn/raw/main/dist/FLUX-VPN-Windows.zip)**.

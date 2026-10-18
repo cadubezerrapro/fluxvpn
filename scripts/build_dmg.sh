@@ -29,13 +29,17 @@ mkdir -p "$REPO_DIR/dist/macOS"
 touch "$REPO_DIR/dist/.metadata_never_index"
 touch "$REPO_DIR/dist/macOS/.metadata_never_index"
 
-# 2. Compilar Lançador Mach-O Nativo Apple (Zero erro de 'não pode ser aberto')
-echo "[1/7] Compilando executável nativo Mach-O (C/Clang)..."
+# 2. Compilar Lançador Mach-O Nativo Apple (Zero dependência do Chrome, 100% App Próprio com WebKit nativo)
+echo "[1/7] Compilando executável nativo Cocoa WebKit Mach-O (Clang)..."
 if command -v clang >/dev/null 2>&1; then
-    clang -O2 -mmacosx-version-min=10.15 "$REPO_DIR/scripts/launcher.c" -o "$APP_SOURCE/Contents/MacOS/FLUX-VPN"
+    if [ -f "$REPO_DIR/scripts/launcher.m" ]; then
+        clang -O2 -mmacosx-version-min=10.15 -framework Cocoa -framework WebKit "$REPO_DIR/scripts/launcher.m" -o "$APP_SOURCE/Contents/MacOS/FLUX-VPN"
+    else
+        clang -O2 -mmacosx-version-min=10.15 "$REPO_DIR/scripts/launcher.c" -o "$APP_SOURCE/Contents/MacOS/FLUX-VPN"
+    fi
     cp "$APP_SOURCE/Contents/MacOS/FLUX-VPN" "$ROOT_APP/Contents/MacOS/FLUX-VPN"
     chmod 755 "$APP_SOURCE/Contents/MacOS/FLUX-VPN" "$ROOT_APP/Contents/MacOS/FLUX-VPN"
-    echo "      ✓ Binário Mach-O compilado com sucesso."
+    echo "      ✓ Binário Cocoa WebKit Mach-O compilado com sucesso."
 else
     chmod +x "$APP_SOURCE/Contents/MacOS/FLUX-VPN" "$ROOT_APP/Contents/MacOS/FLUX-VPN"
 fi

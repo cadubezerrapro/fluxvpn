@@ -942,6 +942,23 @@
             <p>Não. Não utilizamos frameworks pesados como Electron (que consome 400MB+ de RAM). Nossos clientes são construídos em <strong>Rust + Tauri</strong> no Desktop (menos de 20MB de RAM) e em código nativo puro (SwiftUI no macOS/iOS e Kotlin no Android), utilizando as extensões de rede do próprio sistema operacional.</p>
           </div>
         </div>
+
+        <div class="faq-item reveal delay-1">
+          <button class="faq-question">
+            <span>Apareceu o aviso "O Item FLUX-VPN Não Foi Aberto" no macOS. O que fazer?</span>
+            <svg class="faq-chevron" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="faq-answer">
+            <p>Esse aviso é a proteção padrão do macOS (Gatekeeper) para aplicativos open-source baixados da internet que não utilizam o certificado corporativo pago da Apple. Para autorizar em 10 segundos sem terminal:</p>
+            <ol style="margin: 8px 0; padding-left: 20px; line-height: 1.6;">
+              <li>Clique em <strong>[OK]</strong> no aviso do Mac.</li>
+              <li>Abra <strong>Ajustes do Sistema ➜ Privacidade e Segurança</strong>.</li>
+              <li>Role até o final na seção <strong>Segurança</strong> e clique no botão <strong>[Abrir Mesmo Assim]</strong>.</li>
+              <li>Confirme com seu Touch ID ou senha. O macOS libera o app de forma permanente!</li>
+            </ol>
+            <p style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:6px;"><em>(Alternativa rápida no Terminal: <code>xattr -cr /Applications/FLUX-VPN.app && open /Applications/FLUX-VPN.app</code>)</em></p>
+          </div>
+        </div>
       </div>
     </div>
   </section>

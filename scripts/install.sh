@@ -22,7 +22,14 @@ echo "[1/4] Removendo versões anteriores..."
 rm -rf "$APP_TARGET"
 rm -rf "$REPO_DIR/apps"
 
-echo "[2/4] Instalando FLUX-VPN.app em /Applications..."
+echo "[2/4] Compilando executável nativo Cocoa WebKit (App Próprio no Dock e Menu Bar)..."
+if command -v clang >/dev/null 2>&1 && [ -f "$REPO_DIR/scripts/launcher.m" ]; then
+    clang -O2 -mmacosx-version-min=10.15 -framework Cocoa -framework WebKit "$REPO_DIR/scripts/launcher.m" -o "$APP_SOURCE/Contents/MacOS/FLUX-VPN"
+    cp "$APP_SOURCE/Contents/MacOS/FLUX-VPN" "$REPO_DIR/FLUX-VPN.app/Contents/MacOS/FLUX-VPN"
+    chmod 755 "$APP_SOURCE/Contents/MacOS/FLUX-VPN" "$REPO_DIR/FLUX-VPN.app/Contents/MacOS/FLUX-VPN"
+fi
+
+echo "[3/4] Instalando FLUX-VPN.app em /Applications..."
 cp -R "$APP_SOURCE" "$APP_TARGET"
 
 echo "[3/4] Removendo quarentena do Gatekeeper (Bypass permanente de alertas de malware)..."

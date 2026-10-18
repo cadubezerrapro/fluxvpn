@@ -11,13 +11,11 @@ fi
 # Localiza o arquivo principal do aplicativo
 APP_FILE="$(pwd)/index.html"
 
-# Executa em modo Janela de Aplicativo Independente
-if [ -d "/Applications/Google Chrome.app" ]; then
-    open -na "Google Chrome" --args --app="file://$APP_FILE" --window-size=1040,700
-elif [ -d "/Applications/Brave Browser.app" ]; then
-    open -na "Brave Browser" --args --app="file://$APP_FILE" --window-size=1040,700
-elif [ -d "/Applications/Microsoft Edge.app" ]; then
-    open -na "Microsoft Edge" --args --app="file://$APP_FILE" --window-size=1040,700
+# Executa como Aplicativo Nativo Próprio (Processo Único no Dock e Menu Bar Apple)
+if [ -d "/Applications/FLUX-VPN.app" ]; then
+    open -a "/Applications/FLUX-VPN.app"
+elif [ -d "./FLUX-VPN.app" ]; then
+    open -a "./FLUX-VPN.app"
 else
     open "$APP_FILE"
 fi
