@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FLUX VPN Popup</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="popup-wrapper">
+    <!-- Header -->
+    <div class="popup-header">
+      <div class="brand">
+        <svg class="brand-svg" viewBox="0 0 32 32" fill="none">
+          <path d="M16 2C21.5 6 26.5 6.5 28 7.5C28.5 13.5 27 22.5 16 30C5 22.5 3.5 13.5 4 7.5C5.5 6.5 10.5 6 16 2Z" fill="#0284C7"/>
+          <path d="M11.5 9.5C11.5 8.67 12.17 8 13 8H20.5C21.33 8 22 8.67 22 9.5C22 10.33 21.33 11 20.5 11H14.5V13.5H19C19.83 13.5 20.5 14.17 20.5 15C20.5 15.83 19.83 16.5 19 16.5H14.5V21.5C14.5 22.33 13.83 23 13 23C12.17 23 11.5 22.33 11.5 21.5V9.5Z" fill="#FFFFFF"/>
+        </svg>
+        <span class="brand-title">FLUX VPN</span>
+      </div>
+      <span class="badge-safe">ANTI-LEAK</span>
+    </div>
+
+    <!-- Botão Power Central -->
+    <div class="power-container">
+      <button class="power-dial-button disconnected" id="btnToggleConnect" aria-label="Alternar VPN">
+        <div class="power-dial-outer-ring"></div>
+        <div class="power-dial-core">
+          <svg class="power-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18.36 6.64a9 9 0 1 1-12.73 0"/>
+            <line x1="12" y1="2" x2="12" y2="12"/>
+          </svg>
+        </div>
+      </button>
+    </div>
+
+    <!-- Status e Timer -->
+    <div class="status-box">
+      <div class="status-row">
+        <span class="status-dot red" id="statusDot"></span>
+        <span class="status-text" id="statusText">Desprotegido</span>
+      </div>
+      <div class="timer" id="popupTimer">00:00</div>
+    </div>
+
+    <!-- Seletor de Servidor -->
+    <div class="server-pill" id="btnSelectLocation">
+      <div class="server-left">
+        <span class="flag" id="flagDisplay">🇧🇷</span>
+        <div class="server-text">
+          <span class="country" id="countryDisplay">Brasil</span>
+          <span class="city" id="cityDisplay">São Paulo #1</span>
+        </div>
+      </div>
+      <span class="ping-tag" id="pingDisplay">18 ms</span>
+    </div>
+
+    <!-- Botão de Ação -->
+    <button class="action-btn connect" id="btnAction">Conectar Agora</button>
+
+    <!-- Mini Auditoria de Vazamentos -->
+    <div class="leak-audit-card">
+      <div class="audit-row">
+        <span>WebRTC Shield</span>
+        <span class="audit-val green">Travado</span>
+      </div>
+      <div class="audit-row">
+        <span>DNS Seguro</span>
+        <span class="audit-val green">Unbound Local</span>
+      </div>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

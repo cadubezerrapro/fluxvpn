@@ -103,28 +103,25 @@ def provision_real_wireguard_profile(output_path=None):
             ipv4_addr = interface_addrs.get("v4", "172.16.0.2/32")
             ipv6_addr = interface_addrs.get("v6", "")
             
-            addr_str = ipv4_addr
-            if ipv6_addr:
-                addr_str += f", {ipv6_addr}"
-
             conf_content = f"""[Interface]
-# FLUX VPN — Nó Anycast de Alta Velocidade (WireGuard®)
-# Roteamento direto de Kernel: Suporte a Discord (UDP), voz e vídeo
+# FLUX VPN — Nó Anycast Oficial WireGuard (flux0)
 PrivateKey = {priv_b64}
-Address = {addr_str}
+Address = 172.16.0.2/32
 DNS = 1.1.1.1, 1.0.0.1
 
 [Peer]
 PublicKey = {peer_pubkey}
-AllowedIPs = 0.0.0.0/0, ::/0
+AllowedIPs = 0.0.0.0/0
 Endpoint = {endpoint_v4}
 PersistentKeepalive = 25
 """
-            if output_path:
-                os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
-                with open(output_path, "w") as f:
-                    f.write(conf_content)
-                os.chmod(output_path, 0o600)
+            if not output_path:
+                output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "profiles", "flux0.conf")
+            
+            os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+            with open(output_path, "w") as f:
+                f.write(conf_content)
+            os.chmod(output_path, 0o600)
                 
             return {
                 "success": True,
@@ -132,12 +129,37 @@ PersistentKeepalive = 25
                 "public_key": pub_b64,
                 "peer_public_key": peer_pubkey,
                 "endpoint": endpoint_v4,
-                "address": addr_str,
+                "address": "172.16.0.2/32",
                 "conf_content": conf_content,
                 "output_path": output_path
             }
 
     except Exception as e:
+        conf_content = f"""[Interface]
+# FLUX VPN — Nó Anycast de Emergência (flux0)
+PrivateKey = {priv_b64}
+Address = 172.16.0.2/32
+DNS = 1.1.1.1, 1.0.0.1
+
+[Peer]
+PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
+AllowedIPs = 0.0.0.0/0
+Endpoint = 162.159.192.1:2408
+PersistentKeepalive = 25
+"""
+        if not output_path:
+            output_path = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "profiles", "flux0.conf")
+        os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
+        with open(output_path, "w") as f:
+            f.write(conf_content)
+        os.chmod(output_path, 0o600)
+
+        return {
+            "success": False,
+            "error": str(e),
+            "conf_content": conf_content,
+            "output_path": output_path
+        }
         # Fallback de emergência para configuração Anycast com chave de base pré-verificada
         conf_content = f"""[Interface]
 # FLUX VPN — Nó Anycast de Emergência (WireGuard®)

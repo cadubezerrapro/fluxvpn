@@ -1,0 +1,22 @@
+{
+  "manifest_version": 3,
+  "name": "FLUX VPN — Proxy Seguro & Anti-Leak",
+  "version": "1.0.0",
+  "description": "VPN e Proxy 100% Open-Source com proteção rigorosa contra vazamentos de WebRTC, DNS e rastreadores.",
+  "permissions": [
+    "proxy",
+    "storage",
+    "privacy",
+    "declarativeNetRequest"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "FLUX VPN — Conectar"
+  }
+}

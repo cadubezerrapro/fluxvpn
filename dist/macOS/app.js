@@ -33,12 +33,12 @@ const SERVERS = [
   {
     id: "us-ny",
     country: "Estados Unidos",
-    city: "Nova York #3",
+    city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
-    ip: "198.51.100.88",
-    endpoint: "198.51.100.88:51820",
-    publicKey: "flUxNY3+jH5kL7mN9pQ1rS3tU5vW7xY9zA1bC3dE5fG=",
-    confFile: "FLUX-EUA-NovaYork.conf",
+    ip: "172.16.0.2",
+    endpoint: "[2602:fc59:b0:64::a29f:c702]:2408",
+    publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+    confFile: "flux0.conf",
     ping: 68,
     type: "speed",
     favorite: true

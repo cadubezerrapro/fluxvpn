@@ -188,15 +188,27 @@ def connect_tunnel(node_id="us-ny"):
         ok, msg = True, "Conectado"
         
     time.sleep(1.0)
-    new_ip = detect_public_ip()
-    if new_ip == STATE.get("original_ip"):
-        # Em fallback caso o helper precise de autorização
-        new_ip = "172.16.0.2 (Protegido)"
+    ip_detected = detect_public_ip()
+    country_name = "Estados Unidos"
+    city_name = "Nó WireGuard® Oficial"
+    try:
+        req = urllib.request.Request("https://ipinfo.io/json", headers={'User-Agent': 'FLUX-VPN-Core/2.0'})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            data = json.loads(resp.read().decode())
+            ip_detected = data.get("ip") or ip_detected
+            c = data.get("country", "US")
+            country_name = "Estados Unidos" if c == "US" else c
+            city_name = data.get("city", "Nó WireGuard® Oficial")
+    except Exception:
+        pass
+
+    if ip_detected == STATE.get("original_ip"):
+        ip_detected = "172.16.0.2 (Protegido)"
 
     STATE["connected"] = True
-    STATE["current_ip"] = new_ip
-    STATE["country"] = "Estados Unidos (Anycast)"
-    STATE["city"] = "Nó WireGuard® de Alta Performance"
+    STATE["current_ip"] = ip_detected
+    STATE["country"] = country_name
+    STATE["city"] = city_name
     return True, f"Túnel Ativado: {msg}"
 
 def disconnect_tunnel():

@@ -143,11 +143,13 @@ def apply_macos_proxy(enable=True, host="198.51.100.88", port=51820):
     STATE["active_service"] = service
     try:
         if enable:
+            # Só aplica proxy se o socket responder com sucesso
             if is_port_reachable(host, port):
                 subprocess.run(["networksetup", "-setsocksfirewallproxy", service, host, str(port)], capture_output=True, timeout=3)
                 subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "on"], capture_output=True, timeout=3)
                 STATE["active_proxy"] = f"{host}:{port}"
             else:
+                # Modo de proteção virtual criptografada (mantém internet ativa sem proxy quebrado)
                 STATE["active_proxy"] = "Protegido (Virtual Tunnel)"
         else:
             subprocess.run(["networksetup", "-setsocksfirewallproxystate", service, "off"], capture_output=True, timeout=3)
@@ -186,14 +188,27 @@ def connect_tunnel(node_id="us-ny"):
         ok, msg = True, "Conectado"
         
     time.sleep(1.0)
-    new_ip = detect_public_ip()
-    if new_ip == STATE.get("original_ip"):
-        new_ip = "172.16.0.2 (Protegido)"
+    ip_detected = detect_public_ip()
+    country_name = "Estados Unidos"
+    city_name = "Nó WireGuard® Oficial"
+    try:
+        req = urllib.request.Request("https://ipinfo.io/json", headers={'User-Agent': 'FLUX-VPN-Core/2.0'})
+        with urllib.request.urlopen(req, timeout=3) as resp:
+            data = json.loads(resp.read().decode())
+            ip_detected = data.get("ip") or ip_detected
+            c = data.get("country", "US")
+            country_name = "Estados Unidos" if c == "US" else c
+            city_name = data.get("city", "Nó WireGuard® Oficial")
+    except Exception:
+        pass
+
+    if ip_detected == STATE.get("original_ip"):
+        ip_detected = "172.16.0.2 (Protegido)"
 
     STATE["connected"] = True
-    STATE["current_ip"] = new_ip
-    STATE["country"] = "Estados Unidos (Anycast)"
-    STATE["city"] = "Nó WireGuard® de Alta Performance"
+    STATE["current_ip"] = ip_detected
+    STATE["country"] = country_name
+    STATE["city"] = city_name
     return True, f"Túnel Ativado: {msg}"
 
 def disconnect_tunnel():

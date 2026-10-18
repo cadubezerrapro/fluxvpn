@@ -10,15 +10,27 @@
 		</data>
 		<key>Resources/app.js</key>
 		<data>
-		ctNOIYdKRKVmop6k7VAc+V39j74=
+		vAJD3W+pitWOsUudQ3hjeZgT8Yo=
 		</data>
 		<key>Resources/core/flux_engine.py</key>
 		<data>
-		PUbsDEWf0j6LElUi4/dtBQW2Fdc=
+		quuy68/w8kSpsFQMDvftS95zjZc=
+		</data>
+		<key>Resources/core/warp_provider.py</key>
+		<data>
+		VIDonVPvzmWT1SifiQr9IejIWd8=
+		</data>
+		<key>Resources/core/wireguard_manager.py</key>
+		<data>
+		cG8Akdg2ARcYlOIBw3r7448D6us=
 		</data>
 		<key>Resources/index.html</key>
 		<data>
 		/qt1SOsuZvNuaWE3qjFcw0Z+frU=
+		</data>
+		<key>Resources/profiles/flux0.conf</key>
+		<data>
+		/xKNhJ5RAUfuuUSic7IlohKLi2M=
 		</data>
 		<key>Resources/style.css</key>
 		<data>
@@ -38,14 +50,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			CK2V8rLk0IHAmYmuxvkZD8RVvg1XZYciOUexDn0Vae8=
+			4f8POjLgQ3OkOTydqRq1SUHh/zrDGcobfIasggjSgy0=
 			</data>
 		</dict>
 		<key>Resources/core/flux_engine.py</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			vU86cN+dIw0ZVAyPpwqrL+pSuGBj1sIvO+6fRDS59WY=
+			S7WV8dwsqUWodeQstgjWMbyM6VMU/jxtnlwEPiWhcrk=
+			</data>
+		</dict>
+		<key>Resources/core/warp_provider.py</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			hxI05MDUm47PZ2umTwvetdvt8bqvKzrT0q2m8UzJisc=
+			</data>
+		</dict>
+		<key>Resources/core/wireguard_manager.py</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			UdgJXSkBKFWDA3xHxTZH5ohceEM6t4UWxLLTVNhzkKc=
 			</data>
 		</dict>
 		<key>Resources/index.html</key>
@@ -53,6 +79,13 @@
 			<key>hash2</key>
 			<data>
 			/5evapFiQa1Wa/WrFPQZygPIw7oKT6bEnlvJ9Wh0eGY=
+			</data>
+		</dict>
+		<key>Resources/profiles/flux0.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			sS1JgYLRmT/PdfgJ70Z3lD38Et3Tr2Jiibaodfyi8WA=
 			</data>
 		</dict>
 		<key>Resources/style.css</key>

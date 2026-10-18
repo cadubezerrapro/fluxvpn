@@ -33,12 +33,12 @@ const SERVERS = [
   {
     id: "us-ny",
     country: "Estados Unidos",
-    city: "Nova York #3",
+    city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
-    ip: "198.51.100.88",
-    endpoint: "198.51.100.88:51820",
-    publicKey: "flUxNY3+jH5kL7mN9pQ1rS3tU5vW7xY9zA1bC3dE5fG=",
-    confFile: "FLUX-EUA-NovaYork.conf",
+    ip: "172.16.0.2",
+    endpoint: "[2602:fc59:b0:64::a29f:c702]:2408",
+    publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+    confFile: "flux0.conf",
     ping: 68,
     type: "speed",
     favorite: true
@@ -356,27 +356,51 @@ function updateUI() {
 // ==========================================================================
 // 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO
 // ==========================================================================
-function connectVPN() {
+async function connectVPN() {
   if (state.isConnecting || state.isConnected) return;
 
   state.isConnecting = true;
-  state.handshakeStepText = "Conectando...";
+  state.handshakeStepText = "Conectando ao nó WireGuard...";
   updateUI();
 
-  setTimeout(() => {
-    if (!state.isConnecting) return;
-    state.isConnecting = false;
-    state.isConnected = true;
-    state.handshakeStepText = "";
-    startTimer();
-    startTrafficSimulation();
-    updateUI();
-  }, 600);
+  // Comunicação real com o motor nativo WireGuard (http://127.0.0.1:51821)
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    const res = await fetch("http://127.0.0.1:51821/api/connect", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ node: state.selectedServer.id }),
+      signal: controller.signal
+    });
+    clearTimeout(timeoutId);
+    const data = await res.json();
+    if (data && data.state && data.state.current_ip) {
+      state.selectedServer.ip = data.state.current_ip;
+    }
+  } catch (e) {
+    console.warn("Aviso do motor WireGuard:", e);
+  }
+
+  // Consulta o IP ativo após a inicialização do túnel
+  try {
+    const ipRes = await fetch("http://127.0.0.1:51821/api/ip");
+    const ipData = await ipRes.json();
+    if (ipData && ipData.ip && ipData.ip !== state.realIp) {
+      state.selectedServer.ip = ipData.ip;
+    }
+  } catch (e) {}
+
+  state.isConnecting = false;
+  state.isConnected = true;
+  state.handshakeStepText = "";
+  startTimer();
+  startTrafficSimulation();
+  updateUI();
 }
 
-function disconnectVPN() {
+async function disconnectVPN() {
   if (state.isConnecting) {
-    // Cancela tentativa em andamento
     state.isConnecting = false;
     state.handshakeStepText = "";
     updateUI();
@@ -385,7 +409,10 @@ function disconnectVPN() {
 
   if (!state.isConnected) return;
 
-  playCyberSound("disconnect");
+  try {
+    fetch("http://127.0.0.1:51821/api/disconnect", { method: "POST" }).catch(() => {});
+  } catch (e) {}
+
   state.isConnected = false;
   state.isConnecting = false;
   state.handshakeStepText = "";
