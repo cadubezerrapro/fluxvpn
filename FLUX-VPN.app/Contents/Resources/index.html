@@ -37,11 +37,11 @@
       </div>
 
       <div class="app-header-right">
-        <button class="header-btn-wireguard" id="btnOpenWireGuardModal" title="Exportar Perfil WireGuard">
+        <button class="header-btn-wireguard" id="btnOpenWireGuardModal" title="Ativar proteção integral para Discord, jogos e celular">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span>⚡ Exportar WireGuard® (.conf / QR)</span>
+          <span>Ativar no Sistema & Celular</span>
         </button>
-        <a href="COMO_USAR_WIREGUARD.md" target="_blank" class="header-icon-btn" title="Manual de Kernel">
+        <a href="COMO_USAR_WIREGUARD.md" target="_blank" class="header-icon-btn" title="Manual de Kernel & Discord">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
         </a>
       </div>
@@ -109,12 +109,6 @@
         <!-- Botão Primário Desktop -->
         <button class="action-btn-primary connect" id="desktopActionBtn">
           Proteger Minha Conexão
-        </button>
-
-        <!-- Botão Secundário WireGuard Desktop -->
-        <button class="action-btn-wireguard" id="btnDesktopWireGuard" title="Exportar Perfil Oficial WireGuard">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-          <span>Exportar Perfil WireGuard® (.conf / QR)</span>
         </button>
 
         <div class="desktop-divider"></div>
@@ -234,10 +228,10 @@
         <div class="modal-header-left">
           <div class="wg-badge">
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
-            <span>FLUX VPN • MOTOR WIREGUARD® NATIVO</span>
+            <span>FLUX VPN • ROTEAMENTO DE SISTEMA INTEGRAL (DISCORD, GAMES & CELULAR)</span>
           </div>
-          <h2 class="modal-title">Exportar Configuração para Kernel & Celular</h2>
-          <p class="modal-subtitle">Gere chaves Curve25519 e perfis para uso em sistemas nativos, roteadores ou smartphones</p>
+          <h2 class="modal-title">Conectar no Sistema macOS & Celular</h2>
+          <p class="modal-subtitle">Para que o Discord, navegadores, jogos e 100% do Mac usem o túnel internacional (liberando câmera e tela), ative o perfil oficial WireGuard®</p>
         </div>
         <button class="modal-close-btn" id="btnCloseWgModal" aria-label="Fechar Modal">✕</button>
       </div>
@@ -245,7 +239,7 @@
       <div class="modal-body">
         <!-- 1. Seletor de Servidores -->
         <div class="modal-section">
-          <label class="modal-label">1. Localização do Servidor:</label>
+          <label class="modal-label">1. Localização do Servidor (Recomendado para Discord: Nova York ou Frankfurt):</label>
           <div class="wg-server-chips" id="wgServerChips"></div>
         </div>
 
@@ -268,18 +262,18 @@
         <!-- 3. Visualização e Download -->
         <div class="modal-section">
           <div class="modal-section-header">
-            <label class="modal-label">3. Perfil de Configuração (.conf):</label>
+            <label class="modal-label">3. Perfil de Configuração Criptografado:</label>
             <div class="modal-view-tabs">
-              <button class="wg-view-tab active" id="tabViewConfig">Arquivo .conf</button>
-              <button class="wg-view-tab" id="tabViewQr">QR Code (Celular)</button>
+              <button class="wg-view-tab active" id="tabViewQr">QR Code (Celular / App)</button>
+              <button class="wg-view-tab" id="tabViewConfig">Arquivo .conf (Mac / PC)</button>
             </div>
           </div>
 
-          <div class="wg-code-box" id="wgCodeBox">
+          <div class="wg-code-box" id="wgCodeBox" style="display: none;">
             <pre><code class="font-mono" id="wgConfigCode"></code></pre>
           </div>
 
-          <div class="wg-qr-box" id="wgQrBox" style="display: none;">
+          <div class="wg-qr-box" id="wgQrBox" style="display: flex;">
             <div class="qr-canvas-wrap" id="wgQrContainer"></div>
             <p class="qr-instructions">Abra o app <strong>WireGuard</strong> no celular → Toque em <strong>+</strong> → <strong>Escanear do código QR</strong></p>
           </div>
@@ -299,15 +293,15 @@
 
         <!-- Guia Passo a Passo -->
         <div class="wg-quick-guide">
-          <span class="guide-title">Como Ativar o Modo Kernel no seu Dispositivo (4 Passos Rápidos):</span>
+          <span class="guide-title">Como Desbloquear o Discord e Rotejar 100% do seu Mac (Passo a Passo em 30s):</span>
           <div class="guide-steps">
             <div class="guide-step">
               <span class="step-num">1</span>
-              <span>Instale o aplicativo oficial gratuito do <a href="https://www.wireguard.com/install/" target="_blank">WireGuard</a> (Windows, Mac, iOS ou Android).</span>
+              <span>Instale o aplicativo oficial e gratuito do <a href="https://apps.apple.com/app/wireguard/id1451685025" target="_blank">WireGuard na Mac App Store</a> (certificado oficialmente pela Apple).</span>
             </div>
             <div class="guide-step">
               <span class="step-num">2</span>
-              <span>Baixe o arquivo <strong>.conf</strong> no botão acima ou escaneie o <strong>QR Code</strong> com seu celular.</span>
+              <span>Baixe o arquivo <strong>.conf</strong> no botão acima (ou use os perfis inclusos na pasta <code>profiles/</code>).</span>
             </div>
             <div class="guide-step">
               <span class="step-num">3</span>
@@ -315,7 +309,7 @@
             </div>
             <div class="guide-step">
               <span class="step-num">4</span>
-              <span>Clique no botão <strong>Activate</strong>. Sua conexão inteira está 100% protegida e o IP alterado em nível de sistema operacional!</span>
+              <span>Clique no botão <strong>Activate</strong>. Pronto! O Discord, câmera, tela e toda a máquina estarão conectados fora do Brasil com IP internacional.</span>
             </div>
           </div>
         </div>
