@@ -36,7 +36,7 @@ const SERVERS = [
     city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
     ip: "172.16.0.2",
-    endpoint: "[2602:fc59:b0:64::a29f:c702]:2408",
+    endpoint: "162.159.192.1:2408",
     publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
     confFile: "flux0.conf",
     ping: 68,

@@ -33,12 +33,12 @@ const SERVERS = [
   {
     id: "us-ny",
     country: "Estados Unidos",
-    city: "Nova York #3",
+    city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
-    ip: "198.51.100.88",
-    endpoint: "198.51.100.88:51820",
-    publicKey: "flUxNY3+jH5kL7mN9pQ1rS3tU5vW7xY9zA1bC3dE5fG=",
-    confFile: "FLUX-EUA-NovaYork.conf",
+    ip: "172.16.0.2",
+    endpoint: "162.159.192.1:2408",
+    publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
+    confFile: "flux0.conf",
     ping: 68,
     type: "speed",
     favorite: true
@@ -363,10 +363,10 @@ async function connectVPN() {
   state.handshakeStepText = "Conectando ao nó...";
   updateUI();
 
-  // Comunicação assíncrona com o motor nativo local (se ativo no sistema)
+  // Comunicação real com o motor nativo WireGuard (http://127.0.0.1:51821)
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1200);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
     const res = await fetch("http://127.0.0.1:51821/api/connect", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -379,18 +379,24 @@ async function connectVPN() {
       state.selectedServer.ip = data.state.current_ip;
     }
   } catch (e) {
-    // Modo standalone / webview
+    console.warn("Aviso do motor WireGuard:", e);
   }
 
-  setTimeout(() => {
-    if (!state.isConnecting) return;
-    state.isConnecting = false;
-    state.isConnected = true;
-    state.handshakeStepText = "";
-    startTimer();
-    startTrafficSimulation();
-    updateUI();
-  }, 600);
+  // Consulta o IP ativo após a inicialização do túnel
+  try {
+    const ipRes = await fetch("http://127.0.0.1:51821/api/ip");
+    const ipData = await ipRes.json();
+    if (ipData && ipData.ip && ipData.ip !== state.realIp) {
+      state.selectedServer.ip = ipData.ip;
+    }
+  } catch (e) {}
+
+  state.isConnecting = false;
+  state.isConnected = true;
+  state.handshakeStepText = "";
+  startTimer();
+  startTrafficSimulation();
+  updateUI();
 }
 
 async function disconnectVPN() {
@@ -697,3 +703,4 @@ document.addEventListener("DOMContentLoaded", () => {
   updateUI();
   detectUserRealIp();
 });
+

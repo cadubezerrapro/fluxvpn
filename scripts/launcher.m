@@ -97,9 +97,10 @@
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification {
-    // Restaura configurações normais de rede e encerra o motor Python
     system("pkill -f flux_engine.py >/dev/null 2>&1");
     system("networksetup -setsocksfirewallproxystate Wi-Fi off >/dev/null 2>&1");
+    system("networksetup -setwebproxystate Wi-Fi off >/dev/null 2>&1");
+    system("networksetup -setsecurewebproxystate Wi-Fi off >/dev/null 2>&1");
 }
 
 @end

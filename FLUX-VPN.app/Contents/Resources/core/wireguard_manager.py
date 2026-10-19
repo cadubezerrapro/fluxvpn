@@ -21,6 +21,21 @@ import warp_provider
 DEFAULT_CONF = "/etc/wireguard/flux0.conf"
 REPO_CONF = os.path.join(REPO_DIR, "profiles", "flux0.conf")
 
+def find_binary(name):
+    """Localiza executável no sistema operacional (Apple Silicon e Intel)."""
+    candidates = [
+        shutil.which(name),
+        f"/opt/homebrew/bin/{name}",
+        f"/usr/local/bin/{name}",
+        f"/usr/bin/{name}",
+        f"/sbin/{name}",
+        f"/usr/sbin/{name}"
+    ]
+    for c in candidates:
+        if c and os.path.exists(c) and os.access(c, os.X_OK):
+            return c
+    return None
+
 def ensure_profile():
     """Garante a existência de um perfil WireGuard válido e ativo."""
     if os.path.exists(REPO_CONF) and os.path.getsize(REPO_CONF) > 50:
@@ -32,27 +47,21 @@ def ensure_profile():
 
 def is_wireguard_installed():
     """Verifica se o utilitário wg-quick ou wireguard-tools está disponível no sistema."""
-    paths = [
-        "/opt/homebrew/bin/wg-quick",
-        "/usr/local/bin/wg-quick",
-        shutil.which("wg-quick")
-    ]
-    for p in paths:
-        if p and os.path.exists(p) and os.access(p, os.X_OK):
-            return p
-    return None
+    return find_binary("wg-quick")
 
 def is_tunnel_active():
     """Verifica se a interface WireGuard (utun) está ativada no sistema."""
     try:
         res = subprocess.run(["ifconfig"], capture_output=True, text=True, timeout=2)
-        if "172.16.0.2" in res.stdout or "flux0" in res.stdout:
+        if "flux0" in res.stdout or "172.16.0.2" in res.stdout:
             return True
-        wg_bin = shutil.which("wg") or "/opt/homebrew/bin/wg" or "/usr/local/bin/wg"
-        if os.path.exists(wg_bin):
+        wg_bin = find_binary("wg")
+        if wg_bin:
             wg_res = subprocess.run([wg_bin, "show"], capture_output=True, text=True, timeout=2)
             if "interface:" in wg_res.stdout:
                 return True
+        if os.path.exists("/var/run/wireguard/flux0.name"):
+            return True
     except Exception:
         pass
     return False
@@ -60,19 +69,19 @@ def is_tunnel_active():
 def activate_wireguard(conf_path=None):
     """
     Ativa o túnel WireGuard de Kernel.
-    Tenta wg-quick com privilégios de helper ou scutil nativo do macOS.
+    Tenta wg-quick com privilégios de helper ou autorização nativa do macOS.
     """
     conf = conf_path or ensure_profile()
     wg_quick = is_wireguard_installed()
 
-    # 1. Garante que nenhum proxy SOCKS quebrado esteja ativo no Wi-Fi
+    # 1. Garante que nenhum proxy SOCKS quebrado esteja ativo na rede
     cleanup_system_proxies()
 
     if is_tunnel_active():
         return True, "Túnel WireGuard Já Ativo (flux0)"
 
     if wg_quick:
-        # Tenta com o arquivo de configuração atualizado (profiles/flux0.conf) primeiro
+        # 1. Tenta sudo sem senha (quando configurado via helper)
         targets = [conf, "flux0"]
         for target in targets:
             try:
@@ -83,6 +92,7 @@ def activate_wireguard(conf_path=None):
             except Exception:
                 pass
 
+        # 2. Tenta execução direta
         try:
             cmd = [wg_quick, "up", conf]
             res = subprocess.run(cmd, capture_output=True, text=True, timeout=5)
@@ -91,10 +101,19 @@ def activate_wireguard(conf_path=None):
         except Exception:
             pass
 
+        # 3. Fallback inteligente: autorização gráfica nativa do macOS via osascript
+        try:
+            ascript = f'do shell script "{wg_quick} up {conf}" with administrator privileges'
+            res_as = subprocess.run(["osascript", "-e", ascript], capture_output=True, text=True, timeout=20)
+            if res_as.returncode == 0:
+                return True, "Túnel WireGuard Ativado com Sucesso (Administrador)"
+        except Exception:
+            pass
+
     return False, "Requer ativação do Helper WireGuard nativo no macOS (sudo bash scripts/setup_wireguard.sh)"
 
 def deactivate_wireguard(conf_path=None):
-    """Desativa com segurança o túnel WireGuard e restaura 100% da rede Wi-Fi normal."""
+    """Desativa com segurança o túnel WireGuard e restaura 100% da rede normal."""
     conf = conf_path or ensure_profile()
     wg_quick = is_wireguard_installed()
 
@@ -108,9 +127,11 @@ def deactivate_wireguard(conf_path=None):
                 subprocess.run([wg_quick, "down", target], capture_output=True, timeout=4)
             except Exception:
                 pass
-
-    cleanup_system_proxies()
-    return True, "Túnel Desativado e Rede Normal Restaurada"
+            try:
+                ascript = f'do shell script "{wg_quick} down {target}" with administrator privileges'
+                subprocess.run(["osascript", "-e", ascript], capture_output=True, timeout=10)
+            except Exception:
+                pass
 
     cleanup_system_proxies()
     return True, "Túnel Desativado e Rede Normal Restaurada"
@@ -118,8 +139,16 @@ def deactivate_wireguard(conf_path=None):
 def cleanup_system_proxies():
     """Garante que nenhum proxy residual interfira em chamadas do Discord ou navegação."""
     try:
-        subprocess.run(["networksetup", "-setsocksfirewallproxystate", "Wi-Fi", "off"], capture_output=True, timeout=2)
-        subprocess.run(["networksetup", "-setwebproxystate", "Wi-Fi", "off"], capture_output=True, timeout=2)
-        subprocess.run(["networksetup", "-setsecurewebproxystate", "Wi-Fi", "off"], capture_output=True, timeout=2)
+        res = subprocess.run(["networksetup", "-listallnetworkservices"], capture_output=True, text=True, timeout=2)
+        services = [s.strip() for s in res.stdout.splitlines() if s.strip() and not s.startswith("*")]
+        for s in services:
+            subprocess.run(["networksetup", "-setsocksfirewallproxystate", s, "off"], capture_output=True, timeout=1)
+            subprocess.run(["networksetup", "-setwebproxystate", s, "off"], capture_output=True, timeout=1)
+            subprocess.run(["networksetup", "-setsecurewebproxystate", s, "off"], capture_output=True, timeout=1)
     except Exception:
-        pass
+        try:
+            subprocess.run(["networksetup", "-setsocksfirewallproxystate", "Wi-Fi", "off"], capture_output=True, timeout=1)
+            subprocess.run(["networksetup", "-setwebproxystate", "Wi-Fi", "off"], capture_output=True, timeout=1)
+            subprocess.run(["networksetup", "-setsecurewebproxystate", "Wi-Fi", "off"], capture_output=True, timeout=1)
+        except Exception:
+            pass

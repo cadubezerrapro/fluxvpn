@@ -55,9 +55,17 @@ if [ -f "$REPO_DIR/dist/assets/AppIcon.icns" ]; then
     echo "      ✓ AppIcon.icns instalado em Contents/Resources/."
 fi
 
+cp "$REPO_DIR/index.html" "$APP_SOURCE/Contents/Resources/"
+cp "$REPO_DIR/index.html" "$ROOT_APP/Contents/Resources/"
+cp "$REPO_DIR/style.css" "$APP_SOURCE/Contents/Resources/"
+cp "$REPO_DIR/style.css" "$ROOT_APP/Contents/Resources/"
+cp "$REPO_DIR/app.js" "$APP_SOURCE/Contents/Resources/"
+cp "$REPO_DIR/app.js" "$ROOT_APP/Contents/Resources/"
+cp -R "$REPO_DIR/profiles" "$APP_SOURCE/Contents/Resources/"
+cp -R "$REPO_DIR/profiles" "$ROOT_APP/Contents/Resources/"
 cp -R "$REPO_DIR/core" "$APP_SOURCE/Contents/Resources/"
 cp -R "$REPO_DIR/core" "$ROOT_APP/Contents/Resources/"
-echo "      ✓ Módulos do motor WireGuard sincronizados em Contents/Resources/core/."
+echo "      ✓ Frontend, perfis e motor WireGuard sincronizados em Contents/Resources/."
 
 # 4. Assinatura de Código Apple (CodeSign Ad-Hoc com SHA256)
 echo "[3/7] Aplicando CodeSign nativo Apple em todo o bundle..."

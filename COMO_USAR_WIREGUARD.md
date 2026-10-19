@@ -64,9 +64,28 @@ Você encontra as configurações criptográficas prontas na pasta [`profiles/`]
 
 ---
 
+## 🎮 Desbloqueio do Discord (Câmera, Transmissão e Tela)
+
+Em razão de ordens regulatórias cautelares no Brasil, o Discord suspendeu as funções de **câmera de vídeo** e **compartilhamento de tela (Go Live)** para todos os usuários com endereço IP identificado como **Brasil (`BR`)**.
+
+### Como liberar a câmera e a tela de forma imediata:
+1. O Discord verifica a geolocalização do seu IP público de saída. Ao conectar através de um IP dos **Estados Unidos (`US`)** ou **Europa (`DE`)**, o aplicativo do Discord detecta imediatamente a saída internacional e **reativa os botões de câmera e transmissão de tela**.
+2. **Opção 1 — Servidor Próprio Dedicado (Zero Custo / Oracle Cloud Free Tier):**
+   - Na raiz do projeto, execute em sua VPS nos EUA:
+     ```bash
+     sudo bash deploy_vps_node.sh
+     ```
+   - O script gera o arquivo `FLUX-EUA-NovaYork.conf` completo e pronto. Salve-o em `profiles/flux0.conf`.
+3. **Opção 2 — Usar Perfil WireGuard Existente dos EUA / Europa:**
+   - Basta colar qualquer arquivo `.conf` de servidor internacional em `profiles/flux0.conf`.
+   - Ao ativar o FLUX VPN, seu tráfego UDP flui com latência mínima e o Discord funciona 100% sem restrições.
+
+---
+
 ## 🧪 Como Validar a Conexão
 
 Após ativar a conexão:
 1. Abra seu navegador e acesse:
-   - `https://api.ipify.org` ou `https://dnsleaktest.com`
-2. Você confirmará que o seu IP foi substituído pelo IP do nó do FLUX VPN e seu provedor local está oculto.
+   - `https://api.ipify.org` ou `https://ipinfo.io`
+2. Você confirmará que o seu IP foi substituído pelo IP do nó do FLUX VPN e seu provedor local está protegido.
+

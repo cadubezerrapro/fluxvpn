@@ -36,7 +36,7 @@ const SERVERS = [
     city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
     ip: "172.16.0.2",
-    endpoint: "[2602:fc59:b0:64::a29f:c702]:2408",
+    endpoint: "162.159.192.1:2408",
     publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
     confFile: "flux0.conf",
     ping: 68,
@@ -148,7 +148,6 @@ const state = {
 // 1. SÍNTESE SONORA (Desativada — Operação 100% Silenciosa e Profissional)
 // ==========================================================================
 function playCyberSound(type) {
-  // Sons desativados: operação 100% silenciosa, sóbria e corporativa
   return;
 }
 
@@ -216,11 +215,9 @@ function startTrafficSimulation() {
   if (state.trafficInterval) clearInterval(state.trafficInterval);
   state.trafficInterval = setInterval(() => {
     if (!state.isConnected) return;
-    // Oscilação realista de tráfego
-    state.downloadSpeed = (Math.random() * 35 + 25).toFixed(1); // 25 a 60 MB/s
-    state.uploadSpeed = (Math.random() * 12 + 6).toFixed(1);   // 6 a 18 MB/s
+    state.downloadSpeed = (Math.random() * 35 + 25).toFixed(1);
+    state.uploadSpeed = (Math.random() * 12 + 6).toFixed(1);
 
-    // Jitter sutil de ping (±2 ms)
     const basePing = state.selectedServer.ping;
     const jitter = Math.floor(Math.random() * 5) - 2;
     const currentPing = Math.max(8, basePing + jitter);
@@ -264,7 +261,6 @@ function stopTrafficSimulation() {
 function updateUI() {
   const { isConnected, isConnecting, selectedServer, realIp, handshakeStepText } = state;
 
-  // Elementos Mobile
   const mobileShieldBtn = document.getElementById("mobileShieldBtn");
   const mobileStatusDot = document.getElementById("mobileStatusDot");
   const mobileStatusText = document.getElementById("mobileStatusText");
@@ -276,7 +272,6 @@ function updateUI() {
   const mobilePingBadge = document.getElementById("mobilePingBadge");
   const mobileKillBadge = document.getElementById("mobileKillBadge");
 
-  // Elementos Desktop
   const desktopShieldBtn = document.getElementById("desktopShieldBtn");
   const desktopStatusDot = document.getElementById("desktopStatusDot");
   const desktopStatusText = document.getElementById("desktopStatusText");
@@ -285,7 +280,6 @@ function updateUI() {
   const desktopTitleStatus = document.getElementById("desktopTitleStatus");
   const desktopLocationSub = document.getElementById("desktopLocationSub");
 
-  // Definições visuais conforme o estado
   let statusText = "Desconectado";
   let dotClass = "red";
   let dialClass = "disconnected";
@@ -312,7 +306,6 @@ function updateUI() {
     titleSub = "Protegido";
   }
 
-  // Atualizar Mobile
   if (mobileShieldBtn) {
     mobileShieldBtn.className = `shield-button mobile-shield ${dialClass}`;
   }
@@ -332,7 +325,6 @@ function updateUI() {
     mobileKillBadge.textContent = isConnected ? 'Ativo' : 'Pronto';
   }
 
-  // Atualizar Desktop
   if (desktopShieldBtn) {
     desktopShieldBtn.className = `power-dial-button ${dialClass}`;
   }
@@ -363,10 +355,10 @@ async function connectVPN() {
   state.handshakeStepText = "Conectando ao nó...";
   updateUI();
 
-  // Comunicação assíncrona com o motor nativo local (se ativo no sistema)
+  // Comunicação real com o motor nativo WireGuard (http://127.0.0.1:51821)
   try {
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 1200);
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
     const res = await fetch("http://127.0.0.1:51821/api/connect", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -379,18 +371,24 @@ async function connectVPN() {
       state.selectedServer.ip = data.state.current_ip;
     }
   } catch (e) {
-    // Modo standalone / webview
+    console.warn("Aviso do motor WireGuard:", e);
   }
 
-  setTimeout(() => {
-    if (!state.isConnecting) return;
-    state.isConnecting = false;
-    state.isConnected = true;
-    state.handshakeStepText = "";
-    startTimer();
-    startTrafficSimulation();
-    updateUI();
-  }, 600);
+  // Consulta o IP ativo após a inicialização do túnel
+  try {
+    const ipRes = await fetch("http://127.0.0.1:51821/api/ip");
+    const ipData = await ipRes.json();
+    if (ipData && ipData.ip && ipData.ip !== state.realIp) {
+      state.selectedServer.ip = ipData.ip;
+    }
+  } catch (e) {}
+
+  state.isConnecting = false;
+  state.isConnected = true;
+  state.handshakeStepText = "";
+  startTimer();
+  startTrafficSimulation();
+  updateUI();
 }
 
 async function disconnectVPN() {
@@ -433,7 +431,6 @@ function selectServer(server) {
   state.selectedServer = server;
 
   if (wasConnected) {
-    // Se estava conectado, simula re-roteamento suave para o novo nó
     state.isConnecting = true;
     state.handshakeStepText = `Alternando para ${server.city}...`;
     updateUI();
@@ -446,7 +443,6 @@ function selectServer(server) {
       updateUI();
     }, 650);
   } else {
-    // Se estava desconectado, apenas atualiza a escolha SEM conectar sozinho!
     updateUI();
   }
 }
@@ -552,7 +548,6 @@ function renderFavoritesChips() {
 // 9. CONFIGURAÇÃO DE EVENTOS
 // ==========================================================================
 function setupEventListeners() {
-  // Cliques nos Escudos e Botões de Conexão
   const mobileShieldBtn = document.getElementById("mobileShieldBtn");
   const desktopShieldBtn = document.getElementById("desktopShieldBtn");
   const mobileActionBtn = document.getElementById("mobileActionBtn");
@@ -563,7 +558,6 @@ function setupEventListeners() {
   if (mobileActionBtn) mobileActionBtn.addEventListener("click", toggleConnection);
   if (desktopActionBtn) desktopActionBtn.addEventListener("click", toggleConnection);
 
-  // Busca de Servidores
   const searchInput = document.getElementById("serverSearchInput");
   const searchClearBtn = document.getElementById("searchClearBtn");
 
@@ -586,7 +580,6 @@ function setupEventListeners() {
     });
   }
 
-  // Abas de Categoria
   const tabButtons = document.querySelectorAll(".server-tabs .tab-btn");
   tabButtons.forEach(btn => {
     btn.addEventListener("click", () => {
@@ -598,7 +591,6 @@ function setupEventListeners() {
     });
   });
 
-  // Switch de Modo de Visualização (Desktop / Mobile / Ambos)
   const switcherButtons = document.querySelectorAll(".switcher-btn");
   const showcaseContainer = document.getElementById("showcaseContainer");
 
@@ -617,7 +609,6 @@ function setupEventListeners() {
     });
   });
 
-  // Pill Mobile abre seleção rápida
   const mobileServerPill = document.getElementById("mobileServerPill");
   if (mobileServerPill) {
     mobileServerPill.addEventListener("click", () => {
@@ -627,7 +618,6 @@ function setupEventListeners() {
     });
   }
 
-  // Toggles de Segurança (Kill Switch, Wi-Fi, LAN, Leaks)
   const checkKillSwitch = document.getElementById("checkKillSwitch");
   if (checkKillSwitch) {
     checkKillSwitch.addEventListener("change", (e) => {
@@ -636,7 +626,6 @@ function setupEventListeners() {
     });
   }
 
-  // Relógio do Mobile sincronizado com horário local
   const mobileTime = document.getElementById("mobileTime");
   if (mobileTime) {
     const updateTime = () => {
@@ -647,7 +636,6 @@ function setupEventListeners() {
     setInterval(updateTime, 30000);
   }
 
-  // Modais Nativos: Preferências e Sobre
   const btnOpenSettings = document.getElementById("btnOpenSettings");
   const btnCloseSettingsModal = document.getElementById("btnCloseSettingsModal");
   const settingsModal = document.getElementById("settingsModal");

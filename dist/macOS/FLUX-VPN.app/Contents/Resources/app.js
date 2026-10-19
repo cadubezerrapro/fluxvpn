@@ -36,7 +36,7 @@ const SERVERS = [
     city: "Nova York #3 (US Gateway)",
     flag: "🇺🇸",
     ip: "172.16.0.2",
-    endpoint: "[2602:fc59:b0:64::a29f:c702]:2408",
+    endpoint: "162.159.192.1:2408",
     publicKey: "bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=",
     confFile: "flux0.conf",
     ping: 68,
@@ -354,13 +354,13 @@ function updateUI() {
 }
 
 // ==========================================================================
-// 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO
+// 6. MOTOR DE CONEXÃO DIRETO & EMBUTIDO (Com Bridge Nativa)
 // ==========================================================================
 async function connectVPN() {
   if (state.isConnecting || state.isConnected) return;
 
   state.isConnecting = true;
-  state.handshakeStepText = "Conectando ao nó WireGuard...";
+  state.handshakeStepText = "Conectando ao nó...";
   updateUI();
 
   // Comunicação real com o motor nativo WireGuard (http://127.0.0.1:51821)
@@ -703,3 +703,4 @@ document.addEventListener("DOMContentLoaded", () => {
   updateUI();
   detectUserRealIp();
 });
+

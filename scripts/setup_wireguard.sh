@@ -34,8 +34,16 @@ else
 fi
 
 # 3. Provisiona perfil WireGuard Anycast Real com Chaves Curve25519
-echo "[3/4] Provisionando túnel criptografado Anycast de alta velocidade..."
+echo "[3/4] Provisionando túnel criptografado Anycast de alta velocidade (flux0)..."
 python3 "$REPO_DIR/core/warp_provider.py" || true
+
+# Copia a configuração para /etc/wireguard/flux0.conf
+sudo mkdir -p /etc/wireguard
+if [ -f "$REPO_DIR/profiles/flux0.conf" ]; then
+    sudo cp "$REPO_DIR/profiles/flux0.conf" /etc/wireguard/flux0.conf
+    sudo chmod 600 /etc/wireguard/flux0.conf
+    echo "      ✓ Configuração instalada em: /etc/wireguard/flux0.conf"
+fi
 
 # 4. Configura Privileged Helper Tool no macOS (Zero prompts de senha no app)
 echo "[4/4] Autorizando controle seguro de rede para o FLUX VPN..."
@@ -45,7 +53,7 @@ WG_BIN=$(command -v wg || echo "/opt/homebrew/bin/wg")
 SUDOERS_FILE="/etc/sudoers.d/fluxvpn"
 TMP_SUDOERS="/tmp/fluxvpn_sudoers"
 
-echo "$CURRENT_USER ALL=(ALL) NOPASSWD: $WG_PATH, $WG_BIN" > "$TMP_SUDOERS"
+echo "$CURRENT_USER ALL=(ALL) NOPASSWD: /opt/homebrew/bin/wg-quick, /opt/homebrew/bin/wg, /usr/local/bin/wg-quick, /usr/local/bin/wg, $WG_PATH, $WG_BIN" > "$TMP_SUDOERS"
 echo "Para autorizar o FLUX VPN a controlar a interface WireGuard sem pedir senha a cada clique:"
 sudo cp "$TMP_SUDOERS" "$SUDOERS_FILE" 2>/dev/null || {
     echo "⚠️  Execute este comando com sudo para salvar a regra de 1 clique:"

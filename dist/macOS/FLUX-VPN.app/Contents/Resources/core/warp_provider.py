@@ -160,31 +160,6 @@ PersistentKeepalive = 25
             "conf_content": conf_content,
             "output_path": output_path
         }
-        # Fallback de emergência para configuração Anycast com chave de base pré-verificada
-        conf_content = f"""[Interface]
-# FLUX VPN — Nó Anycast de Emergência (WireGuard®)
-PrivateKey = {priv_b64}
-Address = 172.16.0.2/32
-DNS = 1.1.1.1, 1.0.0.1
-
-[Peer]
-PublicKey = bmXOC+F1FxEMF9dyiK2H5/1SUtzH0JuVo51h2wPfgyo=
-AllowedIPs = 0.0.0.0/0, ::/0
-Endpoint = 162.159.192.1:2408
-PersistentKeepalive = 25
-"""
-        if output_path:
-            os.makedirs(os.path.dirname(os.path.abspath(output_path)), exist_ok=True)
-            with open(output_path, "w") as f:
-                f.write(conf_content)
-            os.chmod(output_path, 0o600)
-
-        return {
-            "success": False,
-            "error": str(e),
-            "conf_content": conf_content,
-            "output_path": output_path
-        }
 
 if __name__ == "__main__":
     res = provision_real_wireguard_profile("profiles/FLUX-WireGuard-Real.conf")

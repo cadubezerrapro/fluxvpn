@@ -14,9 +14,14 @@ import subprocess
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 REPO_DIR = os.path.dirname(SCRIPT_DIR)
+sys.path.insert(0, REPO_DIR)
 sys.path.insert(0, os.path.join(REPO_DIR, "core"))
 
 import flux_engine
+try:
+    import warp_provider
+except ImportError:
+    from core import warp_provider
 
 def run_tests():
     print("=" * 60)
@@ -47,7 +52,6 @@ def run_tests():
     # Teste 3: Provisionamento e Validação de Chaves WireGuard® Curve25519
     print("[3/5] Testando provisionamento de chaves Curve25519 e túnel Anycast...")
     try:
-        from core import warp_provider
         conf_res = warp_provider.provision_real_wireguard_profile()
         print(f"      ✓ Endpoint WireGuard verificado: {conf_res.get('endpoint')}")
         passed += 1
@@ -69,6 +73,8 @@ def run_tests():
     # Teste 5: Verificação de Integridade dos Bundles .app
     print("[5/5] Testando integridade do binário Mach-O e Info.plist...")
     app_path = os.path.join(REPO_DIR, "dist", "macOS", "FLUX-VPN.app")
+    if not os.path.exists(app_path):
+        app_path = os.path.join(REPO_DIR, "FLUX-VPN.app")
     exec_path = os.path.join(app_path, "Contents", "MacOS", "FLUX-VPN")
     plist_path = os.path.join(app_path, "Contents", "Info.plist")
     

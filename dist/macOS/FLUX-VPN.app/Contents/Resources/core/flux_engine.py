@@ -252,7 +252,20 @@ class FluxHttpHandler(BaseHTTPRequestHandler):
 
     def do_POST(self):
         if self.path.startswith('/api/connect'):
-            success, msg = connect_tunnel()
+            node_id = "us-ny"
+            if '?' in self.path:
+                query = self.path.split('?', 1)[1]
+                for param in query.split('&'):
+                    if param.startswith('node='):
+                        node_id = param.split('=', 1)[1]
+            try:
+                content_len = int(self.headers.get('Content-Length', 0))
+                if content_len > 0:
+                    body = json.loads(self.rfile.read(content_len).decode('utf-8'))
+                    node_id = body.get('node', node_id)
+            except Exception:
+                pass
+            success, msg = connect_tunnel(node_id)
             self._set_headers(200)
             self.wfile.write(json.dumps({"success": success, "message": msg, "state": STATE}).encode())
         elif self.path == '/api/disconnect':

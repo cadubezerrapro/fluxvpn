@@ -10,27 +10,55 @@
 		</data>
 		<key>Resources/app.js</key>
 		<data>
-		vAJD3W+pitWOsUudQ3hjeZgT8Yo=
+		SyyexalTFa7kxd4x9eT9MGHkLX0=
 		</data>
 		<key>Resources/core/flux_engine.py</key>
 		<data>
-		quuy68/w8kSpsFQMDvftS95zjZc=
+		3ZXdkPvezz710qWOyZ5L0LqOU6Y=
 		</data>
 		<key>Resources/core/warp_provider.py</key>
 		<data>
-		VIDonVPvzmWT1SifiQr9IejIWd8=
+		NpyUrHU1lia8dTevFqKxicl+7xI=
 		</data>
 		<key>Resources/core/wireguard_manager.py</key>
 		<data>
-		cG8Akdg2ARcYlOIBw3r7448D6us=
+		V+ZcUTQQyC0MsxLaWVaf5u+WFUo=
 		</data>
 		<key>Resources/index.html</key>
 		<data>
 		/qt1SOsuZvNuaWE3qjFcw0Z+frU=
 		</data>
+		<key>Resources/profiles/FLUX-Alemanha-Frankfurt.conf</key>
+		<data>
+		bbLB1qsMquyKugxS6nmq0tXZ6JY=
+		</data>
+		<key>Resources/profiles/FLUX-Brasil-SaoPaulo.conf</key>
+		<data>
+		h9gSccSFCx0BD0PduuRbk/9DITI=
+		</data>
+		<key>Resources/profiles/FLUX-EUA-NovaYork.conf</key>
+		<data>
+		Qhl4TLAlVl++xGZwZ1y5RR5DwSo=
+		</data>
+		<key>Resources/profiles/FLUX-Islandia-Reykjavik.conf</key>
+		<data>
+		TDYoPh00gb71GF22/nBA29n1y/8=
+		</data>
+		<key>Resources/profiles/FLUX-Japao-Toquio.conf</key>
+		<data>
+		vRA9tFU268jELnMltjpv0nGeaE8=
+		</data>
+		<key>Resources/profiles/FLUX-Suica-Zurique.conf</key>
+		<data>
+		j3FklEy6vib38KmOYZ2hc5Hli4o=
+		</data>
+		<key>Resources/profiles/FLUX-WireGuard-Real.conf</key>
+		<data>
+		c6szTsGqZ0CVbg8J2w4g/bCE2AI=
+		</data>
 		<key>Resources/profiles/flux0.conf</key>
 		<data>
-		/xKNhJ5RAUfuuUSic7IlohKLi2M=
+		k6coKdHHpfcA3/OVcQst8JptFoY=
 		</data>
 		<key>Resources/style.css</key>
 		<data>
@@ -50,28 +78,28 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			4f8POjLgQ3OkOTydqRq1SUHh/zrDGcobfIasggjSgy0=
+			LrlqIzZlowlc6ZeVEbNE2mMlTQzAoeMWLjGZEGb0sCQ=
 			</data>
 		</dict>
 		<key>Resources/core/flux_engine.py</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			S7WV8dwsqUWodeQstgjWMbyM6VMU/jxtnlwEPiWhcrk=
+			wKUCFEqFeD3pgG7LK/52KnhykqnEBtqX69shp1qpQtg=
 			</data>
 		</dict>
 		<key>Resources/core/warp_provider.py</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			hxI05MDUm47PZ2umTwvetdvt8bqvKzrT0q2m8UzJisc=
+			/cUSyT/uqMWyxzOysa41+yfijp0kJuWmXhatCJqmAq4=
 			</data>
 		</dict>
 		<key>Resources/core/wireguard_manager.py</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			UdgJXSkBKFWDA3xHxTZH5ohceEM6t4UWxLLTVNhzkKc=
+			2MnX+yE2Xo0MKbR5uu49hoiNXe582mYshqnPMUJJ/bY=
 			</data>
 		</dict>
 		<key>Resources/index.html</key>
@@ -81,11 +109,60 @@
 			/5evapFiQa1Wa/WrFPQZygPIw7oKT6bEnlvJ9Wh0eGY=
 			</data>
 		</dict>
+		<key>Resources/profiles/FLUX-Alemanha-Frankfurt.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			VwO2A93KdLMATGSOW5+utOfX4ZehoBRQbsIy0261+0s=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-Brasil-SaoPaulo.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			2w2qPYMRlnMtFuvNAI1GgXRbDhVmr1NjpN9DgCJeOnI=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-EUA-NovaYork.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			InokKfeWbaCIE0KbPxM7oMFRaw2ePviyJzcbR/0qg5E=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-Islandia-Reykjavik.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			IYcelBuaR0u/6KqpqRMsW93zRwdfR2D4kEwRvxhGBhw=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-Japao-Toquio.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			7z2J9w2SP6Wh2jCfIOOoYeBaaK64H0TI5n+FvBfjQiA=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-Suica-Zurique.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			KhuCbLoDUCQsV3TxHWt9juyG+1asKDQ1R03Qw3xq8f4=
+			</data>
+		</dict>
+		<key>Resources/profiles/FLUX-WireGuard-Real.conf</key>
+		<dict>
+			<key>hash2</key>
+			<data>
+			BEqo5DjPwOQVjX9tUjvbJApPsuYsk/M/L6fHa65soLY=
+			</data>
+		</dict>
 		<key>Resources/profiles/flux0.conf</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			sS1JgYLRmT/PdfgJ70Z3lD38Et3Tr2Jiibaodfyi8WA=
+			PNBpTPK9iHx6DzK0Ww6E3P06LdQ4OohigQC/L4yRuJw=
 			</data>
 		</dict>
 		<key>Resources/style.css</key>

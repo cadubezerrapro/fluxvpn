@@ -23,6 +23,14 @@ rm -rf "$APP_TARGET"
 rm -rf "$REPO_DIR/apps"
 networksetup -setsocksfirewallproxystate Wi-Fi off 2>/dev/null || true
 networksetup -setwebproxystate Wi-Fi off 2>/dev/null || true
+networksetup -setsecurewebproxystate Wi-Fi off 2>/dev/null || true
+
+# Sincroniza frontend, perfis e motor para dentro do bundle do app
+cp "$REPO_DIR/index.html" "$APP_SOURCE/Contents/Resources/"
+cp "$REPO_DIR/style.css" "$APP_SOURCE/Contents/Resources/"
+cp "$REPO_DIR/app.js" "$APP_SOURCE/Contents/Resources/"
+cp -R "$REPO_DIR/profiles" "$APP_SOURCE/Contents/Resources/"
+cp -R "$REPO_DIR/core" "$APP_SOURCE/Contents/Resources/"
 
 # Provisiona chaves reais WireGuard Anycast de alta velocidade
 python3 "$REPO_DIR/core/warp_provider.py" 2>/dev/null || true
